@@ -90,6 +90,28 @@ export function GlyphBowl({ size = 80 }: { size?: number }) {
   );
 }
 
+export function GlyphTape({ size = 80 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 100 100"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="20" y="20" width="60" height="60" />
+      {[32, 50, 68].map((y) =>
+        [32, 50, 68].map((x) => (
+          <circle key={`${x}-${y}`} cx={x} cy={y} r="1.5" fill="currentColor" />
+        ))
+      )}
+    </svg>
+  );
+}
+
 export function GlyphDeck({ size = 80 }: { size?: number }) {
   return (
     <svg
