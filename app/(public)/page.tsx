@@ -1,14 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 
+import { CountUp } from "@/components/effects/CountUp";
+import { Marquee } from "@/components/effects/Marquee";
+import { RotatingText } from "@/components/effects/RotatingText";
+import { SectionReveal } from "@/components/effects/SectionReveal";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { buildMetadata } from "@/lib/seo";
 import { urlFor } from "@/sanity/lib/image";
@@ -24,6 +22,28 @@ export const metadata = buildMetadata({
     "Skateboarding classes, hourly bowl practice, and gear for kids and adults in Hyderabad. Coached by Hari.",
   path: "/",
 });
+
+const HERO_LINES = [
+  "Skate Hyderabad",
+  "Learn the Right Way",
+  "Find Your Crew",
+  "Book a Session",
+];
+
+const MARQUEE_ITEMS = [
+  "STEEZE",
+  "Hyderabad",
+  "Skateboarding",
+  "Bowl",
+  "Classes",
+  "Community",
+];
+
+const STATS = [
+  { value: 50, suffix: "+", label: "Students" },
+  { value: 1, suffix: "", label: "Bowl" },
+  { value: 100, suffix: "%", label: "Stoke" },
+];
 
 const OFFERS = [
   {
@@ -50,150 +70,248 @@ export default async function HomePage() {
     getMediaItems(),
   ]);
 
-  const heroTitle =
-    settings?.hero?.title ?? "Skateboarding coaching in Hyderabad";
-  const heroSubtitle =
-    settings?.hero?.subtitle ??
-    "Classes, practice time, and gear — all in one place. Coached by Hari.";
-
   return (
     <>
-      <section className="container py-16 md:py-24 lg:py-28">
-        <div className="grid gap-10 md:grid-cols-2 md:items-center">
-          <div className="space-y-6">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-              {heroTitle}
-            </h1>
-            <p className="text-lg text-muted-foreground md:text-xl">
-              {heroSubtitle}
+      {/* Hero */}
+      <section className="relative overflow-hidden border-b border-border">
+        <div className="container py-20 md:py-32 lg:py-40">
+          <SectionReveal>
+            <p className="mb-6 text-xs font-semibold uppercase tracking-[0.4em] text-primary">
+              Hyderabad · India
             </p>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <WhatsAppCTA intent="class" size="lg">
-                WhatsApp for class info
-              </WhatsAppCTA>
-              <Button asChild variant="outline" size="lg">
-                <Link href="/classes">See classes</Link>
-              </Button>
-            </div>
-          </div>
-          {settings?.hero?.image ? (
-            <Image
-              src={urlFor(settings.hero.image).width(800).height(600).url()}
-              alt={settings.hero.image.alt ?? "Skateboarding at STEEZE"}
-              width={800}
-              height={600}
-              priority
-              className="aspect-[4/3] w-full rounded-lg object-cover"
-            />
-          ) : (
-            <div className="aspect-[4/3] w-full rounded-lg border bg-muted" />
-          )}
-        </div>
-      </section>
+          </SectionReveal>
 
-      <section className="container py-12">
-        <h2 className="mb-8 text-center text-3xl font-bold tracking-tight md:text-4xl">
-          What we offer
-        </h2>
-        <div className="grid gap-6 md:grid-cols-3">
-          {OFFERS.map((offer) => (
-            <Card key={offer.href}>
-              <CardHeader>
-                <CardTitle>{offer.title}</CardTitle>
-                <CardDescription>{offer.desc}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button asChild variant="outline" className="w-full">
-                  <Link href={offer.href}>Learn more</Link>
+          <SectionReveal delay={0.1}>
+            <h1 className="font-display text-6xl uppercase leading-[0.9] tracking-tight md:text-[10rem] md:leading-[0.85]">
+              Steeze
+              <br />
+              <span className="text-primary">Skate</span>boarding
+            </h1>
+          </SectionReveal>
+
+          <SectionReveal delay={0.25} className="mt-10 md:mt-14">
+            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <div className="font-display text-2xl uppercase leading-tight tracking-wide text-foreground/90 md:text-4xl">
+                <RotatingText items={HERO_LINES} />
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row md:shrink-0">
+                <WhatsAppCTA
+                  intent="class"
+                  size="lg"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90"
+                >
+                  WhatsApp for class info
+                </WhatsAppCTA>
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="border-foreground/40 hover:bg-foreground hover:text-background"
+                >
+                  <Link href="/classes">See classes</Link>
                 </Button>
-              </CardContent>
-            </Card>
-          ))}
+              </div>
+            </div>
+          </SectionReveal>
         </div>
       </section>
 
-      {settings?.about?.bio ? (
-        <section className="container py-12">
-          <div className="grid items-center gap-10 md:grid-cols-3">
-            {settings.about.photo ? (
-              <Image
-                src={urlFor(settings.about.photo).width(400).height(400).url()}
-                alt="Hari, coach at STEEZE"
-                width={400}
-                height={400}
-                className="aspect-square rounded-full object-cover md:col-span-1"
-              />
-            ) : null}
-            <div className="space-y-4 md:col-span-2">
-              <h2 className="text-3xl font-bold tracking-tight">About Hari</h2>
-              <p className="whitespace-pre-line text-muted-foreground">
-                {settings.about.bio}
-              </p>
-              <Button asChild variant="link" className="px-0">
-                <Link href="/about">Read more →</Link>
-              </Button>
-            </div>
-          </div>
-        </section>
-      ) : null}
+      {/* Marquee */}
+      <Marquee items={MARQUEE_ITEMS} />
 
-      {mediaItems.length > 0 ? (
-        <section className="container py-12">
-          <h2 className="mb-8 text-3xl font-bold tracking-tight">Gallery</h2>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            {mediaItems.slice(0, 8).map((item) =>
-              item.image ? (
-                <Image
-                  key={item._id}
-                  src={urlFor(item.image).width(400).height(400).url()}
-                  alt={item.caption || item.image.alt || "STEEZE Skateboarding"}
-                  width={400}
-                  height={400}
-                  className="aspect-square rounded-lg object-cover"
-                />
-              ) : null
-            )}
-          </div>
-        </section>
-      ) : null}
-
-      {testimonials.length > 0 ? (
-        <section className="container py-12">
-          <h2 className="mb-8 text-3xl font-bold tracking-tight">
-            What parents say
-          </h2>
-          <div className="grid gap-6 md:grid-cols-3">
-            {testimonials.map((t) => (
-              <Card key={t._id}>
-                <CardContent className="pt-6">
-                  <p className="italic">&ldquo;{t.quote}&rdquo;</p>
-                  <p className="mt-4 text-sm text-muted-foreground">
-                    {t.parentName ?? t.studentName ?? "Parent"}
-                  </p>
-                </CardContent>
-              </Card>
+      {/* Stats */}
+      <section className="border-b border-border py-20 md:py-28">
+        <div className="container">
+          <SectionReveal>
+            <p className="mb-12 text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
+              By the numbers
+            </p>
+          </SectionReveal>
+          <div className="grid gap-12 md:grid-cols-3">
+            {STATS.map((stat, i) => (
+              <SectionReveal key={stat.label} delay={i * 0.1}>
+                <div className="space-y-3">
+                  <div className="font-display text-7xl leading-none md:text-9xl">
+                    <CountUp to={stat.value} suffix={stat.suffix} />
+                  </div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+                    {stat.label}
+                  </div>
+                </div>
+              </SectionReveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* 3 Offers */}
+      <section className="border-b border-border py-20 md:py-28">
+        <div className="container">
+          <SectionReveal className="mb-12">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
+              What we offer
+            </p>
+            <h2 className="font-display text-5xl uppercase leading-none tracking-tight md:text-7xl">
+              Three ways<br />to start
+            </h2>
+          </SectionReveal>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {OFFERS.map((offer, i) => (
+              <SectionReveal key={offer.href} delay={i * 0.1}>
+                <Link
+                  href={offer.href}
+                  className="group relative flex h-full flex-col justify-between rounded-lg border border-border bg-card p-8 transition-colors hover:border-primary"
+                >
+                  <div>
+                    <h3 className="font-display text-3xl uppercase tracking-tight md:text-4xl">
+                      {offer.title}
+                    </h3>
+                    <p className="mt-3 text-sm text-muted-foreground">
+                      {offer.desc}
+                    </p>
+                  </div>
+                  <ArrowUpRight className="mt-12 h-6 w-6 text-foreground/60 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-primary" />
+                </Link>
+              </SectionReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About snippet */}
+      {settings?.about?.bio ? (
+        <section className="border-b border-border py-20 md:py-28">
+          <div className="container">
+            <div className="grid items-center gap-12 md:grid-cols-3">
+              {settings.about.photo ? (
+                <SectionReveal className="md:col-span-1">
+                  <Image
+                    src={urlFor(settings.about.photo).width(600).height(720).url()}
+                    alt="Hari, coach at STEEZE"
+                    width={600}
+                    height={720}
+                    className="aspect-[5/6] w-full rounded-lg object-cover grayscale"
+                  />
+                </SectionReveal>
+              ) : null}
+              <SectionReveal delay={0.1} className="space-y-6 md:col-span-2">
+                <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
+                  About Hari
+                </p>
+                <h2 className="font-display text-5xl uppercase leading-none tracking-tight md:text-7xl">
+                  The <span className="text-primary">coach</span>
+                </h2>
+                <p className="whitespace-pre-line text-lg text-muted-foreground">
+                  {settings.about.bio}
+                </p>
+                <Button
+                  asChild
+                  variant="link"
+                  className="px-0 text-foreground hover:text-primary"
+                >
+                  <Link href="/about">Read more →</Link>
+                </Button>
+              </SectionReveal>
+            </div>
+          </div>
         </section>
       ) : null}
 
-      <section className="container py-12 md:py-20">
-        <div className="rounded-xl bg-muted p-8 text-center md:p-12">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-            Ready to start?
-          </h2>
-          <p className="mx-auto mt-4 max-w-prose text-muted-foreground">
-            WhatsApp Hari directly to book a class, ask about pricing, or arrange
-            a visit.
-          </p>
-          <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <WhatsAppCTA intent="general" size="lg">
-              WhatsApp Hari
-            </WhatsAppCTA>
-            <Button asChild variant="outline" size="lg">
-              <Link href="/contact">Contact details</Link>
-            </Button>
+      {/* Marquee */}
+      <Marquee items={MARQUEE_ITEMS} />
+
+      {/* Gallery */}
+      {mediaItems.length > 0 ? (
+        <section className="border-b border-border py-20 md:py-28">
+          <div className="container">
+            <SectionReveal className="mb-12">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
+                In motion
+              </p>
+              <h2 className="font-display text-5xl uppercase leading-none tracking-tight md:text-7xl">
+                Gallery
+              </h2>
+            </SectionReveal>
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+              {mediaItems.slice(0, 8).map((item, i) =>
+                item.image ? (
+                  <SectionReveal key={item._id} delay={i * 0.05}>
+                    <Image
+                      src={urlFor(item.image).width(500).height(500).url()}
+                      alt={item.caption || item.image.alt || "STEEZE"}
+                      width={500}
+                      height={500}
+                      className="aspect-square w-full rounded-lg object-cover"
+                    />
+                  </SectionReveal>
+                ) : null
+              )}
+            </div>
           </div>
+        </section>
+      ) : null}
+
+      {/* Testimonials */}
+      {testimonials.length > 0 ? (
+        <section className="border-b border-border py-20 md:py-28">
+          <div className="container">
+            <SectionReveal className="mb-12">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
+                The crew says
+              </p>
+              <h2 className="font-display text-5xl uppercase leading-none tracking-tight md:text-7xl">
+                Word of <span className="text-primary">mouth</span>
+              </h2>
+            </SectionReveal>
+            <div className="grid gap-6 md:grid-cols-3">
+              {testimonials.map((t, i) => (
+                <SectionReveal key={t._id} delay={i * 0.1}>
+                  <div className="flex h-full flex-col gap-6 rounded-lg border border-border bg-card p-8">
+                    <p className="text-lg leading-snug">
+                      &ldquo;{t.quote}&rdquo;
+                    </p>
+                    <p className="mt-auto text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                      — {t.parentName ?? t.studentName ?? "Parent"}
+                    </p>
+                  </div>
+                </SectionReveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {/* Final CTA */}
+      <section className="py-24 md:py-36">
+        <div className="container">
+          <SectionReveal>
+            <div className="rounded-xl border border-border bg-card p-10 text-center md:p-20">
+              <h2 className="font-display text-5xl uppercase leading-none tracking-tight md:text-7xl">
+                Ready to <span className="text-primary">roll?</span>
+              </h2>
+              <p className="mx-auto mt-6 max-w-prose text-lg text-muted-foreground">
+                WhatsApp Hari directly. No forms, no friction.
+              </p>
+              <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <WhatsAppCTA
+                  intent="general"
+                  size="lg"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90"
+                >
+                  WhatsApp Hari
+                </WhatsAppCTA>
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="border-foreground/40 hover:bg-foreground hover:text-background"
+                >
+                  <Link href="/contact">Contact details</Link>
+                </Button>
+              </div>
+            </div>
+          </SectionReveal>
         </div>
       </section>
     </>

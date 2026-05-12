@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { getSiteSettings } from "@/sanity/queries";
@@ -23,31 +22,34 @@ export async function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-16 border-t bg-muted/30">
-      <div className="container grid gap-8 py-12 md:grid-cols-4">
-        <div className="space-y-3">
-          <Image
-            src="/brand/logo.png"
-            alt="STEEZE Skateboarding"
-            width={1089}
-            height={490}
-            className="h-10 w-auto"
-          />
+    <footer className="mt-24 border-t border-border bg-background">
+      <div className="container grid gap-12 py-16 md:grid-cols-4">
+        <div className="space-y-3 md:col-span-1">
+          <Link
+            href="/"
+            className="block font-display text-3xl uppercase leading-none tracking-widest"
+          >
+            Stee<span className="text-primary">z</span>e
+          </Link>
           {settings?.tagline ? (
             <p className="text-sm text-muted-foreground">{settings.tagline}</p>
-          ) : null}
+          ) : (
+            <p className="text-sm text-muted-foreground">
+              Skateboarding in Hyderabad.
+            </p>
+          )}
         </div>
 
         <div>
-          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide">
+          <h3 className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
             Contact
           </h3>
-          <ul className="space-y-2 text-sm text-muted-foreground">
+          <ul className="space-y-2 text-sm">
             {settings?.phoneNumber ? (
               <li>
                 <a
                   href={`tel:${settings.phoneNumber}`}
-                  className="hover:text-foreground"
+                  className="text-foreground/80 transition-colors hover:text-primary"
                 >
                   {settings.phoneNumber}
                 </a>
@@ -57,7 +59,7 @@ export async function Footer() {
               <li>
                 <a
                   href={`mailto:${settings.email}`}
-                  className="hover:text-foreground"
+                  className="text-foreground/80 transition-colors hover:text-primary"
                 >
                   {settings.email}
                 </a>
@@ -67,7 +69,7 @@ export async function Footer() {
               <li>
                 <a
                   href={`https://wa.me/${settings.whatsappNumber}`}
-                  className="hover:text-foreground"
+                  className="text-foreground/80 transition-colors hover:text-primary"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -79,20 +81,20 @@ export async function Footer() {
         </div>
 
         <div>
-          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide">
+          <h3 className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
             Visit
           </h3>
           {addressLines ? (
-            <address className="not-italic text-sm text-muted-foreground">
+            <address className="not-italic text-sm text-foreground/80">
               {addressLines.map((line, i) => (
                 <div key={i}>{line}</div>
               ))}
             </address>
           ) : (
-            <p className="text-sm text-muted-foreground">Hyderabad, Telangana</p>
+            <p className="text-sm text-foreground/80">Hyderabad, Telangana</p>
           )}
           {settings?.openingHours && settings.openingHours.length > 0 ? (
-            <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
+            <ul className="mt-3 space-y-1 text-sm text-foreground/80">
               {settings.openingHours.map((h) => (
                 <li key={h}>{h}</li>
               ))}
@@ -101,17 +103,17 @@ export async function Footer() {
         </div>
 
         <div>
-          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide">
+          <h3 className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
             Follow
           </h3>
-          <ul className="space-y-2 text-sm text-muted-foreground">
+          <ul className="space-y-2 text-sm">
             {settings?.social?.instagram ? (
               <li>
                 <a
                   href={settings.social.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-foreground"
+                  className="text-foreground/80 transition-colors hover:text-primary"
                 >
                   Instagram
                 </a>
@@ -123,7 +125,7 @@ export async function Footer() {
                   href={settings.social.youtube}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-foreground"
+                  className="text-foreground/80 transition-colors hover:text-primary"
                 >
                   YouTube
                 </a>
@@ -133,8 +135,8 @@ export async function Footer() {
         </div>
       </div>
 
-      <div className="border-t">
-        <div className="container flex flex-col items-start justify-between gap-2 py-6 text-sm text-muted-foreground md:flex-row md:items-center">
+      <div className="border-t border-border">
+        <div className="container flex flex-col items-start justify-between gap-2 py-6 text-xs uppercase tracking-widest text-muted-foreground md:flex-row md:items-center">
           <p>© {year} STEEZE Skateboarding</p>
           <p>
             Designed by{" "}
@@ -142,7 +144,7 @@ export async function Footer() {
               href="https://moretraffic.in"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-medium text-foreground hover:underline"
+              className="text-foreground transition-colors hover:text-primary"
             >
               Joe
             </Link>
