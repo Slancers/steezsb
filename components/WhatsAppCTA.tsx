@@ -3,20 +3,37 @@
 import { usePathname } from "next/navigation";
 import * as React from "react";
 
-import { Button, type ButtonProps } from "@/components/ui/button";
 import { pushEvent } from "@/lib/analytics";
 import type { LeadIntent } from "@/lib/whatsapp";
 
-type Props = Omit<ButtonProps, "onClick"> & {
+type Props = Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "size"
+> & {
   intent: LeadIntent;
   children: React.ReactNode;
+  // Accepted but ignored — v1 pages still pass `size="lg"` from the old
+  // shadcn Button API. They'll get redesigned in a follow-up; until then,
+  // accept the prop silently so the build doesn't break.
+  size?: "default" | "sm" | "lg" | "icon";
+  variant?: string;
 };
 
-// Wraps a shadcn Button with the full WhatsApp attribution flow:
-// click → POST /api/lead → open wa.me URL with ref code prefilled.
-// On API failure, falls back to opening a plain wa.me link so the
-// visitor is never blocked (PRD Section 7, edge cases).
-export function WhatsAppCTA({ intent, children, ...buttonProps }: Props) {
+// Native-button version of the WhatsApp CTA. Accepts full className control
+// so each page can apply .btn-zine / .btn-zine--red / custom utilities.
+// The lead attribution flow is unchanged:
+//   click → POST /api/lead → open wa.me URL with ref code prefilled.
+// On API failure, falls back to opening a plain wa.me link so the visitor
+// is never blocked (PRD Section 7, edge cases).
+export function WhatsAppCTA({
+  intent,
+  children,
+  className,
+  onClick: _ignored,
+  size: _sizeIgnored,
+  variant: _variantIgnored,
+  ...rest
+}: Props) {
   const pathname = usePathname();
   const [pending, setPending] = React.useState(false);
 
@@ -49,22 +66,21 @@ export function WhatsAppCTA({ intent, children, ...buttonProps }: Props) {
       });
       window.open(data.whatsappUrl, "_blank", "noopener,noreferrer");
     } catch {
-      // Fall back to a plain wa.me URL with no ref code so the user can
-      // still reach Hari. The lead just won't be attributed.
       const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "";
-      window.open(
-        `https://wa.me/${number}`,
-        "_blank",
-        "noopener,noreferrer"
-      );
+      window.open(`https://wa.me/${number}`, "_blank", "noopener,noreferrer");
     } finally {
       setPending(false);
     }
   }
 
   return (
-    <Button {...buttonProps} onClick={handleClick} disabled={pending}>
+    <button
+      {...rest}
+      onClick={handleClick}
+      disabled={pending}
+      className={className ?? "btn-zine"}
+    >
       {children}
-    </Button>
+    </button>
   );
 }

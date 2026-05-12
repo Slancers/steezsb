@@ -1,5 +1,4 @@
-import { MessageCircle } from "lucide-react";
-
+import { WhatsAppIcon } from "@/components/icons/zine";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 
 // Fixed-position WhatsApp button visible only on mobile (md:hidden).
@@ -8,9 +7,8 @@ import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 export function StickyMobileWhatsApp() {
   return (
     <div className="fixed bottom-4 right-4 z-40 md:hidden">
-      <WhatsAppCTA intent="general" size="lg" className="shadow-lg">
-        <MessageCircle className="mr-1 h-5 w-5" />
-        WhatsApp
+      <WhatsAppCTA intent="general" className="btn-zine btn-zine--red">
+        <WhatsAppIcon size={16} /> WhatsApp
       </WhatsAppCTA>
     </div>
   );
