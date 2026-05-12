@@ -10,19 +10,26 @@ const entries = lines
   })
   .filter(({ value }) => value.length > 0);
 
+const targetEnvs = process.argv.slice(2);
+const envs = targetEnvs.length > 0 ? targetEnvs : ["production"];
+
 for (const { key, value } of entries) {
-  const result = spawnSync(
-    "vercel",
-    ["env", "add", key, "production"],
-    { input: value + "\n", encoding: "utf-8" }
-  );
   const masked =
     /TOKEN|SECRET|DSN/.test(key)
       ? `<set, ${value.length} chars>`
       : value;
-  if (result.status === 0) {
-    console.log(`✓ ${key}=${masked}`);
-  } else {
-    console.log(`✗ ${key}: ${result.stderr || result.stdout}`);
+  for (const env of envs) {
+    const result = spawnSync(
+      "vercel",
+      ["env", "add", key, env, "--value", value, "--yes"],
+      { encoding: "utf-8" }
+    );
+    const tag = `${key} [${env}]`;
+    if (result.status === 0) {
+      console.log(`✓ ${tag}=${masked}`);
+    } else {
+      const err = (result.stderr || result.stdout || "").trim();
+      console.log(`✗ ${tag}: ${err.split("\n").slice(0, 3).join(" | ")}`);
+    }
   }
 }
