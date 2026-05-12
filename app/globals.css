@@ -41,7 +41,11 @@
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    @apply bg-paper text-ink font-sans antialiased;
+    /* Periwinkle blue page canvas — preserves the designer's direct edit
+       in index.html (background-color: rgb(110, 149, 209)). Cream cards,
+       ink containers, and marquee variants sit on top of this. */
+    background-color: rgb(110, 149, 209);
+    @apply text-ink font-sans antialiased;
     font-feature-settings: "kern", "calt";
     overflow-x: hidden;
   }
