@@ -15,35 +15,16 @@ export function OllieSequence({
   return (
     <div className={`ollie-sequence w-full ${className}`}>
       <svg
-        viewBox="0 0 800 220"
+        viewBox="0 30 800 190"
         fill="none"
         stroke={color}
-        strokeWidth="2.2"
+        strokeWidth="2.6"
         strokeLinecap="round"
         strokeLinejoin="round"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden
         className="ollie-sequence__svg w-full"
       >
-        {/* Phase numerals — small typeset labels above each frame */}
-        <g
-          fill="currentColor"
-          stroke="none"
-          fontFamily="var(--font-space-mono), ui-monospace, monospace"
-          fontSize="10"
-          fontWeight="700"
-          letterSpacing="2"
-          textAnchor="middle"
-          className="ollie-sequence__nums"
-          opacity="0.5"
-        >
-          <text x="80" y="16">01</text>
-          <text x="240" y="16">02</text>
-          <text x="400" y="16">03</text>
-          <text x="560" y="16">04</text>
-          <text x="720" y="16">05</text>
-        </g>
-
         {/* ===== FRAME 1 — SETUP — standing on board on the ground ===== */}
         <g className="ollie-sequence__frame ollie-sequence__frame--1">
           {/* Helmet */}
@@ -167,8 +148,8 @@ export function OllieSequence({
 
       {/* HTML labels under the SVG, aligned to a 5-col grid that mirrors
           the frame centers. Easier to keep accessible + responsive than
-          rendering text inside the SVG. */}
-      <div className="mt-3 grid grid-cols-5 gap-2 text-center font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+          rendering text inside the SVG at small scales. */}
+      <div className="mt-2 grid grid-cols-5 gap-1 text-center font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-on-surface-variant">
         <span>Setup</span>
         <span>Pop</span>
         <span>Lift</span>
@@ -200,17 +181,8 @@ export function OllieSequence({
         .ollie-sequence__frame--5 path,
         .ollie-sequence__frame--5 circle { animation-delay: 1500ms; }
 
-        .ollie-sequence__nums {
-          opacity: 0;
-          animation: ollie-fade 600ms ease-out forwards;
-          animation-delay: 1800ms;
-        }
-
         @keyframes ollie-draw {
           to { stroke-dashoffset: 0; }
-        }
-        @keyframes ollie-fade {
-          to { opacity: 0.5; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -219,10 +191,6 @@ export function OllieSequence({
           .ollie-sequence__frame circle {
             animation: none;
             stroke-dashoffset: 0;
-          }
-          .ollie-sequence__nums {
-            animation: none;
-            opacity: 0.5;
           }
         }
       `}</style>

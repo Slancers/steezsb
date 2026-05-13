@@ -38,7 +38,7 @@ export function PageHero({
   return (
     <section className="container pt-10 md:pt-14">
       <Reveal>
-        <div className="grid items-start gap-8 md:grid-cols-[1fr_240px] md:gap-12 lg:grid-cols-[1fr_280px]">
+        <div className="grid items-start gap-8 md:grid-cols-[1fr_340px] md:gap-10 lg:grid-cols-[1fr_400px] lg:gap-14">
           <div>
             <div className="eyebrow-zine mb-5">{eyebrow}</div>
             <h1 className="font-display break-words font-bold uppercase leading-[0.88] -tracking-[0.03em] text-[clamp(44px,10vw,160px)] md:leading-[0.85] md:-tracking-[0.05em]">
