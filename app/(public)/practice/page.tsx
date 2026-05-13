@@ -1,7 +1,7 @@
 import { BowlArt } from "@/components/effects/BowlArt";
+import { DropInSequence } from "@/components/effects/DropInSequence";
 import { Marquee } from "@/components/effects/Marquee";
 import { Reveal } from "@/components/effects/Reveal";
-import { SkateboardIllustration } from "@/components/effects/SkateboardIllustration";
 import { Arrow, StarBurst } from "@/components/icons/zine";
 import { JsonLd } from "@/components/JsonLd";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
@@ -110,7 +110,7 @@ export default function PracticePage() {
       {/* Page hero */}
       <section className="container pt-12 md:pt-16">
         <Reveal>
-          <div className="grid items-start gap-8 md:grid-cols-[1fr_280px] md:gap-12 lg:grid-cols-[1fr_320px]">
+          <div className="grid items-stretch gap-8 md:grid-cols-[1fr_380px] md:gap-10 lg:grid-cols-[1fr_560px] lg:gap-16">
             <div>
               <div className="eyebrow-zine mb-6">[ practice ]</div>
               <h1 className="font-display break-words font-bold uppercase leading-[0.88] -tracking-[0.03em] text-[clamp(44px,10vw,160px)] md:leading-[0.85] md:-tracking-[0.05em]">
@@ -133,8 +133,14 @@ export default function PracticePage() {
                 class. Helmets are free. Music is loud.
               </p>
             </div>
-            <div className="hidden self-start justify-self-end md:block" aria-hidden>
-              <SkateboardIllustration className="w-full max-w-[320px]" />
+            <div
+              className="hidden w-full self-center justify-self-end md:block"
+              aria-hidden
+            >
+              <div className="mb-4 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+                [ How a drop-in works ]
+              </div>
+              <DropInSequence />
             </div>
           </div>
         </Reveal>

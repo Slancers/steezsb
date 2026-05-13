@@ -1,3 +1,4 @@
+import { BoardBuildSequence } from "@/components/effects/BoardBuildSequence";
 import { Marquee } from "@/components/effects/Marquee";
 import { Reveal } from "@/components/effects/Reveal";
 import {
@@ -250,6 +251,14 @@ export default function ShopPage() {
           { text: "SKATING.", treatment: "outlined" },
         ]}
         subtitle="A tight starter shop. Decks, trucks, wheels, bearings, helmets, stickers. Nothing you don't need. We'll set up your board on the bench, in front of you."
+        illustration={
+          <div className="w-full">
+            <div className="mb-4 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+              [ How a board comes together ]
+            </div>
+            <BoardBuildSequence />
+          </div>
+        }
       />
 
       <div className="pt-12 md:pt-16">
