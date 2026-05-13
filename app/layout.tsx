@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Permanent_Marker, Space_Mono } from "next/font/google";
+import { Fraunces, Inter, Space_Mono } from "next/font/google";
 
 import { GtmNoScript, GtmScript } from "@/components/analytics/Gtm";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
-const jetbrains = JetBrains_Mono({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -15,13 +21,6 @@ const spaceMono = Space_Mono({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-space-mono",
-  display: "swap",
-});
-
-const permanentMarker = Permanent_Marker({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-permanent-marker",
   display: "swap",
 });
 
@@ -50,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${jetbrains.variable} ${spaceMono.variable} ${permanentMarker.variable}`}
+      className={`${fraunces.variable} ${inter.variable} ${spaceMono.variable}`}
     >
       <body className="min-h-screen text-ink antialiased">
         <GtmScript />

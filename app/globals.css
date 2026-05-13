@@ -3,36 +3,36 @@
 @tailwind utilities;
 
 /* ============================================================
-   STEEZ — v3 BRUTALIST SKATE-ZINE
-   Cream paper + ink + red/blue/lime punch
+   STEEZ — v4 SKATE GARDEN
+   Sun-drenched, calm, photo-led.
+   Soft sky canvas, cream cards, sage/sun/terracotta accents.
    ============================================================ */
 
 @layer base {
   :root {
-    /* shadcn carry-over (HSL components consumed by existing UI). Map them
-       to the new palette so old shadcn components don't look broken. */
-    --background: 47 42% 89%;          /* paper */
-    --foreground: 40 12% 5%;           /* ink */
-    --card: 47 42% 89%;
-    --card-foreground: 40 12% 5%;
-    --popover: 47 42% 89%;
-    --popover-foreground: 40 12% 5%;
-    --primary: 40 12% 5%;
-    --primary-foreground: 47 42% 89%;
-    --secondary: 47 36% 84%;           /* paper-deep */
-    --secondary-foreground: 40 12% 5%;
-    --muted: 47 36% 84%;
-    --muted-foreground: 40 12% 35%;
-    --accent: 0 100% 59%;              /* red */
-    --accent-foreground: 47 42% 89%;
-    --destructive: 0 100% 59%;
-    --destructive-foreground: 47 42% 89%;
-    --border: 40 12% 5%;               /* ink hairlines */
-    --input: 40 12% 5%;
-    --ring: 0 100% 59%;
-    --radius: 0px;                     /* brutalist: no rounded corners */
+    /* shadcn carry-over — HSL components mapped to v4 palette */
+    --background: 210 49% 86%;         /* sky */
+    --foreground: 30 5% 16%;           /* ink */
+    --card: 36 56% 91%;                /* sand */
+    --card-foreground: 30 5% 16%;
+    --popover: 36 56% 91%;
+    --popover-foreground: 30 5% 16%;
+    --primary: 30 5% 16%;              /* ink */
+    --primary-foreground: 36 56% 91%;  /* sand */
+    --secondary: 36 41% 84%;           /* sand-deep */
+    --secondary-foreground: 30 5% 16%;
+    --muted: 36 41% 84%;
+    --muted-foreground: 30 5% 30%;
+    --accent: 18 60% 58%;              /* terracotta */
+    --accent-foreground: 36 56% 91%;
+    --destructive: 18 60% 48%;         /* terracotta-deep */
+    --destructive-foreground: 36 56% 91%;
+    --border: 30 5% 16%;
+    --input: 30 5% 16%;
+    --ring: 18 60% 58%;
+    --radius: 12px;                    /* v4: soft rounded corners */
 
-    /* Motion scaling — every animation duration multiplies this */
+    /* Motion scaling */
     --motion: 1;
   }
 }
@@ -41,132 +41,152 @@
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    /* Periwinkle blue page canvas — preserves the designer's direct edit
-       in index.html (background-color: rgb(110, 149, 209)). Cream cards,
-       ink containers, and marquee variants sit on top of this. */
-    background-color: rgb(110, 149, 209);
+    /* Soft sky canvas — calm, bright, sun-drenched */
+    background-color: #C8DDEE;
+    background-image:
+      radial-gradient(ellipse at 20% 0%, rgba(245, 194, 91, 0.18), transparent 50%),
+      radial-gradient(ellipse at 80% 100%, rgba(127, 164, 107, 0.12), transparent 55%);
+    background-attachment: fixed;
     @apply text-ink font-sans antialiased;
-    font-feature-settings: "kern", "calt";
+    font-feature-settings: "kern", "calt", "ss01";
     overflow-x: hidden;
   }
 
-  /* Paper grain — subtle dot pattern under everything */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.06;
-    z-index: 1;
-    background-image: radial-gradient(circle at 1px 1px, #0E0D0B 1px, transparent 0);
-    background-size: 4px 4px;
-    mix-blend-mode: multiply;
+  ::selection { background: #F5C25B; color: #2A2826; }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: #B5B0A8;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
   }
-
-  ::selection { background: #FF2D2D; color: #F1EAD7; }
-
-  ::-webkit-scrollbar { width: 12px; height: 12px; }
-  ::-webkit-scrollbar-track { background: #E6DDC5; }
-  ::-webkit-scrollbar-thumb { background: #0E0D0B; border: 2px solid #E6DDC5; }
+  ::-webkit-scrollbar-thumb:hover { background-color: #8F8B83; }
 }
 
 @layer components {
-  /* Brutalist button — used by .btn-zine variants in JSX */
+  /* Soft pill button — replaces v3 brutalist offset-shadow button */
   .btn-zine {
-    @apply inline-flex items-center gap-2.5 border-2 border-ink bg-ink px-5 py-3 text-xs font-semibold uppercase tracking-wider text-paper;
-    box-shadow: 4px 4px 0 #FF2D2D;
+    @apply inline-flex items-center gap-2.5 rounded-full border border-ink/15 bg-ink px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-sand;
+    box-shadow: 0 2px 8px rgba(42, 40, 38, 0.10), 0 8px 24px rgba(42, 40, 38, 0.08);
     transition:
-      transform 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
-      box-shadow 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
-      background 140ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      background 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
     white-space: nowrap;
   }
   .btn-zine:hover:not(:disabled) {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 #FF2D2D;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(42, 40, 38, 0.14), 0 16px 40px rgba(42, 40, 38, 0.10);
   }
   .btn-zine:active:not(:disabled) {
-    transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0 #FF2D2D;
+    transform: translateY(0);
+    box-shadow: 0 1px 4px rgba(42, 40, 38, 0.10);
   }
   .btn-zine--red {
-    background: #FF2D2D;
-    border-color: #FF2D2D;
-    color: #F1EAD7;
-    box-shadow: 4px 4px 0 #0E0D0B;
+    background: #D67A52;
+    border-color: rgba(178, 93, 56, 0.3);
+    color: #F5EBDA;
+    box-shadow: 0 2px 8px rgba(214, 122, 82, 0.20), 0 8px 24px rgba(214, 122, 82, 0.15);
   }
-  .btn-zine--red:hover:not(:disabled) { box-shadow: 6px 6px 0 #0E0D0B; }
-  .btn-zine--red:active:not(:disabled) { box-shadow: 1px 1px 0 #0E0D0B; }
+  .btn-zine--red:hover:not(:disabled) {
+    box-shadow: 0 4px 16px rgba(214, 122, 82, 0.28), 0 16px 40px rgba(214, 122, 82, 0.18);
+  }
   .btn-zine--blue {
-    background: #2547F0;
-    border-color: #2547F0;
-    color: #F1EAD7;
-    box-shadow: 4px 4px 0 #0E0D0B;
+    background: #7FA46B;
+    border-color: rgba(94, 133, 80, 0.3);
+    color: #F5EBDA;
+    box-shadow: 0 2px 8px rgba(127, 164, 107, 0.20), 0 8px 24px rgba(127, 164, 107, 0.15);
   }
-  .btn-zine--blue:hover:not(:disabled) { box-shadow: 6px 6px 0 #0E0D0B; }
+  .btn-zine--blue:hover:not(:disabled) {
+    box-shadow: 0 4px 16px rgba(127, 164, 107, 0.28), 0 16px 40px rgba(127, 164, 107, 0.18);
+  }
   .btn-zine--lime {
-    background: #D3F046;
-    border-color: #0E0D0B;
-    color: #0E0D0B;
-    box-shadow: 4px 4px 0 #0E0D0B;
+    background: #F5C25B;
+    border-color: rgba(224, 167, 55, 0.3);
+    color: #2A2826;
+    box-shadow: 0 2px 8px rgba(245, 194, 91, 0.30), 0 8px 24px rgba(245, 194, 91, 0.20);
   }
-  .btn-zine--lime:hover:not(:disabled) { box-shadow: 6px 6px 0 #0E0D0B; }
+  .btn-zine--lime:hover:not(:disabled) {
+    box-shadow: 0 4px 16px rgba(245, 194, 91, 0.38), 0 16px 40px rgba(245, 194, 91, 0.24);
+  }
   .btn-zine--ghost {
     background: transparent;
-    color: #0E0D0B;
+    color: #2A2826;
+    border: 1px solid rgba(42, 40, 38, 0.25);
     box-shadow: none;
   }
   .btn-zine--ghost:hover:not(:disabled) {
-    background: #0E0D0B;
-    color: #F1EAD7;
+    background: rgba(42, 40, 38, 0.06);
     box-shadow: none;
-    transform: none;
+    transform: translateY(-1px);
   }
 
-  /* Chip / tag — small ink-bordered pills */
+  /* Chip — softer, pill-shaped, lower contrast borders */
   .chip-zine {
-    @apply inline-flex items-center gap-1.5 border-[1.5px] border-ink bg-paper px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest text-ink;
+    @apply inline-flex items-center gap-1.5 rounded-full border border-ink/25 bg-sand px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink;
   }
-  .chip-zine--red { background: #FF2D2D; color: #F1EAD7; border-color: #FF2D2D; }
-  .chip-zine--blue { background: #2547F0; color: #F1EAD7; border-color: #2547F0; }
-  .chip-zine--lime { background: #D3F046; color: #0E0D0B; border-color: #0E0D0B; }
+  .chip-zine--red { background: #D67A52; color: #F5EBDA; border-color: transparent; }
+  .chip-zine--blue { background: #7FA46B; color: #F5EBDA; border-color: transparent; }
+  .chip-zine--lime { background: #F5C25B; color: #2A2826; border-color: transparent; }
   .chip-zine--live::before {
     content: '';
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #D3F046;
-    box-shadow: 0 0 0 0 #D3F046;
-    animation: pulse-dot calc(1.8s * var(--motion, 1)) infinite;
+    background: #7FA46B;
+    box-shadow: 0 0 0 0 #7FA46B;
+    animation: pulse-dot calc(2.4s * var(--motion, 1)) infinite;
   }
 
   /* Eyebrow — small section labels with a leading bar */
   .eyebrow-zine {
-    @apply inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-steeze-red;
+    @apply inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta;
   }
   .eyebrow-zine::before {
     content: '';
-    width: 18px;
+    width: 20px;
     height: 2px;
     background: currentColor;
+    border-radius: 2px;
   }
 
-  /* Section head — big number + huge title separator */
+  /* Section head — Fraunces serif, calmer scale than v3 */
   .s-num-zine {
-    @apply text-[11px] font-medium uppercase tracking-[0.18em] text-ink/60;
+    @apply text-[11px] font-medium uppercase tracking-[0.2em] text-ink/55;
   }
   .s-title-zine {
-    @apply font-display text-5xl font-bold uppercase leading-[0.9] tracking-tight md:text-7xl lg:text-[5.25rem];
+    @apply font-display text-5xl font-medium leading-[1.0] -tracking-[0.02em] md:text-7xl;
+    font-variation-settings: "SOFT" 100, "WONK" 0;
   }
 
-  /* Route transition — soft fade+rise replayed on every navigation.
-     Paired with components/effects/RouteTransition.tsx which remounts
-     children via key={pathname}. */
+  /* Soft card — replaces v3 brutalist hard-shadow card */
+  .card-soft {
+    @apply rounded-2xl border border-ink/10 bg-sand;
+    box-shadow:
+      0 1px 2px rgba(42, 40, 38, 0.04),
+      0 4px 16px rgba(42, 40, 38, 0.06),
+      0 16px 48px rgba(42, 40, 38, 0.04);
+  }
+
+  /* Photo grain — barely-there film grain for photo containers */
+  .photo-grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.04) 1px, transparent 0);
+    background-size: 3px 3px;
+    mix-blend-mode: overlay;
+  }
+
+  /* Route transition — soft fade-up on navigation */
   .route-in {
-    animation: route-in 280ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: route-in 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
   }
   @keyframes route-in {
-    from { opacity: 0; transform: translateY(8px); }
+    from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -176,21 +196,29 @@
   /* Scroll reveal — paired with components/effects/Reveal.tsx */
   .reveal {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(28px);
     transition:
-      opacity calc(700ms * var(--motion, 1)) cubic-bezier(0.16, 1, 0.3, 1),
-      transform calc(700ms * var(--motion, 1)) cubic-bezier(0.16, 1, 0.3, 1);
+      opacity calc(800ms * var(--motion, 1)) cubic-bezier(0.16, 1, 0.3, 1),
+      transform calc(800ms * var(--motion, 1)) cubic-bezier(0.16, 1, 0.3, 1);
   }
   .reveal.in { opacity: 1; transform: translateY(0); }
   .reveal-stagger > * {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(22px);
     transition:
-      opacity calc(600ms * var(--motion, 1)) cubic-bezier(0.16, 1, 0.3, 1),
-      transform calc(600ms * var(--motion, 1)) cubic-bezier(0.16, 1, 0.3, 1);
+      opacity calc(700ms * var(--motion, 1)) cubic-bezier(0.16, 1, 0.3, 1),
+      transform calc(700ms * var(--motion, 1)) cubic-bezier(0.16, 1, 0.3, 1);
   }
   .reveal-stagger.in > * { opacity: 1; transform: translateY(0); }
-  .reveal-stagger.in > *:nth-child(2) { transition-delay: 80ms; }
-  .reveal-stagger.in > *:nth-child(3) { transition-delay: 160ms; }
-  .reveal-stagger.in > *:nth-child(4) { transition-delay: 240ms; }
+  .reveal-stagger.in > *:nth-child(2) { transition-delay: 100ms; }
+  .reveal-stagger.in > *:nth-child(3) { transition-delay: 200ms; }
+  .reveal-stagger.in > *:nth-child(4) { transition-delay: 300ms; }
+
+  /* Hero photo container — Ken Burns slow zoom */
+  .photo-kenburns img {
+    animation: ken-burns 14s ease-in-out infinite alternate;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .photo-kenburns img { animation: none; }
+  }
 }

@@ -149,13 +149,13 @@ function BigFooterWord() {
   return (
     <div className="overflow-hidden border-t border-paper/15 py-6">
       <div
-        className="animate-ticker-slow whitespace-nowrap font-display text-[clamp(60px,14vw,220px)] font-bold uppercase leading-none -tracking-[0.04em]"
+        className="animate-ticker-slow whitespace-nowrap font-display text-[clamp(60px,14vw,220px)] font-medium leading-none -tracking-[0.025em]"
         style={{
           color: "transparent",
-          WebkitTextStroke: "2px #F1EAD7",
+          WebkitTextStroke: "1.5px #F5EBDA",
         }}
       >
-        SKATE&nbsp;·&nbsp;OR&nbsp;·&nbsp;DON&apos;T&nbsp;·&nbsp;SKATE&nbsp;·&nbsp;OR&nbsp;·&nbsp;DON&apos;T&nbsp;·&nbsp;
+        ROOM&nbsp;TO&nbsp;ROLL&nbsp;·&nbsp;ROOM&nbsp;TO&nbsp;ROLL&nbsp;·&nbsp;
       </div>
     </div>
   );
