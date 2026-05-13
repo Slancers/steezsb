@@ -85,11 +85,11 @@ export default async function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="container relative pb-24 pt-12 md:pt-20">
-        <div className="grid items-center gap-10 md:grid-cols-[1.1fr_1fr] md:gap-12">
-          <div className="relative z-10">
+      <section className="container relative pb-20 pt-10 md:pb-24 md:pt-20">
+        <div className="grid gap-8 md:grid-cols-[1.1fr_1fr] md:items-center md:gap-12">
+          <div className="relative z-10 md:order-none">
             <Reveal>
-              <div className="mb-8 flex flex-wrap items-center gap-3">
+              <div className="mb-6 flex flex-wrap items-center gap-2 md:mb-8 md:gap-3">
                 <span className="chip-zine chip-zine--live">LIVE · HYD</span>
                 <span className="chip-zine">EST · 2019</span>
                 <span className="chip-zine chip-zine--blue">
@@ -99,14 +99,14 @@ export default async function HomePage() {
             </Reveal>
 
             <Reveal>
-              <h1 className="font-display break-words font-bold uppercase leading-[0.88] -tracking-[0.03em] md:leading-[0.82] md:-tracking-[0.05em]">
+              <h1 className="font-display break-words font-bold uppercase leading-[0.95] -tracking-[0.03em] md:leading-[0.82] md:-tracking-[0.05em]">
                 <span
-                  className="block text-[clamp(56px,11vw,180px)]"
-                  style={{ textShadow: "5px 5px 0 #FF2D2D" }}
+                  className="hero-skate block pb-2 text-[clamp(48px,11vw,180px)] md:pb-0"
+                  style={{ textShadow: "3px 3px 0 #FF2D2D" }}
                 >
                   SKATE
                 </span>
-                <span className="block text-[clamp(56px,11vw,180px)]">
+                <span className="block text-[clamp(48px,11vw,180px)]">
                   <span
                     className="text-transparent"
                     style={{ WebkitTextStroke: "2px #0E0D0B" }}
@@ -122,7 +122,7 @@ export default async function HomePage() {
             </Reveal>
 
             <Reveal>
-              <p className="mt-8 max-w-[480px] text-[15px] leading-relaxed text-ink-soft">
+              <p className="mt-10 max-w-[480px] text-[15px] leading-relaxed text-ink-soft md:mt-8">
                 Skateboarding coaching in{" "}
                 <strong className="bg-steeze-lime px-1 font-semibold text-ink">
                   Hyderabad

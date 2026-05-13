@@ -267,9 +267,12 @@ export function Deck3D() {
         </div>
       </div>
 
-      {/* Floating stamps around the deck */}
+      {/* Floating stamps around the deck.
+          The LIVE·HYD and COACHED·BY·HARI stamps are hidden on mobile —
+          they'd otherwise duplicate the chips directly below the deck
+          in the home hero text column. */}
       <div
-        className="absolute font-mono text-[10px] font-bold uppercase tracking-[0.16em]"
+        className="absolute hidden font-mono text-[10px] font-bold uppercase tracking-[0.16em] sm:block"
         style={{
           top: "10%",
           left: "5%",
@@ -282,7 +285,7 @@ export function Deck3D() {
         <span className="text-steeze-red">●</span>&nbsp;LIVE · HYD
       </div>
       <div
-        className="absolute font-sticker text-2xl text-steeze-red animate-bob"
+        className="absolute font-sticker text-xl text-steeze-red animate-bob md:text-2xl"
         style={{ top: "8%", right: "12%" }}
       >
         SKATE OR DON&apos;T
@@ -301,7 +304,7 @@ export function Deck3D() {
         7.75&quot; · maple
       </div>
       <div
-        className="absolute font-mono text-[10px] font-bold uppercase tracking-[0.16em]"
+        className="absolute hidden font-mono text-[10px] font-bold uppercase tracking-[0.16em] sm:block"
         style={{
           bottom: "20%",
           right: "6%",
