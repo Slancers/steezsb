@@ -23,29 +23,27 @@ export async function Footer() {
     settings?.address?.line1 ||
     settings?.address?.city ||
     "Banjara Hills";
-  const cityLine = [
-    settings?.address?.city,
-    settings?.address?.state,
-  ]
-    .filter(Boolean)
-    .join(", ") || "Hyderabad, Telangana";
+  const cityLine =
+    [settings?.address?.city, settings?.address?.state]
+      .filter(Boolean)
+      .join(", ") || "Hyderabad, Telangana";
 
   return (
     <footer className="relative z-[2] bg-ink text-paper">
-      <div className="container pb-8 pt-20">
-        <div className="grid gap-12 border-b border-paper/15 pb-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
-          <div>
-            <div className="font-display text-6xl font-bold uppercase leading-[0.85] -tracking-[0.04em] md:text-7xl">
-              STEEZ<span className="text-steeze-red">.</span>
+      <div className="container pb-10 pt-20 md:pb-14 md:pt-28">
+        <div className="grid gap-12 border-b border-paper/12 pb-14 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] lg:gap-10">
+          <div className="max-w-[360px]">
+            <div className="font-display text-6xl font-medium leading-[0.9] -tracking-[0.02em] md:text-7xl">
+              STEEZ<span className="italic text-terracotta">.</span>
             </div>
-            <p className="mt-4 max-w-[280px] text-[13px] leading-relaxed text-paper/70">
-              Skateboarding coaching in Hyderabad. Classes, hourly bowl, kit
-              shop. Coached by Hari since 2019.
+            <p className="mt-5 text-[14px] leading-relaxed text-paper/65">
+              Skateboarding for kids in Hyderabad. A bowl, a kit shop, and a
+              coach who skates with them. Since 2019.
             </p>
-            <div className="mt-6">
+            <div className="mt-7">
               <WhatsAppCTA
                 intent="general"
-                className="btn-zine btn-zine--red text-[11px]"
+                className="btn-zine btn-zine--red"
               >
                 <WhatsAppIcon size={14} /> WhatsApp Hari
               </WhatsAppCTA>
@@ -53,15 +51,15 @@ export async function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-steeze-red">
+            <h4 className="mb-5 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-terracotta">
               Site
             </h4>
-            <ul className="space-y-2 text-[13px] text-paper/80">
+            <ul className="space-y-2.5 text-[14px] text-paper/75">
               {SITE_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="transition-colors hover:text-steeze-lime"
+                    className="transition-colors hover:text-paper"
                   >
                     {link.label}
                   </Link>
@@ -71,27 +69,31 @@ export async function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-steeze-red">
+            <h4 className="mb-5 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-terracotta">
               Visit
             </h4>
-            <ul className="space-y-2 text-[13px] text-paper/80">
+            <ul className="space-y-2.5 text-[14px] text-paper/75">
               <li>{addressLine}</li>
               <li>{cityLine}</li>
               <li>India</li>
-              <li className="pt-3">Mon–Sat · 06–21</li>
-              <li>Sun · 06–13</li>
+              <li className="pt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-paper/55">
+                Mon–Sat · 06–21
+              </li>
+              <li className="font-mono text-[11px] uppercase tracking-[0.18em] text-paper/55">
+                Sun · 06–13
+              </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-steeze-red">
+            <h4 className="mb-5 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-terracotta">
               Reach
             </h4>
-            <ul className="space-y-2 text-[13px] text-paper/80">
+            <ul className="space-y-2.5 text-[14px] text-paper/75">
               <li>
                 <a
                   href={`tel:${phone}`}
-                  className="transition-colors hover:text-steeze-lime"
+                  className="transition-colors hover:text-paper"
                 >
                   {phone}
                 </a>
@@ -99,7 +101,7 @@ export async function Footer() {
               <li>
                 <a
                   href={`mailto:${email}`}
-                  className="transition-colors hover:text-steeze-lime"
+                  className="transition-colors hover:text-paper"
                 >
                   {email}
                 </a>
@@ -110,7 +112,7 @@ export async function Footer() {
                     href={insta}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="transition-colors hover:text-steeze-lime"
+                    className="transition-colors hover:text-paper"
                   >
                     @steezsb
                   </a>
@@ -120,42 +122,37 @@ export async function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-6 font-mono text-[10px] uppercase tracking-[0.14em] text-paper/50">
-          <span>© {new Date().getFullYear()} STEEZ Skateboarding</span>
-          <span className="inline-flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-steeze-lime" />
-            Bowl · Open
-          </span>
-          <span>
-            Designed by{" "}
-            <Link
-              href="https://moretraffic.in"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-paper transition-colors hover:text-steeze-lime"
-            >
-              Joe
-            </Link>
-          </span>
-        </div>
+        {/* Colophon — Patagonia-style restraint, like a print book endpage */}
+        <Colophon />
       </div>
-
-      <BigFooterWord />
     </footer>
   );
 }
 
-function BigFooterWord() {
+function Colophon() {
   return (
-    <div className="overflow-hidden border-t border-paper/15 py-6">
-      <div
-        className="animate-ticker-slow whitespace-nowrap font-display text-[clamp(60px,14vw,220px)] font-medium leading-none -tracking-[0.025em]"
-        style={{
-          color: "transparent",
-          WebkitTextStroke: "1.5px #F5EBDA",
-        }}
-      >
-        ROOM&nbsp;TO&nbsp;ROLL&nbsp;·&nbsp;ROOM&nbsp;TO&nbsp;ROLL&nbsp;·&nbsp;
+    <div className="grid gap-6 pt-8 md:grid-cols-[2fr_1fr] md:items-end md:pt-10">
+      <p className="max-w-[640px] font-display text-[15px] italic leading-[1.55] text-paper/55 md:text-[16px]">
+        STEEZ is a skateboarding school for kids, set in a garden in Banjara
+        Hills, Hyderabad. Photographs by Hari, 2024–2025. The bowl was
+        hand-troweled. The kids did the rest.
+      </p>
+      <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2 font-mono text-[10px] uppercase tracking-[0.2em] text-paper/45 md:justify-end md:text-right">
+        <span>© {new Date().getFullYear()} · STEEZ · EST 2019</span>
+        <span className="hidden md:inline-block" aria-hidden>
+          ·
+        </span>
+        <span>
+          Site by{" "}
+          <Link
+            href="https://moretraffic.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-paper/75 transition-colors hover:text-paper"
+          >
+            More Traffic
+          </Link>
+        </span>
       </div>
     </div>
   );
