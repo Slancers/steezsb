@@ -149,7 +149,7 @@ export function OllieSequence({
       {/* HTML labels under the SVG, aligned to a 5-col grid that mirrors
           the frame centers. Easier to keep accessible + responsive than
           rendering text inside the SVG at small scales. */}
-      <div className="mt-2 grid grid-cols-5 gap-1 text-center font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-on-surface-variant">
+      <div className="mt-3 grid grid-cols-5 gap-2 text-center font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
         <span>Setup</span>
         <span>Pop</span>
         <span>Lift</span>

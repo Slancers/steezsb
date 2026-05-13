@@ -181,7 +181,7 @@ export default function ClassesPage() {
         subtitle="We coach skateboarding from your first push to your first kickflip. 1-on-1, small group, or seasonal cohort. No board? We'll lend you one for the first session."
         illustration={
           <div className="w-full">
-            <div className="mb-3 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+            <div className="mb-4 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
               [ How an ollie works ]
             </div>
             <OllieSequence />
