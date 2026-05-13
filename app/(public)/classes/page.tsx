@@ -1,4 +1,5 @@
 import { Marquee } from "@/components/effects/Marquee";
+import { OllieIllustration } from "@/components/effects/OllieIllustration";
 import { Reveal } from "@/components/effects/Reveal";
 import { Arrow, StarBurst, WhatsAppIcon } from "@/components/icons/zine";
 import { JsonLd } from "@/components/JsonLd";
@@ -178,6 +179,7 @@ export default function ClassesPage() {
           { text: "GO.", treatment: "outlined" },
         ]}
         subtitle="We coach skateboarding from your first push to your first kickflip. 1-on-1, small group, or seasonal cohort. No board? We'll lend you one for the first session."
+        illustration={<OllieIllustration className="w-full max-w-[280px]" />}
       />
 
       <div className="pt-12 md:pt-16">

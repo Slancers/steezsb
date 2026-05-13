@@ -1,6 +1,7 @@
 import { BowlArt } from "@/components/effects/BowlArt";
 import { Marquee } from "@/components/effects/Marquee";
 import { Reveal } from "@/components/effects/Reveal";
+import { SkateboardIllustration } from "@/components/effects/SkateboardIllustration";
 import { Arrow, StarBurst } from "@/components/icons/zine";
 import { JsonLd } from "@/components/JsonLd";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
@@ -109,26 +110,33 @@ export default function PracticePage() {
       {/* Page hero */}
       <section className="container pt-12 md:pt-16">
         <Reveal>
-          <div className="eyebrow-zine mb-6">[ practice ]</div>
-          <h1 className="font-display break-words font-bold uppercase leading-[0.88] -tracking-[0.03em] text-[clamp(44px,10vw,160px)] md:leading-[0.85] md:-tracking-[0.05em]">
-            <span
-              className="block text-transparent"
-              style={{ WebkitTextStroke: "2px #0E0D0B" }}
-            >
-              THE BOWL.
-            </span>
-            <span className="block">BY THE</span>
-            <span
-              className="block text-steeze-blue"
-              style={{ textShadow: "6px 6px 0 #0E0D0B" }}
-            >
-              HOUR.
-            </span>
-          </h1>
-          <p className="mt-8 max-w-[560px] text-[15px] leading-relaxed text-ink-soft">
-            For independent skaters. Book a slot, show up, skate. No coach, no
-            class. Helmets are free. Music is loud.
-          </p>
+          <div className="grid items-start gap-8 md:grid-cols-[1fr_280px] md:gap-12 lg:grid-cols-[1fr_320px]">
+            <div>
+              <div className="eyebrow-zine mb-6">[ practice ]</div>
+              <h1 className="font-display break-words font-bold uppercase leading-[0.88] -tracking-[0.03em] text-[clamp(44px,10vw,160px)] md:leading-[0.85] md:-tracking-[0.05em]">
+                <span
+                  className="block text-transparent"
+                  style={{ WebkitTextStroke: "2px #0E0D0B" }}
+                >
+                  THE BOWL.
+                </span>
+                <span className="block">BY THE</span>
+                <span
+                  className="block text-steeze-blue"
+                  style={{ textShadow: "6px 6px 0 #0E0D0B" }}
+                >
+                  HOUR.
+                </span>
+              </h1>
+              <p className="mt-8 max-w-[560px] text-[15px] leading-relaxed text-ink-soft">
+                For independent skaters. Book a slot, show up, skate. No coach, no
+                class. Helmets are free. Music is loud.
+              </p>
+            </div>
+            <div className="hidden self-start justify-self-end md:block" aria-hidden>
+              <SkateboardIllustration className="w-full max-w-[320px]" />
+            </div>
+          </div>
         </Reveal>
       </section>
 
