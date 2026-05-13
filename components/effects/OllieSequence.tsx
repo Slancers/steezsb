@@ -15,7 +15,7 @@ export function OllieSequence({
   return (
     <div className={`ollie-sequence w-full ${className}`}>
       <svg
-        viewBox="0 30 800 190"
+        viewBox="0 14 800 206"
         fill="none"
         stroke={color}
         strokeWidth="2.6"
@@ -152,7 +152,7 @@ export function OllieSequence({
       <div className="mt-3 grid grid-cols-5 gap-2 text-center font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
         <span>Setup</span>
         <span>Pop</span>
-        <span>Lift</span>
+        <span>Drag</span>
         <span>Peak</span>
         <span>Land</span>
       </div>
