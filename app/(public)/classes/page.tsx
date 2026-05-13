@@ -1,5 +1,5 @@
 import { Marquee } from "@/components/effects/Marquee";
-import { OllieIllustration } from "@/components/effects/OllieIllustration";
+import { OllieSequence } from "@/components/effects/OllieSequence";
 import { Reveal } from "@/components/effects/Reveal";
 import { Arrow, StarBurst, WhatsAppIcon } from "@/components/icons/zine";
 import { JsonLd } from "@/components/JsonLd";
@@ -179,8 +179,24 @@ export default function ClassesPage() {
           { text: "GO.", treatment: "outlined" },
         ]}
         subtitle="We coach skateboarding from your first push to your first kickflip. 1-on-1, small group, or seasonal cohort. No board? We'll lend you one for the first session."
-        illustration={<OllieIllustration className="w-full max-w-[280px]" />}
       />
+
+      {/* Ollie motion study — 5-frame instructional diagram below hero */}
+      <section className="container hidden pt-14 md:block md:pt-20">
+        <Reveal>
+          <div className="border-t border-outline-variant pt-10">
+            <div className="mb-6 flex items-end justify-between">
+              <div className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+                [ How an ollie works ]
+              </div>
+              <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-on-surface-variant">
+                Diagram · 01 of 12
+              </div>
+            </div>
+            <OllieSequence />
+          </div>
+        </Reveal>
+      </section>
 
       <div className="pt-12 md:pt-16">
         <Marquee variant="dark">
