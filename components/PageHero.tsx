@@ -31,7 +31,7 @@ export function PageHero({
     <section className="container pt-10 md:pt-14">
       <Reveal>
         <div className="eyebrow-zine mb-5">{eyebrow}</div>
-        <h1 className="font-display font-bold uppercase leading-[0.85] -tracking-[0.05em] text-[clamp(64px,10vw,160px)]">
+        <h1 className="font-display break-words font-bold uppercase leading-[0.88] -tracking-[0.03em] text-[clamp(44px,10vw,160px)] md:leading-[0.85] md:-tracking-[0.05em]">
           {lines.map((line, i) => (
             <span
               key={i}

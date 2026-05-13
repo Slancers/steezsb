@@ -110,7 +110,7 @@ export default function PracticePage() {
       <section className="container pt-12 md:pt-16">
         <Reveal>
           <div className="eyebrow-zine mb-6">[ practice ]</div>
-          <h1 className="font-display font-bold uppercase leading-[0.85] -tracking-[0.05em] text-[clamp(64px,10vw,160px)]">
+          <h1 className="font-display break-words font-bold uppercase leading-[0.88] -tracking-[0.03em] text-[clamp(44px,10vw,160px)] md:leading-[0.85] md:-tracking-[0.05em]">
             <span
               className="block text-transparent"
               style={{ WebkitTextStroke: "2px #0E0D0B" }}
@@ -252,7 +252,8 @@ export default function PracticePage() {
         </Reveal>
 
         <Reveal>
-          <div className="border-x-[1.5px] border-ink">
+          <div className="-mx-4 overflow-x-auto px-4 md:mx-0 md:px-0">
+            <div className="min-w-[680px] border-x-[1.5px] border-ink">
             {/* Day-of-week header */}
             <div className="grid grid-cols-[100px_repeat(7,1fr)] bg-ink font-mono text-[11px] uppercase tracking-[0.14em] text-paper">
               <div className="border-r border-paper/15 p-2.5" />
@@ -304,9 +305,10 @@ export default function PracticePage() {
                 </div>
               );
             })}
+            </div>
           </div>
           {/* Legend */}
-          <div className="mt-4 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.14em] text-ink/60">
+          <div className="mt-4 flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-[0.14em] text-ink/60">
             <span>QUIET</span>
             <div className="flex gap-0.5">
               {[0, 1, 2, 3, 4, 5].map((i) => (

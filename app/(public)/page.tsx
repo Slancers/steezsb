@@ -99,14 +99,14 @@ export default async function HomePage() {
             </Reveal>
 
             <Reveal>
-              <h1 className="font-display font-bold uppercase leading-[0.82] -tracking-[0.05em]">
+              <h1 className="font-display break-words font-bold uppercase leading-[0.88] -tracking-[0.03em] md:leading-[0.82] md:-tracking-[0.05em]">
                 <span
-                  className="block text-[clamp(64px,11vw,180px)]"
+                  className="block text-[clamp(56px,11vw,180px)]"
                   style={{ textShadow: "5px 5px 0 #FF2D2D" }}
                 >
                   SKATE
                 </span>
-                <span className="block text-[clamp(64px,11vw,180px)]">
+                <span className="block text-[clamp(56px,11vw,180px)]">
                   <span
                     className="text-transparent"
                     style={{ WebkitTextStroke: "2px #0E0D0B" }}
@@ -345,7 +345,7 @@ export default async function HomePage() {
         <Reveal className="grid gap-12 md:grid-cols-[1.5fr_1fr] md:items-center">
           <div>
             <div className="eyebrow-zine mb-4">[ 03 / SHOW UP ]</div>
-            <h2 className="font-display text-5xl font-bold uppercase leading-[0.9] -tracking-[0.04em] md:text-7xl lg:text-[7.5rem]">
+            <h2 className="font-display break-words text-4xl font-bold uppercase leading-[0.95] -tracking-[0.03em] sm:text-5xl md:text-7xl md:leading-[0.9] md:-tracking-[0.04em] lg:text-[7.5rem]">
               <span>Book </span>
               <span
                 style={{

@@ -302,7 +302,8 @@ export default function ClassesPage() {
         </Reveal>
 
         <Reveal>
-          <div className="border-[1.5px] border-ink bg-paper">
+          <div className="-mx-4 overflow-x-auto px-4 md:mx-0 md:px-0">
+            <div className="min-w-[720px] border-[1.5px] border-ink bg-paper md:min-w-0">
             <div className="grid grid-cols-[80px_repeat(7,1fr)] bg-ink font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-paper md:grid-cols-[100px_repeat(7,1fr)] md:text-[11px]">
               <div className="border-r border-paper/15 p-3">TIME</div>
               {DAYS.map((d, i) => (
@@ -347,6 +348,7 @@ export default function ClassesPage() {
                 })}
               </div>
             ))}
+            </div>
           </div>
         </Reveal>
       </section>

@@ -72,7 +72,7 @@ export function Deck3D() {
   return (
     <div
       ref={wrapRef}
-      className="relative h-[420px] w-full md:h-[580px]"
+      className="relative h-[360px] w-full overflow-hidden sm:h-[420px] md:h-[580px]"
       style={{ perspective: "1400px" }}
     >
       <div
