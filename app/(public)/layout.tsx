@@ -1,4 +1,6 @@
 import { ScrollDepthTracker } from "@/components/analytics/ScrollDepthTracker";
+import { RouteTransition } from "@/components/effects/RouteTransition";
+import { ScrollProgress } from "@/components/effects/ScrollProgress";
 import { StatusTicker } from "@/components/effects/StatusTicker";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
@@ -18,11 +20,14 @@ export default async function PublicLayout({
     <>
       <JsonLd data={organizationJsonLd(settings)} />
       <JsonLd data={localBusinessJsonLd(settings)} />
+      <ScrollProgress />
       <Nav />
       <div className="fixed inset-x-0 top-[60px] z-40 md:top-[68px]">
         <StatusTicker />
       </div>
-      <main className="pt-[100px] md:pt-[108px]">{children}</main>
+      <main className="pt-[100px] md:pt-[108px]">
+        <RouteTransition>{children}</RouteTransition>
+      </main>
       <Footer />
       <StickyMobileWhatsApp />
       <ScrollDepthTracker />
