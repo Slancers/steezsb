@@ -52,7 +52,7 @@ export default function RootLayout({
       lang="en"
       className={`${jetbrains.variable} ${spaceMono.variable} ${permanentMarker.variable}`}
     >
-      <body className="min-h-screen bg-paper text-ink antialiased">
+      <body className="min-h-screen text-ink antialiased">
         <GtmScript />
         <GtmNoScript />
         {children}
