@@ -3,36 +3,35 @@
 @tailwind utilities;
 
 /* ============================================================
-   STEEZ — v4 SKATE GARDEN
-   Sun-drenched, calm, photo-led.
-   Soft sky canvas, cream cards, sage/sun/terracotta accents.
+   STEEZ — v8 SKATE EDITORIAL
+   Stitch-designed "Athletic Minimalism + Premium Editorial".
+   Off-white canvas, dark grey ink, terracotta accent.
+   Sharp corners, flat surfaces, condensed display.
    ============================================================ */
 
 @layer base {
   :root {
-    /* shadcn carry-over — HSL components mapped to v4 palette */
-    --background: 210 49% 86%;         /* sky */
-    --foreground: 30 5% 16%;           /* ink */
-    --card: 36 56% 91%;                /* sand */
-    --card-foreground: 30 5% 16%;
-    --popover: 36 56% 91%;
-    --popover-foreground: 30 5% 16%;
-    --primary: 30 5% 16%;              /* ink */
-    --primary-foreground: 36 56% 91%;  /* sand */
-    --secondary: 36 41% 84%;           /* sand-deep */
-    --secondary-foreground: 30 5% 16%;
-    --muted: 36 41% 84%;
-    --muted-foreground: 30 5% 30%;
-    --accent: 18 60% 58%;              /* terracotta */
-    --accent-foreground: 36 56% 91%;
-    --destructive: 18 60% 48%;         /* terracotta-deep */
-    --destructive-foreground: 36 56% 91%;
-    --border: 30 5% 16%;
-    --input: 30 5% 16%;
-    --ring: 18 60% 58%;
-    --radius: 12px;                    /* v4: soft rounded corners */
+    --background: 0 0% 98%;            /* #f9f9f9 surface */
+    --foreground: 180 4% 11%;          /* #1a1c1c on-surface */
+    --card: 0 0% 100%;                 /* #ffffff surface-container-lowest */
+    --card-foreground: 180 4% 11%;
+    --popover: 0 0% 98%;
+    --popover-foreground: 180 4% 11%;
+    --primary: 22 84% 32%;             /* #99420d primary */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 1% 37%;             /* #5f5e5e */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 91%;                 /* surface-container-highest */
+    --muted-foreground: 25 19% 28%;    /* on-surface-variant */
+    --accent: 22 64% 47%;              /* #C4622D */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 42%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 22 38% 79%;              /* outline-variant */
+    --input: 22 38% 79%;
+    --ring: 22 64% 47%;
+    --radius: 0px;                     /* v8: sharp 90° corners */
 
-    /* Motion scaling */
     --motion: 1;
   }
 }
@@ -41,180 +40,139 @@
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    /* Soft sky canvas — calm, bright, sun-drenched */
-    background-color: #C8DDEE;
-    background-image:
-      radial-gradient(ellipse at 20% 0%, rgba(245, 194, 91, 0.18), transparent 50%),
-      radial-gradient(ellipse at 80% 100%, rgba(127, 164, 107, 0.12), transparent 55%);
-    background-attachment: fixed;
-    @apply text-ink font-sans antialiased;
-    font-feature-settings: "kern", "calt", "ss01", "tnum";
+    background-color: #f9f9f9;
+    color: #1a1c1c;
+    font-family: var(--font-hanken), system-ui, sans-serif;
+    font-feature-settings: "kern", "calt";
+    -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
 
-  ::selection { background: #F5C25B; color: #2A2826; }
+  ::selection { background: #C4622D; color: #ffffff; }
 
   ::-webkit-scrollbar { width: 10px; height: 10px; }
-  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-track { background: #f9f9f9; }
   ::-webkit-scrollbar-thumb {
-    background: #B5B0A8;
-    border-radius: 999px;
-    border: 2px solid transparent;
-    background-clip: content-box;
+    background: #dcc1b5;
+    border-radius: 0;
   }
-  ::-webkit-scrollbar-thumb:hover { background-color: #8F8B83; }
+  ::-webkit-scrollbar-thumb:hover { background-color: #897268; }
 }
 
 @layer components {
-  /* Soft pill button — replaces v3 brutalist offset-shadow button */
+  /* Primary button — Stitch terracotta, sharp, uppercase label */
   .btn-zine {
-    @apply inline-flex items-center gap-2.5 rounded-full border border-ink/15 bg-ink px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-sand;
-    box-shadow: 0 2px 8px rgba(42, 40, 38, 0.10), 0 8px 24px rgba(42, 40, 38, 0.08);
-    transition:
-      transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
-      box-shadow 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
-      background 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    @apply inline-flex items-center justify-center gap-2 bg-[#1A1A1A] px-6 py-3 text-[14px] font-bold uppercase tracking-[0.05em] text-white;
+    border-radius: 0;
+    transition: opacity 200ms ease, background-color 200ms ease, color 200ms ease;
     white-space: nowrap;
+    font-family: var(--font-hanken), system-ui, sans-serif;
   }
-  .btn-zine:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(42, 40, 38, 0.14), 0 16px 40px rgba(42, 40, 38, 0.10);
-  }
-  .btn-zine:active:not(:disabled) {
-    transform: translateY(0);
-    box-shadow: 0 1px 4px rgba(42, 40, 38, 0.10);
-  }
+  .btn-zine:hover:not(:disabled) { opacity: 0.9; }
   .btn-zine--red {
-    background: #D67A52;
-    border-color: rgba(178, 93, 56, 0.3);
-    color: #F5EBDA;
-    box-shadow: 0 2px 8px rgba(214, 122, 82, 0.20), 0 8px 24px rgba(214, 122, 82, 0.15);
+    background: #C4622D;
+    color: #ffffff;
   }
-  .btn-zine--red:hover:not(:disabled) {
-    box-shadow: 0 4px 16px rgba(214, 122, 82, 0.28), 0 16px 40px rgba(214, 122, 82, 0.18);
-  }
+  .btn-zine--red:hover:not(:disabled) { opacity: 0.9; }
   .btn-zine--blue {
-    background: #7FA46B;
-    border-color: rgba(94, 133, 80, 0.3);
-    color: #F5EBDA;
-    box-shadow: 0 2px 8px rgba(127, 164, 107, 0.20), 0 8px 24px rgba(127, 164, 107, 0.15);
+    background: #C4622D;
+    color: #ffffff;
   }
-  .btn-zine--blue:hover:not(:disabled) {
-    box-shadow: 0 4px 16px rgba(127, 164, 107, 0.28), 0 16px 40px rgba(127, 164, 107, 0.18);
-  }
+  .btn-zine--blue:hover:not(:disabled) { opacity: 0.9; }
   .btn-zine--lime {
-    background: #F5C25B;
-    border-color: rgba(224, 167, 55, 0.3);
-    color: #2A2826;
-    box-shadow: 0 2px 8px rgba(245, 194, 91, 0.30), 0 8px 24px rgba(245, 194, 91, 0.20);
+    background: #C4622D;
+    color: #ffffff;
   }
-  .btn-zine--lime:hover:not(:disabled) {
-    box-shadow: 0 4px 16px rgba(245, 194, 91, 0.38), 0 16px 40px rgba(245, 194, 91, 0.24);
-  }
+  .btn-zine--lime:hover:not(:disabled) { opacity: 0.9; }
   .btn-zine--ghost {
     background: transparent;
-    color: #2A2826;
-    border: 1px solid rgba(42, 40, 38, 0.25);
-    box-shadow: none;
+    color: #1A1A1A;
+    border: 2px solid #1A1A1A;
   }
   .btn-zine--ghost:hover:not(:disabled) {
-    background: rgba(42, 40, 38, 0.06);
-    box-shadow: none;
-    transform: translateY(-1px);
+    background: #1A1A1A;
+    color: #ffffff;
+    opacity: 1;
   }
 
-  /* Chip — softer, pill-shaped, lower contrast borders */
+  /* Chip — sharp outlined tag */
   .chip-zine {
-    @apply inline-flex items-center gap-1.5 rounded-full border border-ink/25 bg-sand px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink;
+    @apply inline-flex items-center gap-1.5 border border-on-surface bg-transparent px-3 py-1 text-[12px] font-bold uppercase tracking-[0.05em] text-on-surface;
+    border-radius: 0;
   }
-  .chip-zine--red { background: #D67A52; color: #F5EBDA; border-color: transparent; }
-  .chip-zine--blue { background: #7FA46B; color: #F5EBDA; border-color: transparent; }
-  .chip-zine--lime { background: #F5C25B; color: #2A2826; border-color: transparent; }
+  .chip-zine--red { background: #C4622D; color: #ffffff; border-color: #C4622D; }
+  .chip-zine--blue { background: #1A1A1A; color: #ffffff; border-color: #1A1A1A; }
+  .chip-zine--lime { background: #C4622D; color: #ffffff; border-color: #C4622D; }
   .chip-zine--live::before {
     content: '';
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #7FA46B;
-    box-shadow: 0 0 0 0 #7FA46B;
+    background: #C4622D;
+    box-shadow: 0 0 0 0 #C4622D;
     animation: pulse-dot calc(2.4s * var(--motion, 1)) infinite;
   }
 
-  /* Eyebrow — small section labels with a leading bar */
+  /* Eyebrow — terracotta label */
   .eyebrow-zine {
-    @apply inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta;
-  }
-  .eyebrow-zine::before {
-    content: '';
-    width: 20px;
-    height: 2px;
-    background: currentColor;
-    border-radius: 2px;
+    @apply inline-block text-[14px] font-bold uppercase tracking-[0.05em];
+    color: #C4622D;
+    font-family: var(--font-hanken), system-ui, sans-serif;
   }
 
-  /* Section head — Fraunces serif, calmer scale than v3 */
+  /* Section heads */
   .s-num-zine {
-    @apply text-[11px] font-medium uppercase tracking-[0.2em] text-ink/55;
+    @apply text-[14px] font-bold uppercase tracking-[0.05em];
+    color: #56433a;
   }
   .s-title-zine {
-    @apply font-display text-5xl font-medium leading-[1.0] -tracking-[0.02em] md:text-7xl;
-    font-variation-settings: "SOFT" 100, "WONK" 0;
+    @apply font-display text-display-sm uppercase md:text-display-lg;
+    color: #1A1A1A;
+    line-height: 0.95;
   }
 
-  /* Soft card — replaces v3 brutalist hard-shadow card */
+  /* Flat card — Stitch defines cards as 1px bordered, no shadow */
   .card-soft {
-    @apply rounded-2xl border border-ink/10 bg-sand;
-    box-shadow:
-      0 1px 2px rgba(42, 40, 38, 0.04),
-      0 4px 16px rgba(42, 40, 38, 0.06),
-      0 16px 48px rgba(42, 40, 38, 0.04);
+    background: #f9f9f9;
+    border: 1px solid #dcc1b5;
+    border-radius: 0;
+    box-shadow: none;
   }
 
-  /* Photo grain — barely-there film grain for photo containers */
-  .photo-grain::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.04) 1px, transparent 0);
-    background-size: 3px 3px;
-    mix-blend-mode: overlay;
-  }
-
-  /* Route transition — soft fade-up on navigation */
+  /* Route transition */
   .route-in {
     animation: route-in 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
   }
   @keyframes route-in {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: translateY(0); }
   }
   @media (prefers-reduced-motion: reduce) {
     .route-in { animation: none; }
   }
 
-  /* Scroll reveal — slower, more organic drift than v5 */
+  /* Scroll reveal — calm editorial fade */
   .reveal {
     opacity: 0;
-    transform: translateY(32px);
+    transform: translateY(28px);
     transition:
-      opacity calc(1100ms * var(--motion, 1)) cubic-bezier(0.22, 1, 0.36, 1),
-      transform calc(1100ms * var(--motion, 1)) cubic-bezier(0.22, 1, 0.36, 1);
+      opacity calc(900ms * var(--motion, 1)) cubic-bezier(0.22, 1, 0.36, 1),
+      transform calc(900ms * var(--motion, 1)) cubic-bezier(0.22, 1, 0.36, 1);
   }
   .reveal.in { opacity: 1; transform: translateY(0); }
   .reveal-stagger > * {
     opacity: 0;
-    transform: translateY(26px);
+    transform: translateY(22px);
     transition:
-      opacity calc(1000ms * var(--motion, 1)) cubic-bezier(0.22, 1, 0.36, 1),
-      transform calc(1000ms * var(--motion, 1)) cubic-bezier(0.22, 1, 0.36, 1);
+      opacity calc(800ms * var(--motion, 1)) cubic-bezier(0.22, 1, 0.36, 1),
+      transform calc(800ms * var(--motion, 1)) cubic-bezier(0.22, 1, 0.36, 1);
   }
   .reveal-stagger.in > * { opacity: 1; transform: translateY(0); }
-  .reveal-stagger.in > *:nth-child(2) { transition-delay: 140ms; }
-  .reveal-stagger.in > *:nth-child(3) { transition-delay: 280ms; }
-  .reveal-stagger.in > *:nth-child(4) { transition-delay: 420ms; }
+  .reveal-stagger.in > *:nth-child(2) { transition-delay: 120ms; }
+  .reveal-stagger.in > *:nth-child(3) { transition-delay: 240ms; }
+  .reveal-stagger.in > *:nth-child(4) { transition-delay: 360ms; }
 
-  /* Hero photo container — Ken Burns slow zoom */
+  /* Hero Ken Burns */
   .photo-kenburns img {
     animation: ken-burns 18s ease-in-out infinite alternate;
   }
@@ -222,34 +180,20 @@
     .photo-kenburns img { animation: none; }
   }
 
-  /* Tabular numerals — for stats and big numbers */
+  /* Tabular numerals */
   .nums {
-    font-feature-settings: "tnum" 1, "ss01" 1;
+    font-feature-settings: "tnum" 1;
     font-variant-numeric: tabular-nums;
   }
-
-  /* Italic display utility — Fraunces italic with a softer tracking */
-  .display-italic {
-    @apply font-display italic font-medium -tracking-[0.005em];
-  }
-
-  /* Margin note — small editorial annotation, hand-written feel */
-  .margin-note {
-    @apply font-display italic text-[14px] leading-snug text-ink/65 md:text-[15px];
-  }
 }
 
-/* Slow light shift on hero photos — feels like the sun moving across.
-   Sits outside @layer components so it can compose with the kenburns class. */
-@keyframes light-shift {
-  0%, 100% { filter: saturate(1) brightness(1); }
-  50% { filter: saturate(1.06) brightness(1.03); }
+/* Ticker animation — used by the dark scrolling status bar */
+.ticker-wrap { width: 100%; overflow: hidden; white-space: nowrap; }
+.ticker {
+  display: inline-block;
+  animation: ticker-scroll 30s linear infinite;
 }
-.photo-light-shift > img,
-.photo-light-shift img {
-  animation: light-shift 9s ease-in-out infinite;
-}
-@media (prefers-reduced-motion: reduce) {
-  .photo-light-shift > img,
-  .photo-light-shift img { animation: none; }
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }

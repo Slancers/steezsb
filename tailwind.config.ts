@@ -10,24 +10,30 @@ const config: Config = {
   theme: {
     container: {
       center: true,
-      padding: "1.5rem",
-      screens: { "2xl": "1320px" },
+      padding: { DEFAULT: "16px", md: "48px" },
+      screens: { "2xl": "1280px" },
     },
     extend: {
       colors: {
-        // shadcn carry-over (HSL components consumed by existing UI)
+        // shadcn carry-over
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "#99420d",
+          foreground: "#ffffff",
+          container: "#b95925",
+          fixed: "#ffdbcc",
+          "fixed-dim": "#ffb693",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "#5f5e5e",
+          foreground: "#ffffff",
+          container: "#e2dfde",
+          fixed: "#e5e2e1",
+          "fixed-dim": "#c8c6c5",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
@@ -38,77 +44,147 @@ const config: Config = {
           foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "#C4622D",
+          foreground: "#ffffff",
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: "#f9f9f9",
+          foreground: "#1a1c1c",
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: "#f9f9f9",
+          foreground: "#1a1c1c",
         },
 
-        // v4 SKATE GARDEN palette — sun-drenched, calm, photo-led
-        sky: {
-          DEFAULT: "#C8DDEE",
-          deep: "#A8C5E0",
-          light: "#E2EDF6",
+        // v8 STITCH "Skate Editorial" tokens (Material Design 3 naming)
+        surface: {
+          DEFAULT: "#f9f9f9",
+          bright: "#f9f9f9",
+          dim: "#dadada",
+          tint: "#9c440f",
+          variant: "#e2e2e2",
+          container: "#eeeeee",
+          "container-low": "#f3f3f4",
+          "container-lowest": "#ffffff",
+          "container-high": "#e8e8e8",
+          "container-highest": "#e2e2e2",
         },
+        "on-surface": {
+          DEFAULT: "#1a1c1c",
+          variant: "#56433a",
+        },
+        "inverse-surface": "#2f3131",
+        "inverse-on-surface": "#f0f1f1",
+        "inverse-primary": "#ffb693",
+        outline: {
+          DEFAULT: "#897268",
+          variant: "#dcc1b5",
+        },
+        // STEEZ brand accent — Stitch's terracotta
+        terracotta: {
+          DEFAULT: "#C4622D",
+          deep: "#99420d",
+          light: "#ffb693",
+        },
+
+        // Legacy v3/v4/v5/v7 aliases — repointed to Stitch tokens so older
+        // pages don't break during the v8 reskin. Most points to surface/ink.
         sand: {
-          DEFAULT: "#F5EBDA",
-          deep: "#E9DCC1",
-          warm: "#F2E2C6",
+          DEFAULT: "#f9f9f9",
+          deep: "#eeeeee",
+          warm: "#f3f3f4",
+          light: "#ffffff",
+        },
+        sky: {
+          DEFAULT: "#f9f9f9",
+          deep: "#eeeeee",
+          light: "#ffffff",
         },
         sage: {
-          DEFAULT: "#7FA46B",
-          deep: "#5E8550",
-          light: "#A8C496",
+          DEFAULT: "#1a1c1c",
+          deep: "#1a1c1c",
+          light: "#56433a",
         },
         sun: {
-          DEFAULT: "#F5C25B",
-          deep: "#E0A737",
-          light: "#FBDC9A",
-        },
-        terracotta: {
-          DEFAULT: "#D67A52",
-          deep: "#B25D38",
-          light: "#E6A082",
+          DEFAULT: "#C4622D",
+          deep: "#99420d",
+          light: "#ffb693",
         },
         concrete: {
-          DEFAULT: "#B5B0A8",
-          deep: "#8F8B83",
-          light: "#D4D0C8",
+          DEFAULT: "#dcc1b5",
+          deep: "#897268",
+          light: "#e2e2e2",
         },
         ink: {
-          DEFAULT: "#2A2826",
-          soft: "#4A4642",
+          DEFAULT: "#1a1c1c",
+          soft: "#56433a",
         },
-
-        // v3 carry-over aliases (kept so old code doesn't break during reskin)
         paper: {
-          DEFAULT: "#F5EBDA",
-          deep: "#E9DCC1",
-          warm: "#F2E2C6",
+          DEFAULT: "#f9f9f9",
+          deep: "#eeeeee",
+          warm: "#f3f3f4",
         },
         steeze: {
-          red: "#D67A52",
-          "red-d": "#B25D38",
-          blue: "#7FA46B",
-          "blue-d": "#5E8550",
-          lime: "#F5C25B",
-          "lime-d": "#E0A737",
+          red: "#C4622D",
+          "red-d": "#99420d",
+          blue: "#1a1c1c",
+          "blue-d": "#1a1c1c",
+          lime: "#C4622D",
+          "lime-d": "#99420d",
         },
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        sans: ["var(--font-hanken)", "system-ui", "sans-serif"],
         mono: ["var(--font-space-mono)", "ui-monospace", "monospace"],
-        display: ["var(--font-fraunces)", "Georgia", "serif"],
-        sticker: ["var(--font-fraunces)", "Georgia", "serif"],
+        display: ["var(--font-bebas)", "Impact", "sans-serif"],
+        sticker: ["var(--font-bebas)", "Impact", "sans-serif"],
+        body: ["var(--font-hanken)", "system-ui", "sans-serif"],
+      },
+      fontSize: {
+        // Stitch typographic scale
+        "display-lg": [
+          "80px",
+          { lineHeight: "80px", letterSpacing: "0.02em", fontWeight: "400" },
+        ],
+        "display-sm": [
+          "48px",
+          { lineHeight: "48px", letterSpacing: "0.02em", fontWeight: "400" },
+        ],
+        "headline-lg": [
+          "32px",
+          { lineHeight: "32px", letterSpacing: "0.02em", fontWeight: "400" },
+        ],
+        "headline-lg-mobile": [
+          "28px",
+          { lineHeight: "28px", letterSpacing: "0.02em", fontWeight: "400" },
+        ],
+        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+        "label-bold": [
+          "14px",
+          { lineHeight: "20px", letterSpacing: "0.05em", fontWeight: "700" },
+        ],
+      },
+      spacing: {
+        // Stitch spacing tokens
+        "stack-sm": "8px",
+        "stack-md": "16px",
+        "stack-lg": "32px",
+        gutter: "24px",
+        "margin-mobile": "16px",
+        "margin-desktop": "48px",
+        "section-gap": "120px",
+        "container-max": "1280px",
+      },
+      maxWidth: {
+        "container-max": "1280px",
       },
       borderRadius: {
-        lg: "var(--radius)",
+        DEFAULT: "0.25rem",
+        lg: "0.5rem",
+        xl: "0.75rem",
+        full: "9999px",
+        // shadcn carry-over
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
@@ -121,35 +197,26 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        ticker: {
-          to: { transform: "translateX(-50%)" },
-        },
-        spin: {
-          to: { transform: "rotate(360deg)" },
-        },
-        blink: {
-          "50%": { opacity: "0" },
-        },
+        ticker: { to: { transform: "translateX(-50%)" } },
+        spin: { to: { transform: "rotate(360deg)" } },
+        blink: { "50%": { opacity: "0" } },
         bob: {
           "0%, 100%": { transform: "translateY(0) rotate(-2deg)" },
           "50%": { transform: "translateY(-6px) rotate(2deg)" },
         },
         "pulse-dot": {
-          "0%": { boxShadow: "0 0 0 0 rgba(127, 164, 107, 0.6)" },
-          "70%": { boxShadow: "0 0 0 8px rgba(127, 164, 107, 0)" },
-          "100%": { boxShadow: "0 0 0 0 rgba(127, 164, 107, 0)" },
+          "0%": { boxShadow: "0 0 0 0 rgba(196, 98, 45, 0.65)" },
+          "70%": { boxShadow: "0 0 0 8px rgba(196, 98, 45, 0)" },
+          "100%": { boxShadow: "0 0 0 0 rgba(196, 98, 45, 0)" },
         },
-        // v4: slow Ken Burns zoom on hero photos
         "ken-burns": {
           "0%": { transform: "scale(1) translate(0, 0)" },
-          "100%": { transform: "scale(1.08) translate(-1%, -1%)" },
+          "100%": { transform: "scale(1.06) translate(-1%, -1%)" },
         },
-        // v4: soft glow on sun mark
         "sun-glow": {
           "0%, 100%": { opacity: "0.85", transform: "scale(1)" },
           "50%": { opacity: "1", transform: "scale(1.04)" },
         },
-        // v4: subtle leaf sway
         "leaf-sway": {
           "0%, 100%": { transform: "rotate(-2deg)" },
           "50%": { transform: "rotate(2deg)" },
@@ -160,28 +227,28 @@ const config: Config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "ticker-fast": "ticker 30s linear infinite",
         "ticker-slow": "ticker 45s linear infinite",
-        "ticker-status": "ticker 60s linear infinite",
+        "ticker-status": "ticker 30s linear infinite",
         spin: "spin 12s linear infinite",
         "spin-fast": "spin 8s linear infinite",
         blink: "blink 1.4s step-end infinite",
         bob: "bob 5s ease-in-out infinite",
         "pulse-dot": "pulse-dot 2.4s infinite",
-        "ken-burns": "ken-burns 14s ease-in-out infinite alternate",
+        "ken-burns": "ken-burns 18s ease-in-out infinite alternate",
         "sun-glow": "sun-glow 4.5s ease-in-out infinite",
         "leaf-sway": "leaf-sway 6s ease-in-out infinite",
       },
       boxShadow: {
-        // v4: soft natural drop shadows replace v3 hard offset shadows
-        soft: "0 2px 8px rgba(42, 40, 38, 0.06), 0 8px 24px rgba(42, 40, 38, 0.08)",
-        "soft-lg": "0 4px 16px rgba(42, 40, 38, 0.08), 0 16px 48px rgba(42, 40, 38, 0.12)",
-        "soft-warm": "0 4px 16px rgba(214, 122, 82, 0.15), 0 12px 32px rgba(214, 122, 82, 0.08)",
-        // v3 carry-over (still used by old chips/buttons until reskinned)
-        hard: "0 2px 8px rgba(42, 40, 38, 0.08)",
-        "hard-r": "0 4px 16px rgba(214, 122, 82, 0.18)",
-        "hard-b": "0 4px 16px rgba(127, 164, 107, 0.18)",
-        "hard-l": "0 4px 16px rgba(245, 194, 91, 0.22)",
-        "hard-lg": "0 6px 24px rgba(42, 40, 38, 0.10)",
-        "hard-lg-r": "0 6px 24px rgba(214, 122, 82, 0.22)",
+        // Stitch design = flat, no shadows. These are kept only for legacy
+        // pages that haven't been v8-reskinned yet.
+        soft: "none",
+        "soft-lg": "none",
+        "soft-warm": "none",
+        hard: "none",
+        "hard-r": "none",
+        "hard-b": "none",
+        "hard-l": "none",
+        "hard-lg": "none",
+        "hard-lg-r": "none",
       },
     },
   },

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>STEEZ Skateboarding School</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Hanken+Grotesk:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#f9f9f9",
+                        "primary-fixed": "#ffdbcc",
+                        "on-primary-fixed": "#351000",
+                        "primary-fixed-dim": "#ffb693",
+                        "background": "#f9f9f9",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-container-high": "#e8e8e8",
+                        "outline-variant": "#dcc1b5",
+                        "primary-container": "#b95925",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-primary-container": "#fffbff",
+                        "inverse-on-surface": "#f0f1f1",
+                        "surface-dim": "#dadada",
+                        "secondary-container": "#e2dfde",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-container": "#eeeeee",
+                        "outline": "#897268",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary": "#99420d",
+                        "on-secondary-container": "#636262",
+                        "inverse-primary": "#ffb693",
+                        "tertiary-container": "#737575",
+                        "on-tertiary-container": "#fcfcfc",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-primary-fixed-variant": "#7a3000",
+                        "surface": "#f9f9f9",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "surface-tint": "#9c440f",
+                        "surface-container-low": "#f3f3f4",
+                        "inverse-surface": "#2f3131",
+                        "surface-variant": "#e2e2e2",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#e2e2e2",
+                        "secondary": "#5f5e5e",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-surface-variant": "#56433a",
+                        "on-background": "#1a1c1c",
+                        "tertiary": "#5b5c5c",
+                        "on-surface": "#1a1c1c",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "120px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "32px",
+                        "margin-desktop": "48px",
+                        "container-max": "1280px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Bebas Neue"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Bebas Neue"],
+                        "display-lg": ["Bebas Neue"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "display-sm": ["Bebas Neue"],
+                        "label-bold": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "28px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "32px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "display-lg": ["80px", { "lineHeight": "80px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-sm": ["48px", { "lineHeight": "48px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "label-bold": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .ticker-wrap { width: 100%; overflow: hidden; white-space: nowrap; }
+        .ticker { display: inline-block; animation: ticker 30s linear infinite; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased">
+<!-- TopAppBar -->
+<nav class="fixed top-0 left-0 w-full flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline flat no shadows z-50">
+<a class="font-headline-lg text-headline-lg tracking-tighter text-on-surface dark:text-surface-bright flex items-center" href="#">
+<img alt="STEEZ Logo" class="h-10 w-auto" src="https://lh3.googleusercontent.com/aida/ADBb0ujN9NJ_wbCFJLH1Z2fiPDuDtAgKgmTYqnnMymy3AVfWkRKL4vMnT2YmxC-tc3KutTR4_dolgQQYsFOOU7sdr1owaiq8EHAZLa4wuW4zu53ywfev-Gjh8fIXDkeAngbhZXCAvy6E-n6-GIo7E5GMcTz3HMEY6pBAeliiuN_nA52mzjSVv3-HuxbS5lWeZDw193bDgErZhlSWvM-l4DozxCORFjP0Udunr0xVtanbDRPjhHFRrZg2YqY6550W"/>
+</a>
+<div class="hidden md:flex items-center gap-gutter">
+<a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary dark:border-primary-fixed-dim pb-1 font-label-bold text-label-bold uppercase" href="#">HOME</a>
+<a class="text-on-surface-variant dark:text-secondary-fixed hover:text-primary transition-colors duration-200 font-label-bold text-label-bold uppercase" href="#">CLASSES</a>
+<a class="text-on-surface-variant dark:text-secondary-fixed hover:text-primary transition-colors duration-200 font-label-bold text-label-bold uppercase" href="#">PRACTICE</a>
+<a class="text-on-surface-variant dark:text-secondary-fixed hover:text-primary transition-colors duration-200 font-label-bold text-label-bold uppercase" href="#">KIT</a>
+<a class="text-on-surface-variant dark:text-secondary-fixed hover:text-primary transition-colors duration-200 font-label-bold text-label-bold uppercase" href="#">ABOUT</a>
+<a class="text-on-surface-variant dark:text-secondary-fixed hover:text-primary transition-colors duration-200 font-label-bold text-label-bold uppercase" href="#">FAQ</a>
+<a class="text-on-surface-variant dark:text-secondary-fixed hover:text-primary transition-colors duration-200 font-label-bold text-label-bold uppercase" href="#">CONTACT</a>
+</div>
+<a class="hidden md:inline-flex items-center justify-center px-6 py-3 bg-[#C4622D] text-white font-label-bold text-label-bold uppercase tracking-widest hover:opacity-90 transition-opacity" href="#">
+            WHATSAPP US
+        </a>
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu</span>
+</button>
+</nav>
+<!-- Ticker Bar -->
+<div class="mt-20 w-full bg-[#1A1A1A] text-white py-2 font-label-bold text-label-bold uppercase tracking-widest ticker-wrap">
+<div class="ticker">
+            OPEN NOW · 17:00–20:00 · GROUP SESSION · SAT BEGINNER · HYDERABAD · TELANGANA · IND · EST 2019 · WALK-INS OK · BOWL · OPEN NOW · OPEN NOW · 17:00–20:00 · GROUP SESSION · SAT BEGINNER · HYDERABAD · TELANGANA · IND · EST 2019 · WALK-INS OK · BOWL · OPEN NOW
+        </div>
+</div>
+<!-- Hero Section -->
+<section class="relative w-full h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-[#1A1A1A]">
+<div class="absolute inset-0 z-0">
+<img alt="Gritty photo of a skater at STEEZ SB" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvRghAg4kIv1E7ikOoHsU7QY0zUgg3JxFIP9_SCx80BPWd0wcam-2A-ycTLMzaLLnk-UMbZ-QAcvPQXtj9IB7ADgOk4Q9Geqdssnxtb0IQ2Yp40AxCqyKPrSfR0r7AOSy9xEkY8S1uWlrWHYUjes6-ZE79lyXWeZDbUWoV_YzHgpR-UoaquYb8Wx_ijiMVtjZWiSlXx_umMh8la3koC-88baDdQi9Hoyxv5PIGvSgNOL9jA_wpLrD6u6F8tE3kXeAnIlKGOy9atkuC"/>
+<div class="absolute inset-0 bg-black/50"></div>
+</div>
+<div class="relative z-10 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center flex flex-col items-center gap-stack-lg">
+<h1 class="font-display-lg text-display-sm md:text-display-lg text-white uppercase max-w-4xl leading-tight font-bold">WHERE KIDS LEARN TO SKATE.</h1>
+<p class="font-body-lg text-body-lg text-white/90 max-w-2xl font-medium">Skateboarding classes for kids in Hyderabad. Helmets + pads on, groups small, one coach who actually skates with them.</p>
+<div class="flex flex-col sm:flex-row gap-stack-md mt-stack-sm w-full sm:w-auto justify-center">
+<a class="inline-flex items-center justify-center px-8 py-4 bg-[#C4622D] text-white font-label-bold text-label-bold uppercase tracking-widest hover:opacity-90 transition-opacity w-full sm:w-auto" href="#">
+                    BOOK YOUR KID'S SPOT
+                </a>
+<a class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white font-label-bold text-label-bold uppercase tracking-widest hover:bg-white hover:text-[#1A1A1A] transition-colors w-full sm:w-auto" href="#">
+                    SEE CLASSES <span class="material-symbols-outlined ml-2 text-sm">arrow_outward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Method Section -->
+<section class="w-full py-section-gap px-margin-mobile md:px-margin-desktop bg-surface">
+<div class="max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-2 gap-stack-lg lg:gap-16 items-center">
+<div class="flex flex-col items-start text-left gap-stack-lg order-2 lg:order-1">
+<div class="flex flex-col items-start gap-stack-sm">
+<span class="text-[#C4622D] font-label-bold text-label-bold uppercase tracking-widest">THE METHOD</span>
+<h2 class="font-display-sm text-display-sm text-[#1A1A1A] uppercase max-w-2xl font-bold">FIRST SESSION ON A BOARD. GUARANTEED.</h2>
+</div>
+<div class="space-y-stack-md text-on-surface-variant">
+<p class="font-body-lg text-body-lg">We believe in getting kids moving immediately. Our approach strips away the intimidation factor, focusing on core balance and muscle memory from minute one. We don't overcomplicate; we demonstrate, support, and let them feel the board.</p>
+<p class="font-body-lg text-body-lg">Every session is structured to build confidence through repetition in a controlled, highly supervised environment. We celebrate small wins to build lasting resilience.</p>
+</div>
+<div class="w-full grid grid-cols-1 md:grid-cols-2 gap-stack-md mt-stack-md text-left">
+<div class="flex items-start gap-stack-md p-stack-md border border-outline-variant bg-surface-bright">
+<span class="material-symbols-outlined text-[#C4622D] mt-1" style="font-variation-settings: 'FILL' 1;">check_box</span>
+<div>
+<h3 class="font-label-bold text-label-bold text-[#1A1A1A] uppercase mb-1">Small groups</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">4–6 kids per session so every child gets time on the board.</p>
+</div>
+</div>
+<div class="flex items-start gap-stack-md p-stack-md border border-outline-variant bg-surface-bright">
+<span class="material-symbols-outlined text-[#C4622D] mt-1" style="font-variation-settings: 'FILL' 1;">check_box</span>
+<div>
+<h3 class="font-label-bold text-label-bold text-[#1A1A1A] uppercase mb-1">Safety first</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Helmets and pads provided and worn every session, no exceptions.</p>
+</div>
+</div>
+<div class="flex items-start gap-stack-md p-stack-md border border-outline-variant bg-surface-bright">
+<span class="material-symbols-outlined text-[#C4622D] mt-1" style="font-variation-settings: 'FILL' 1;">check_box</span>
+<div>
+<h3 class="font-label-bold text-label-bold text-[#1A1A1A] uppercase mb-1">Beginner friendly</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">No experience needed. Walk-ins welcome.</p>
+</div>
+</div>
+<div class="flex items-start gap-stack-md p-stack-md border border-outline-variant bg-surface-bright">
+<span class="material-symbols-outlined text-[#C4622D] mt-1" style="font-variation-settings: 'FILL' 1;">check_box</span>
+<div>
+<h3 class="font-label-bold text-label-bold text-[#1A1A1A] uppercase mb-1">Consistent structure</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Same schedule, fresh sessions every week.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full h-full min-h-[400px] lg:min-h-full order-1 lg:order-2">
+<img alt="Kids practicing skateboarding at the skatepark" class="w-full h-full object-cover border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATL7zcznQ5vdgh9HWNoAvVU1DfRDHwQk_0MMZakjEM3Rp7rU6x4gXtbiVR4PyKGHf8rOOWsCxAcQPzqQSoZ4szJbSIJmAM3UfgTcTbRdXCIGr0l5LFUkAmYZrOmrSwYzvPwnuCJ5R4VPrwbKD33jzRefMm8Ld1lXh8Asf4761uhDSef-qEE8F0VBN6I645GKJmUVTF5V2h7JXUdH-l5VSurEu3DtEvBdkbEHU5JkQbgne9UBnhH4NyRBrBxKKBQIa7OgAPos3v393N"/>
+</div>
+</div>
+</section>
+<!-- Stats Row -->
+<section class="w-full bg-[#F5F5F5] py-stack-lg border-y border-outline-variant">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-2 md:grid-cols-4 gap-stack-md text-center divide-x-0 md:divide-x divide-outline-variant">
+<div class="flex flex-col items-center justify-center p-stack-md">
+<span class="font-headline-lg text-headline-lg text-[#1A1A1A] font-bold">EST. 2019</span>
+</div>
+<div class="flex flex-col items-center justify-center p-stack-md">
+<span class="font-headline-lg text-headline-lg text-[#1A1A1A] font-bold">340+ STUDENTS</span>
+</div>
+<div class="flex flex-col items-center justify-center p-stack-md">
+<span class="font-headline-lg text-headline-lg text-[#1A1A1A] font-bold">52 BOWL HRS/WK</span>
+</div>
+<div class="flex flex-col items-center justify-center p-stack-md">
+<span class="font-headline-lg text-headline-lg text-[#1A1A1A] font-bold">AGES 5–16</span>
+</div>
+</div>
+</section>
+<!-- Centered Photo -->
+<section class="w-full py-section-gap bg-surface flex justify-center px-margin-mobile md:px-margin-desktop">
+<div class="max-w-container-max w-full">
+<img alt="A cinematic, lively skate photo of a young student successfully balancing on a skateboard, wearing safety gear." class="w-full h-auto object-cover border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRGWv_jO7eu4UAXhyxsvRk05oUFNWQVA_mnBu5SrBkgzqFORxATALoyAUBKJxhTmA80URhl_51f6AC1b2nqAGgAJQZSoNRnXW1CZPA_NHWu1O_K08ezVGGAlUUMYhxIQ8ec7kn77wBIjjt5fEWiPaXWu1WxJDzKApbN22tIDJt5jz_f8FrA0Wx8DSScNrwiTrfSlakLVSdoBlKwHg7uTY3kTQjOdOdqVJuFyd581gVtONnc1Ln-9U5SCHoTmWYlk-sDL4wWr6z-KZ-"/>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-stack-lg px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-stack-md bg-surface-container-lowest dark:bg-inverse-surface border-t border-on-surface dark:border-outline-variant flat no shadows text-on-surface dark:text-inverse-on-surface">
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface dark:text-surface-bright uppercase font-bold">STEEZ · SB · HYD</div>
+<div class="flex flex-wrap justify-center gap-stack-md font-label-bold text-label-bold">
+<a class="text-secondary dark:text-secondary-fixed hover:text-on-surface hover:underline transition-all duration-200 uppercase" href="#">ABOUT</a>
+<a class="text-secondary dark:text-secondary-fixed hover:text-on-surface hover:underline transition-all duration-200 uppercase" href="#">CLASSES</a>
+<a class="text-secondary dark:text-secondary-fixed hover:text-on-surface hover:underline transition-all duration-200 uppercase" href="#">FAQ</a>
+<a class="text-secondary dark:text-secondary-fixed hover:text-on-surface hover:underline transition-all duration-200 uppercase" href="#">CONTACT</a>
+</div>
+<div class="font-body-md text-body-md text-secondary text-center md:text-right">
+            © 2019 STEEZ SKATEBOARDING SCHOOL HYDERABAD. ALL RIGHTS RESERVED.
+        </div>
+</footer>
+</body></html>

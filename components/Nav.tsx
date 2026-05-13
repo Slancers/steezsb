@@ -2,9 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 
-import { WhatsAppIcon } from "@/components/icons/zine";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { Menu } from "lucide-react";
@@ -19,102 +17,86 @@ const NAV_LINKS = [
   { href: "/contact", label: "Contact" },
 ];
 
+// Stitch-spec Nav: 80px tall, light surface, terracotta active state,
+// terracotta WHATSAPP CTA, flat with single-line outline-variant divider.
 export function Nav() {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        scrolled
-          ? "border-b border-ink/10 bg-sand/85 backdrop-blur-md"
-          : "border-b border-transparent bg-sand/60 backdrop-blur"
-      }`}
-    >
-      <div className="container flex items-center gap-8 py-3.5">
-        <Link href="/" className="flex shrink-0 items-baseline gap-2.5">
-          <span className="font-display text-[22px] font-semibold leading-none -tracking-[0.02em] text-ink">
-            STEEZ
-          </span>
-          <span className="inline-block h-2 w-2 translate-y-0.5 rounded-full bg-terracotta" />
-          <span className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-ink/55">
-            sb·hyd
-          </span>
-        </Link>
+    <nav className="fixed left-0 top-0 z-50 flex h-20 w-full items-center justify-between border-b border-outline-variant bg-surface px-margin-mobile md:px-margin-desktop">
+      <Link href="/" className="flex items-center gap-2">
+        <span className="font-display text-headline-lg uppercase tracking-tight text-on-surface">
+          STEEZ
+        </span>
+        <span aria-hidden className="inline-block h-2 w-2 bg-[#C4622D]" />
+        <span className="font-body text-[10px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+          sb·hyd
+        </span>
+      </Link>
 
-        <nav className="ml-auto hidden items-center gap-1 lg:flex">
-          {NAV_LINKS.map((link) => {
-            const isActive =
-              link.href === "/"
-                ? pathname === "/"
-                : pathname?.startsWith(link.href);
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`group relative px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition-colors ${
-                  isActive ? "text-terracotta" : "text-ink/80 hover:text-ink"
-                }`}
-              >
-                {link.label}
-                <span
-                  className={`absolute inset-x-3 bottom-1 h-px origin-left bg-terracotta transition-transform duration-300 ${
-                    isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                  }`}
-                />
-              </Link>
-            );
-          })}
-        </nav>
-
-        <div className="ml-auto flex items-center gap-2 lg:ml-0">
-          <WhatsAppCTA
-            intent="general"
-            className="btn-zine btn-zine--red hidden md:inline-flex"
-          >
-            <WhatsAppIcon size={14} /> WhatsApp Hari
-          </WhatsAppCTA>
-
-          <Sheet>
-            <SheetTrigger
-              aria-label="Open menu"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-ink/15 bg-sand/80 lg:hidden"
+      <div className="hidden items-center gap-gutter md:flex">
+        {NAV_LINKS.map((link) => {
+          const isActive =
+            link.href === "/"
+              ? pathname === "/"
+              : pathname?.startsWith(link.href);
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`pb-1 font-body text-[14px] font-bold uppercase tracking-[0.05em] transition-colors duration-200 ${
+                isActive
+                  ? "border-b-2 border-[#C4622D] text-[#C4622D]"
+                  : "text-on-surface-variant hover:text-[#C4622D]"
+              }`}
             >
-              <Menu className="h-5 w-5" />
-            </SheetTrigger>
-            <SheetContent
-              side="right"
-              className="w-72 border-l border-ink/10 bg-sand"
-            >
-              <nav className="mt-10 flex flex-col gap-2">
-                {NAV_LINKS.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="font-display text-3xl font-medium -tracking-[0.02em] text-ink transition-colors hover:text-terracotta"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                <div className="mt-6">
-                  <WhatsAppCTA
-                    intent="general"
-                    className="btn-zine btn-zine--red w-full justify-center"
-                  >
-                    <WhatsAppIcon size={14} /> WhatsApp Hari
-                  </WhatsAppCTA>
-                </div>
-              </nav>
-            </SheetContent>
-          </Sheet>
-        </div>
+              {link.label}
+            </Link>
+          );
+        })}
       </div>
-    </header>
+
+      <div className="flex items-center gap-3">
+        <WhatsAppCTA
+          intent="general"
+          className="hidden md:inline-flex items-center justify-center bg-[#C4622D] px-6 py-3 text-[14px] font-bold uppercase tracking-[0.05em] text-white transition-opacity hover:opacity-90"
+        >
+          WhatsApp Us
+        </WhatsAppCTA>
+
+        <Sheet>
+          <SheetTrigger
+            aria-label="Open menu"
+            className="inline-flex h-10 w-10 items-center justify-center text-on-surface md:hidden"
+          >
+            <Menu className="h-6 w-6" />
+          </SheetTrigger>
+          <SheetContent
+            side="right"
+            className="w-72 border-l border-outline-variant bg-surface"
+          >
+            <nav className="mt-10 flex flex-col gap-3">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="font-display text-3xl uppercase text-on-surface transition-colors hover:text-[#C4622D]"
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <div className="mt-6">
+                <WhatsAppCTA
+                  intent="general"
+                  className="btn-zine btn-zine--red w-full"
+                >
+                  WhatsApp Hari
+                </WhatsAppCTA>
+              </div>
+            </nav>
+          </SheetContent>
+        </Sheet>
+      </div>
+    </nav>
   );
 }
