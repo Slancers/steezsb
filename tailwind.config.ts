@@ -15,7 +15,7 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // shadcn carry-over (HSL components consumed by existing UI)
+        // shadcn carry-over
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -50,21 +50,46 @@ const config: Config = {
           foreground: "hsl(var(--card-foreground))",
         },
 
-        // v4 SKATE GARDEN palette — sun-drenched, calm, photo-led
-        sky: {
-          DEFAULT: "#C8DDEE",
-          deep: "#A8C5E0",
-          light: "#E2EDF6",
+        // v6 BARRY'S-INSPIRED palette — dark canvas, cream type, pure red energy
+        night: {
+          DEFAULT: "#0E0D0B",      // near-black canvas
+          deep: "#000000",         // pure black sections
+          soft: "#1A1815",         // softer black for elevation
+          line: "#2A2622",         // borders/dividers on dark
         },
+        cream: {
+          DEFAULT: "#F1EAD7",      // primary text on dark
+          deep: "#E6DDC5",         // dimmer body text
+          dim: "#8E8779",          // muted captions
+        },
+        steeze: {
+          // Pure red — primary energy color, Barry's-style
+          red: "#E10A0A",
+          "red-d": "#B30808",
+          "red-bright": "#FF1F1F",
+          // Carry-over warm/cool accents
+          blue: "#2547F0",
+          "blue-d": "#1A37CC",
+          lime: "#D3F046",
+          "lime-d": "#B5D028",
+        },
+        // Legacy v4/v5 aliases — kept so older components don't break.
+        // Repointed to night/cream so dark-mode pages still render.
         sand: {
-          DEFAULT: "#F5EBDA",
-          deep: "#E9DCC1",
-          warm: "#F2E2C6",
+          DEFAULT: "#F1EAD7",
+          deep: "#E6DDC5",
+          warm: "#EDE3C9",
+          light: "#F5EEDE",
+        },
+        sky: {
+          DEFAULT: "#0E0D0B",
+          deep: "#000000",
+          light: "#1A1815",
         },
         sage: {
-          DEFAULT: "#7FA46B",
-          deep: "#5E8550",
-          light: "#A8C496",
+          DEFAULT: "#E10A0A",
+          deep: "#B30808",
+          light: "#FF4A4A",
         },
         sun: {
           DEFAULT: "#F5C25B",
@@ -72,40 +97,30 @@ const config: Config = {
           light: "#FBDC9A",
         },
         terracotta: {
-          DEFAULT: "#D67A52",
-          deep: "#B25D38",
-          light: "#E6A082",
+          DEFAULT: "#E10A0A",
+          deep: "#B30808",
+          light: "#FF4A4A",
         },
         concrete: {
-          DEFAULT: "#B5B0A8",
-          deep: "#8F8B83",
-          light: "#D4D0C8",
+          DEFAULT: "#2A2622",
+          deep: "#1A1815",
+          light: "#4A4642",
         },
         ink: {
-          DEFAULT: "#2A2826",
-          soft: "#4A4642",
+          DEFAULT: "#F1EAD7",
+          soft: "#E6DDC5",
         },
-
-        // v3 carry-over aliases (kept so old code doesn't break during reskin)
         paper: {
-          DEFAULT: "#F5EBDA",
-          deep: "#E9DCC1",
-          warm: "#F2E2C6",
-        },
-        steeze: {
-          red: "#D67A52",
-          "red-d": "#B25D38",
-          blue: "#7FA46B",
-          "blue-d": "#5E8550",
-          lime: "#F5C25B",
-          "lime-d": "#E0A737",
+          DEFAULT: "#0E0D0B",
+          deep: "#000000",
+          warm: "#1A1815",
         },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
         mono: ["var(--font-space-mono)", "ui-monospace", "monospace"],
-        display: ["var(--font-fraunces)", "Georgia", "serif"],
-        sticker: ["var(--font-fraunces)", "Georgia", "serif"],
+        display: ["var(--font-bebas)", "Impact", "sans-serif"],
+        sticker: ["var(--font-bebas)", "Impact", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -121,35 +136,26 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        ticker: {
-          to: { transform: "translateX(-50%)" },
-        },
-        spin: {
-          to: { transform: "rotate(360deg)" },
-        },
-        blink: {
-          "50%": { opacity: "0" },
-        },
+        ticker: { to: { transform: "translateX(-50%)" } },
+        spin: { to: { transform: "rotate(360deg)" } },
+        blink: { "50%": { opacity: "0" } },
         bob: {
           "0%, 100%": { transform: "translateY(0) rotate(-2deg)" },
           "50%": { transform: "translateY(-6px) rotate(2deg)" },
         },
         "pulse-dot": {
-          "0%": { boxShadow: "0 0 0 0 rgba(127, 164, 107, 0.6)" },
-          "70%": { boxShadow: "0 0 0 8px rgba(127, 164, 107, 0)" },
-          "100%": { boxShadow: "0 0 0 0 rgba(127, 164, 107, 0)" },
+          "0%": { boxShadow: "0 0 0 0 rgba(225, 10, 10, 0.65)" },
+          "70%": { boxShadow: "0 0 0 8px rgba(225, 10, 10, 0)" },
+          "100%": { boxShadow: "0 0 0 0 rgba(225, 10, 10, 0)" },
         },
-        // v4: slow Ken Burns zoom on hero photos
         "ken-burns": {
           "0%": { transform: "scale(1) translate(0, 0)" },
           "100%": { transform: "scale(1.08) translate(-1%, -1%)" },
         },
-        // v4: soft glow on sun mark
         "sun-glow": {
           "0%, 100%": { opacity: "0.85", transform: "scale(1)" },
           "50%": { opacity: "1", transform: "scale(1.04)" },
         },
-        // v4: subtle leaf sway
         "leaf-sway": {
           "0%, 100%": { transform: "rotate(-2deg)" },
           "50%": { transform: "rotate(2deg)" },
@@ -163,7 +169,7 @@ const config: Config = {
         "ticker-status": "ticker 60s linear infinite",
         spin: "spin 12s linear infinite",
         "spin-fast": "spin 8s linear infinite",
-        blink: "blink 1.4s step-end infinite",
+        blink: "blink 1.2s step-end infinite",
         bob: "bob 5s ease-in-out infinite",
         "pulse-dot": "pulse-dot 2.4s infinite",
         "ken-burns": "ken-burns 14s ease-in-out infinite alternate",
@@ -171,17 +177,15 @@ const config: Config = {
         "leaf-sway": "leaf-sway 6s ease-in-out infinite",
       },
       boxShadow: {
-        // v4: soft natural drop shadows replace v3 hard offset shadows
-        soft: "0 2px 8px rgba(42, 40, 38, 0.06), 0 8px 24px rgba(42, 40, 38, 0.08)",
-        "soft-lg": "0 4px 16px rgba(42, 40, 38, 0.08), 0 16px 48px rgba(42, 40, 38, 0.12)",
-        "soft-warm": "0 4px 16px rgba(214, 122, 82, 0.15), 0 12px 32px rgba(214, 122, 82, 0.08)",
-        // v3 carry-over (still used by old chips/buttons until reskinned)
-        hard: "0 2px 8px rgba(42, 40, 38, 0.08)",
-        "hard-r": "0 4px 16px rgba(214, 122, 82, 0.18)",
-        "hard-b": "0 4px 16px rgba(127, 164, 107, 0.18)",
-        "hard-l": "0 4px 16px rgba(245, 194, 91, 0.22)",
-        "hard-lg": "0 6px 24px rgba(42, 40, 38, 0.10)",
-        "hard-lg-r": "0 6px 24px rgba(214, 122, 82, 0.22)",
+        soft: "0 2px 8px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3)",
+        "soft-lg": "0 4px 16px rgba(0, 0, 0, 0.5), 0 16px 48px rgba(0, 0, 0, 0.4)",
+        "soft-warm": "0 4px 16px rgba(225, 10, 10, 0.25), 0 12px 32px rgba(225, 10, 10, 0.15)",
+        hard: "0 2px 8px rgba(0, 0, 0, 0.5)",
+        "hard-r": "0 4px 16px rgba(225, 10, 10, 0.35)",
+        "hard-b": "0 4px 16px rgba(225, 10, 10, 0.25)",
+        "hard-l": "0 4px 16px rgba(245, 194, 91, 0.30)",
+        "hard-lg": "0 8px 28px rgba(0, 0, 0, 0.5)",
+        "hard-lg-r": "0 8px 28px rgba(225, 10, 10, 0.40)",
       },
     },
   },

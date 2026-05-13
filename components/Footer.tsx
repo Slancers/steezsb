@@ -147,15 +147,15 @@ export async function Footer() {
 
 function BigFooterWord() {
   return (
-    <div className="overflow-hidden border-t border-paper/15 py-6">
+    <div className="overflow-hidden border-t border-cream/10 py-6">
       <div
-        className="animate-ticker-slow whitespace-nowrap font-display text-[clamp(60px,14vw,220px)] font-medium leading-none -tracking-[0.025em]"
+        className="animate-ticker-slow whitespace-nowrap font-display text-[clamp(60px,14vw,240px)] font-normal uppercase leading-none -tracking-[0.005em]"
         style={{
           color: "transparent",
-          WebkitTextStroke: "1.5px #F5EBDA",
+          WebkitTextStroke: "1.5px #F1EAD7",
         }}
       >
-        ROOM&nbsp;TO&nbsp;ROLL&nbsp;·&nbsp;ROOM&nbsp;TO&nbsp;ROLL&nbsp;·&nbsp;
+        JUST&nbsp;SEND&nbsp;IT&nbsp;·&nbsp;JUST&nbsp;SEND&nbsp;IT&nbsp;·&nbsp;
       </div>
     </div>
   );

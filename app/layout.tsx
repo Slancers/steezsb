@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, Space_Mono } from "next/font/google";
+import { Bebas_Neue, Inter, Space_Mono } from "next/font/google";
 
 import { GtmNoScript, GtmScript } from "@/components/analytics/Gtm";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
-const fraunces = Fraunces({
+const bebas = Bebas_Neue({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  weight: "400",
+  variable: "--font-bebas",
   display: "swap",
 });
 
@@ -27,11 +28,11 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Skateboarding Coaching · Hyderabad`,
+    default: `${SITE_NAME} — Skateboarding for Kids · Hyderabad`,
     template: `%s · ${SITE_NAME}`,
   },
   description:
-    "Skateboarding classes, hourly bowl practice, and gear for kids and adults in Hyderabad. Coached by Hari.",
+    "Skateboarding classes for kids in Hyderabad. Helmets + pads provided, small groups, coached by Hari since 2019.",
   openGraph: {
     siteName: SITE_NAME,
     locale: "en_IN",
@@ -49,9 +50,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${inter.variable} ${spaceMono.variable}`}
+      className={`${bebas.variable} ${inter.variable} ${spaceMono.variable}`}
     >
-      <body className="min-h-screen text-ink antialiased">
+      <body className="min-h-screen bg-night text-cream antialiased">
         <GtmScript />
         <GtmNoScript />
         {children}
