@@ -41,6 +41,13 @@ export const metadata: Metadata = {
     images: [{ url: "/brand/logo.png" }],
   },
   twitter: { card: "summary_large_image" },
+  alternates: {
+    types: {
+      "application/rss+xml": [
+        { url: "/blog/rss.xml", title: `${SITE_NAME} · Blog RSS` },
+      ],
+    },
+  },
 };
 
 export default function RootLayout({

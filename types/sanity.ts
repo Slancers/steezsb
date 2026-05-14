@@ -109,7 +109,7 @@ export type MediaItem = {
 export type Author = {
   _id: string;
   name: string;
-  slug?: { current: string };
+  slug?: string;
   role?: string;
   bio?: string;
   photo?: SanityImage;
@@ -127,7 +127,7 @@ export type Author = {
 export type BlogCategory = {
   _id: string;
   title: string;
-  slug?: { current: string };
+  slug?: string;
   description?: string;
   order?: number;
 };
@@ -153,7 +153,7 @@ export type BlogPost = {
   _id: string;
   _updatedAt?: string;
   title: string;
-  slug: { current: string };
+  slug: string;
   excerpt?: string;
   coverImage?: SanityImage;
   body?: PortableTextBlock[];

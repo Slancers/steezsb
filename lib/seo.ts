@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
 import type {
+  Author,
+  BlogPost,
+  BlogPostFaq,
   CoachingProgram,
   Faq,
   Product,
@@ -216,5 +219,103 @@ export function breadcrumbJsonLd(
       name: step.name,
       item: absoluteUrl(step.path),
     })),
+  });
+}
+
+// ---- Blog-specific JSON-LD ----
+
+// Build a Person schema object for a Sanity author. Used as both top-level
+// schema on the author page (future) AND embedded inside BlogPosting.author.
+export function authorPersonSchema(author: Author, imageUrl?: string) {
+  const socialLinks = [
+    author.social?.instagram,
+    author.social?.twitter,
+    author.social?.linkedin,
+    author.social?.youtube,
+    author.social?.website,
+  ].filter(Boolean);
+  return cleanObject({
+    "@type": "Person",
+    name: author.name,
+    jobTitle: author.role,
+    description: author.bio,
+    image: imageUrl,
+    knowsAbout: author.credentials,
+    sameAs: socialLinks,
+    url: author.slug ? absoluteUrl(`/author/${author.slug}`) : undefined,
+    email: author.email,
+  });
+}
+
+// BlogPosting + Article JSON-LD for a single post. Includes author + reviewer
+// (E-E-A-T), datePublished + dateModified (freshness), keywords, articleBody
+// summary (if tldr present), and FAQPage cross-reference handled separately.
+export function blogPostingJsonLd(
+  post: BlogPost,
+  options: { coverImageUrl?: string; authorImageUrl?: string; reviewerImageUrl?: string } = {}
+) {
+  const url = absoluteUrl(`/blog/${post.slug}`);
+  const description = post.metaDescription || post.excerpt || post.tldr;
+  return cleanObject({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description,
+    image: options.coverImageUrl ? [options.coverImageUrl] : undefined,
+    datePublished: post.publishedAt,
+    dateModified: post._updatedAt || post.publishedAt,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    url,
+    author: post.author
+      ? authorPersonSchema(post.author, options.authorImageUrl)
+      : undefined,
+    reviewedBy: post.reviewedBy
+      ? authorPersonSchema(post.reviewedBy, options.reviewerImageUrl)
+      : undefined,
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: DEFAULT_OG_IMAGE,
+      },
+    },
+    keywords: post.tags?.join(", "),
+    articleSection: post.category?.title,
+    abstract: post.tldr,
+    inLanguage: "en-IN",
+  });
+}
+
+// FAQPage JSON-LD generated from a blog post's faqSection. Renders alongside
+// (not nested inside) the BlogPosting schema — Google supports both on the
+// same page.
+export function blogFaqSectionJsonLd(faqs: BlogPostFaq[]) {
+  return cleanObject({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  });
+}
+
+// Speakable schema marker — tells voice/AI assistants which sections of a
+// page are best for spoken excerpts. Use CSS selectors to point at the
+// TL;DR and key takeaways blocks.
+export function speakableJsonLd(selectors: string[]) {
+  return cleanObject({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: selectors,
+    },
   });
 }

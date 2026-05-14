@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { href: "/classes", label: "Classes" },
   { href: "/practice", label: "Practice" },
   { href: "/shop", label: "Kit" },
+  { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
