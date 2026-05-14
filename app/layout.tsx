@@ -53,7 +53,7 @@ export default function RootLayout({
       lang="en"
       className={`${bebas.variable} ${hanken.variable} ${spaceMono.variable}`}
     >
-      <body className="min-h-screen bg-surface text-on-surface antialiased">
+      <body className="min-h-screen overflow-x-clip bg-surface text-on-surface antialiased">
         <GtmScript />
         <GtmNoScript />
         {children}

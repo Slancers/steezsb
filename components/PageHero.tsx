@@ -60,7 +60,7 @@ export function PageHero({
           </div>
           {illustration ? (
             <div
-              className="w-full self-center justify-self-end"
+              className="w-full min-w-0 self-center justify-self-end"
               aria-hidden
             >
               {illustration}

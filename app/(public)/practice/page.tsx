@@ -134,7 +134,7 @@ export default function PracticePage() {
               </p>
             </div>
             <div
-              className="w-full self-center justify-self-end"
+              className="w-full min-w-0 self-center justify-self-end"
               aria-hidden
             >
               <div className="mb-4 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
