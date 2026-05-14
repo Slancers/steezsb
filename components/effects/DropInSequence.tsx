@@ -14,6 +14,8 @@ export function DropInSequence({
 }) {
   return (
     <div className={`dropin-sequence w-full ${className}`}>
+      <div className="dropin-sequence__scroll -mx-4 overflow-x-auto md:mx-0 md:overflow-visible">
+        <div className="min-w-[720px] px-4 md:min-w-0 md:px-0">
       <svg
         viewBox="0 14 800 220"
         fill="none"
@@ -181,8 +183,19 @@ export function DropInSequence({
         <span>Carve</span>
         <span>Pump</span>
       </div>
+        </div>
+      </div>
 
       <style>{`
+        /* Hide scrollbar on mobile horizontal scroll */
+        .dropin-sequence__scroll {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .dropin-sequence__scroll::-webkit-scrollbar {
+          display: none;
+        }
+
         .dropin-sequence__frame path,
         .dropin-sequence__frame circle {
           stroke-dasharray: 400;

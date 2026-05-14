@@ -14,6 +14,8 @@ export function OllieSequence({
 }) {
   return (
     <div className={`ollie-sequence w-full ${className}`}>
+      <div className="ollie-sequence__scroll -mx-4 overflow-x-auto md:mx-0 md:overflow-visible">
+        <div className="min-w-[720px] px-4 md:min-w-0 md:px-0">
       <svg
         viewBox="0 14 800 206"
         fill="none"
@@ -147,8 +149,8 @@ export function OllieSequence({
       </svg>
 
       {/* HTML labels under the SVG, aligned to a 5-col grid that mirrors
-          the frame centers. Easier to keep accessible + responsive than
-          rendering text inside the SVG at small scales. */}
+          the frame centers. Inside the scroll wrapper so they track frame
+          positions when the user scrolls horizontally on mobile. */}
       <div className="mt-3 grid grid-cols-5 gap-2 text-center font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
         <span>Setup</span>
         <span>Pop</span>
@@ -156,8 +158,19 @@ export function OllieSequence({
         <span>Peak</span>
         <span>Land</span>
       </div>
+        </div>
+      </div>
 
       <style>{`
+        /* Hide scrollbar on mobile horizontal scroll */
+        .ollie-sequence__scroll {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .ollie-sequence__scroll::-webkit-scrollbar {
+          display: none;
+        }
+
         .ollie-sequence__ground,
         .ollie-sequence__frame path,
         .ollie-sequence__frame circle {

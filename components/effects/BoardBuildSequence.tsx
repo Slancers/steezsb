@@ -21,6 +21,8 @@ export function BoardBuildSequence({
 
   return (
     <div className={`build-sequence w-full ${className}`}>
+      <div className="build-sequence__scroll -mx-4 overflow-x-auto md:mx-0 md:overflow-visible">
+        <div className="min-w-[720px] px-4 md:min-w-0 md:px-0">
       <svg
         viewBox="0 60 800 110"
         fill="none"
@@ -138,8 +140,19 @@ export function BoardBuildSequence({
         <span>Wheels</span>
         <span>Ready</span>
       </div>
+        </div>
+      </div>
 
       <style>{`
+        /* Hide scrollbar on mobile horizontal scroll */
+        .build-sequence__scroll {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .build-sequence__scroll::-webkit-scrollbar {
+          display: none;
+        }
+
         .build-sequence__frame path,
         .build-sequence__frame circle {
           stroke-dasharray: 400;
