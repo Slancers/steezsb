@@ -105,3 +105,70 @@ export type MediaItem = {
   tags?: string[];
   order?: number;
 };
+
+export type Author = {
+  _id: string;
+  name: string;
+  slug?: { current: string };
+  role?: string;
+  bio?: string;
+  photo?: SanityImage;
+  credentials?: string[];
+  social?: {
+    instagram?: string;
+    twitter?: string;
+    linkedin?: string;
+    youtube?: string;
+    website?: string;
+  };
+  email?: string;
+};
+
+export type BlogCategory = {
+  _id: string;
+  title: string;
+  slug?: { current: string };
+  description?: string;
+  order?: number;
+};
+
+export type BlogPostFaq = {
+  _key?: string;
+  question: string;
+  answer: string;
+};
+
+export type BlogPostExternalSource = {
+  _key?: string;
+  title: string;
+  url: string;
+};
+
+// PortableText block — using `unknown` to avoid pulling in the full
+// PortableText types here. Page-level components import the proper type
+// from @portabletext/react when rendering.
+export type PortableTextBlock = unknown;
+
+export type BlogPost = {
+  _id: string;
+  _updatedAt?: string;
+  title: string;
+  slug: { current: string };
+  excerpt?: string;
+  coverImage?: SanityImage;
+  body?: PortableTextBlock[];
+  author?: Author;
+  reviewedBy?: Author;
+  tldr?: string;
+  keyTakeaways?: string[];
+  faqSection?: BlogPostFaq[];
+  category?: BlogCategory;
+  tags?: string[];
+  relatedPosts?: BlogPost[];
+  externalSources?: BlogPostExternalSource[];
+  publishedAt?: string;
+  featured?: boolean;
+  metaTitle?: string;
+  metaDescription?: string;
+  socialImage?: SanityImage;
+};
