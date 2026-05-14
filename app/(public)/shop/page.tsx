@@ -11,7 +11,13 @@ import {
 import { JsonLd } from "@/components/JsonLd";
 import { PageHero } from "@/components/PageHero";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
-import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
+import {
+  absoluteUrl,
+  breadcrumbJsonLd,
+  buildMetadata,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "STEEZ Skate Kit",
@@ -233,6 +239,58 @@ const PRODUCTS: Product[] = [
   },
 ];
 
+function priceToNumber(price: string): string {
+  return price.replace(/[^\d.]/g, "");
+}
+
+const PRODUCT_LIST_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "STEEZ Skate Kit",
+  itemListElement: PRODUCTS.map((p, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "Product",
+      name: p.name,
+      category: p.cat,
+      brand: { "@type": "Brand", name: SITE_NAME },
+      offers: {
+        "@type": "Offer",
+        price: priceToNumber(p.price),
+        priceCurrency: "INR",
+        availability: "https://schema.org/InStock",
+        url: absoluteUrl("/shop"),
+        seller: { "@type": "Organization", name: SITE_NAME, sameAs: SITE_URL },
+      },
+    },
+  })),
+};
+
+const BUNDLES_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "STEEZ Starter Bundles",
+  itemListElement: BUNDLES.map((b, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "Product",
+      name: b.name,
+      description: b.list.join(". "),
+      category: b.tag,
+      brand: { "@type": "Brand", name: SITE_NAME },
+      offers: {
+        "@type": "Offer",
+        price: priceToNumber(b.price),
+        priceCurrency: "INR",
+        availability: "https://schema.org/InStock",
+        url: absoluteUrl("/shop"),
+      },
+    },
+  })),
+};
+
 export default function ShopPage() {
   return (
     <>
@@ -242,6 +300,8 @@ export default function ShopPage() {
           { name: "Shop", path: "/shop" },
         ])}
       />
+      <JsonLd data={BUNDLES_JSONLD} />
+      <JsonLd data={PRODUCT_LIST_JSONLD} />
 
       <PageHero
         eyebrow="[ kit ]"

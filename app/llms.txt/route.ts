@@ -1,5 +1,5 @@
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
-import { getSiteSettings } from "@/sanity/queries";
+import { getBlogPosts, getSiteSettings } from "@/sanity/queries";
 
 // Plain-text summary served at /llms.txt per https://llmstxt.org spec.
 // Lets AI answer engines (ChatGPT, Perplexity, Claude search) ingest a
@@ -7,7 +7,10 @@ import { getSiteSettings } from "@/sanity/queries";
 export const revalidate = 3600;
 
 export async function GET() {
-  const settings = await getSiteSettings();
+  const [settings, posts] = await Promise.all([
+    getSiteSettings(),
+    getBlogPosts(),
+  ]);
 
   const name = settings?.siteName || SITE_NAME;
   const tagline =
@@ -40,6 +43,21 @@ export async function GET() {
     .filter(Boolean)
     .join("\n");
 
+  const recentPostsSection =
+    posts.length > 0
+      ? `
+
+## Recent blog posts
+${posts
+  .slice(0, 10)
+  .map((p) => {
+    const summary = p.tldr || p.excerpt || "";
+    const authorBit = p.author?.name ? ` — by ${p.author.name}` : "";
+    return `- [${p.title}](${SITE_URL}/blog/${p.slug})${authorBit}${summary ? `\n  ${summary}` : ""}`;
+  })
+  .join("\n")}`
+      : "";
+
   const body = `# ${name}
 
 > ${tagline}
@@ -51,6 +69,7 @@ ${name} offers skateboarding coaching and bowl-time practice in Hyderabad, India
 - [Classes](${SITE_URL}/classes) — 1-on-1 and group coaching with structured programs and transparent pricing.
 - [Practice](${SITE_URL}/practice) — Hourly bowl access for independent skaters.
 - [Shop](${SITE_URL}/shop) — The STEEZE Skate Kit: skateboard, helmet, and pads bundled together.
+- [Blog](${SITE_URL}/blog) — Coaching ideas, gear thinking, and scene reports.
 
 ## Location
 ${addressLine}
@@ -63,9 +82,14 @@ ${contactLines || `- Website: ${SITE_URL}`}
 - [Classes](${SITE_URL}/classes)
 - [Practice](${SITE_URL}/practice)
 - [Shop](${SITE_URL}/shop)
+- [Blog](${SITE_URL}/blog)
 - [About](${SITE_URL}/about)
 - [Contact](${SITE_URL}/contact)
 - [FAQ](${SITE_URL}/faq)
+
+## Feeds
+- [RSS](${SITE_URL}/blog/rss.xml) — Blog posts
+- [Sitemap](${SITE_URL}/sitemap.xml)${recentPostsSection}
 `;
 
   return new Response(body, {

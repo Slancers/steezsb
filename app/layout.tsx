@@ -60,6 +60,15 @@ export default function RootLayout({
       lang="en"
       className={`${bebas.variable} ${hanken.variable} ${spaceMono.variable}`}
     >
+      <head>
+        {/* Geo meta — static (Hyderabad / Telangana). Local-SEO signal that
+            some search engines still honor. Approximate coordinates point
+            at Banjara Hills area, not the exact bowl pin. */}
+        <meta name="geo.region" content="IN-TG" />
+        <meta name="geo.placename" content="Hyderabad" />
+        <meta name="geo.position" content="17.4156;78.4347" />
+        <meta name="ICBM" content="17.4156, 78.4347" />
+      </head>
       <body className="min-h-screen overflow-x-clip bg-surface text-on-surface antialiased">
         <GtmScript />
         <GtmNoScript />

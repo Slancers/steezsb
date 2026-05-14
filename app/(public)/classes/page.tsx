@@ -5,7 +5,13 @@ import { Arrow, StarBurst, WhatsAppIcon } from "@/components/icons/zine";
 import { JsonLd } from "@/components/JsonLd";
 import { PageHero } from "@/components/PageHero";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
-import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
+import {
+  absoluteUrl,
+  breadcrumbJsonLd,
+  buildMetadata,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Skateboarding Classes in Hyderabad",
@@ -161,6 +167,38 @@ const LEVEL_WIDTHS = { BEGINNER: 25, INTERMEDIATE: 60, SKILLED: 95 };
 
 const DAYS = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
 
+function priceToNumber(price: string): string {
+  // "₹600" -> "600", "₹4,800" -> "4800"
+  return price.replace(/[^\d.]/g, "");
+}
+
+const COURSES_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "STEEZ Skateboarding Programs",
+  itemListElement: TIERS.map((tier, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "Course",
+      name: tier.name.join(" "),
+      description: tier.features.join(". "),
+      provider: {
+        "@type": "Organization",
+        name: SITE_NAME,
+        sameAs: SITE_URL,
+      },
+      offers: {
+        "@type": "Offer",
+        price: priceToNumber(tier.price),
+        priceCurrency: "INR",
+        availability: "https://schema.org/InStock",
+        url: absoluteUrl("/classes"),
+      },
+    },
+  })),
+};
+
 export default function ClassesPage() {
   return (
     <>
@@ -170,6 +208,7 @@ export default function ClassesPage() {
           { name: "Classes", path: "/classes" },
         ])}
       />
+      <JsonLd data={COURSES_JSONLD} />
 
       <PageHero
         eyebrow="[ classes ]"
