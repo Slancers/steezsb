@@ -6,6 +6,7 @@ import { faq } from "./faq";
 import { lead } from "./lead";
 import { location } from "./location";
 import { mediaItem } from "./mediaItem";
+import { mediaBuzz } from "./mediaBuzz";
 import { practiceTier } from "./practiceTier";
 import { product } from "./product";
 import { siteSettings } from "./siteSettings";
@@ -21,6 +22,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   testimonial,
   faq,
   mediaItem,
+  mediaBuzz,
   blogPost,
   lead,
   student,

@@ -5,6 +5,8 @@ import type {
   CoachingProgram,
   Faq,
   Location,
+  BlogPost,
+  MediaBuzz,
   MediaItem,
   PracticeTier,
   Product,
@@ -56,6 +58,18 @@ const MEDIA_ITEMS_QUERY = groq`*[_type == "mediaItem"] | order(order asc, _creat
   _id, caption, image, videoUrl, tags, order
 }`;
 
+const BLOG_POSTS_QUERY = groq`*[_type == "blogPost" && defined(publishedAt) && publishedAt <= now()] | order(publishedAt desc){
+  _id, title, slug, excerpt, coverImage, publishedAt, tags, metaTitle, metaDescription
+}`;
+
+const BLOG_POST_QUERY = groq`*[_type == "blogPost" && slug.current == $slug && defined(publishedAt) && publishedAt <= now()][0]{
+  _id, title, slug, excerpt, coverImage, body, publishedAt, tags, metaTitle, metaDescription
+}`;
+
+const MEDIA_BUZZ_QUERY = groq`*[_type == "mediaBuzz" && defined(publishedAt) && publishedAt <= now()] | order(publishedAt desc){
+  _id, headline, slug, publication, publishedAt, excerpt, coverImage, sourceUrl, featured
+}`;
+
 export async function getSiteSettings(): Promise<SiteSettings | null> {
   return client.fetch<SiteSettings | null>(SITE_SETTINGS_QUERY, {}, cache);
 }
@@ -90,4 +104,16 @@ export async function getFaqs(): Promise<Faq[]> {
 
 export async function getMediaItems(): Promise<MediaItem[]> {
   return client.fetch<MediaItem[]>(MEDIA_ITEMS_QUERY, {}, cache);
+}
+
+export async function getBlogPosts(): Promise<BlogPost[]> {
+  return client.fetch<BlogPost[]>(BLOG_POSTS_QUERY, {}, cache);
+}
+
+export async function getBlogPost(slug: string): Promise<BlogPost | null> {
+  return client.fetch<BlogPost | null>(BLOG_POST_QUERY, { slug }, cache);
+}
+
+export async function getMediaBuzz(): Promise<MediaBuzz[]> {
+  return client.fetch<MediaBuzz[]>(MEDIA_BUZZ_QUERY, {}, cache);
 }

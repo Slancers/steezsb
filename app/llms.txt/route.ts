@@ -3,7 +3,7 @@ import { getSiteSettings } from "@/sanity/queries";
 
 // Plain-text summary served at /llms.txt per https://llmstxt.org spec.
 // Lets AI answer engines (ChatGPT, Perplexity, Claude search) ingest a
-// canonical factual summary of what STEEZE is and where to find more.
+// canonical factual summary of what WallRide Park is and where to find more.
 export const revalidate = 3600;
 
 export async function GET() {
@@ -12,7 +12,7 @@ export async function GET() {
   const name = settings?.siteName || SITE_NAME;
   const tagline =
     settings?.tagline ||
-    "Skateboarding classes, hourly bowl practice, and gear in Hyderabad. Coached by Hari.";
+    "BMX, skateboarding and a rider-built park for first tries, bigger lines and the community in between.";
 
   const addressLine = settings?.address
     ? [
@@ -45,12 +45,13 @@ export async function GET() {
 > ${tagline}
 
 ## About
-${name} offers skateboarding coaching and bowl-time practice in Hyderabad, India. The program is run by Hari, who coaches students from beginner level upward.
+${name} is a rider-built action-sports park in Hyderabad, India, with BMX, skateboarding, pump track sessions, classes, events and a growing community.
 
 ## Services
-- [Classes](${SITE_URL}/classes) — 1-on-1 and group coaching with structured programs and transparent pricing.
-- [Practice](${SITE_URL}/practice) — Hourly bowl access for independent skaters.
-- [Shop](${SITE_URL}/shop) — The STEEZE Skate Kit: skateboard, helmet, and pads bundled together.
+- [Classes](${SITE_URL}/classes) — BMX, skateboarding and pump track classes for beginners and progressing riders.
+- [Practice](${SITE_URL}/practice) — Park hours, entry, rentals and visit information.
+- [Events](${SITE_URL}/events) — Jams, contests, workshops and community sessions.
+- [Shop](${SITE_URL}/shop) — WallRide drops and partner brands, coming soon.
 
 ## Location
 ${addressLine}
@@ -62,6 +63,7 @@ ${contactLines || `- Website: ${SITE_URL}`}
 - [Home](${SITE_URL}/)
 - [Classes](${SITE_URL}/classes)
 - [Practice](${SITE_URL}/practice)
+- [Events](${SITE_URL}/events)
 - [Shop](${SITE_URL}/shop)
 - [About](${SITE_URL}/about)
 - [Contact](${SITE_URL}/contact)

@@ -55,5 +55,357 @@
   }
   body {
     @apply bg-background text-foreground;
+    background: #f7f4ef;
+    color: #09090b;
+    font-family: var(--font-wr-body), "Avenir Next", Avenir, "Helvetica Neue", sans-serif;
+  }
+
+  ::selection {
+    background: #a855f7;
+    color: #09090b;
+  }
+}
+
+@layer components {
+  .wr-display {
+    font-family: var(--font-wr-display), Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .wr-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .wr-nav {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: rgba(247, 244, 239, 0.96);
+    border-top: 4px solid #a855f7;
+    border-bottom: 1px solid rgba(9, 9, 11, 0.14);
+    backdrop-filter: blur(16px);
+  }
+
+  .wr-nav-link {
+    color: rgba(9, 9, 11, 0.7);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 180ms ease;
+  }
+
+  .wr-nav-link:hover { color: #7e22ce; }
+
+  .wr-nav-cta,
+  .wr-button-primary {
+    background: #a855f7 !important;
+    color: #09090b !important;
+    border: 1px solid #a855f7 !important;
+    font-weight: 800 !important;
+  }
+
+  .wr-button-light {
+    background: #fafafa !important;
+    color: #09090b !important;
+    border: 1px solid #fafafa !important;
+    font-weight: 800 !important;
+  }
+
+  .wr-button-dark {
+    background: #09090b !important;
+    color: #fafafa !important;
+    border: 1px solid #09090b !important;
+    font-weight: 800 !important;
+  }
+
+  .wr-button-outline {
+    border-color: rgba(9, 9, 11, 0.25) !important;
+    color: #09090b !important;
+    font-weight: 800 !important;
+  }
+
+  .wr-button-primary,
+  .wr-button-light,
+  .wr-button-dark,
+  .wr-button-outline,
+  .wr-nav-cta {
+    box-shadow: 4px 4px 0 rgba(9, 9, 11, 0.18);
+    transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+  }
+
+  .wr-button-primary:hover,
+  .wr-button-light:hover,
+  .wr-button-dark:hover,
+  .wr-button-outline:hover,
+  .wr-nav-cta:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 rgba(9, 9, 11, 0.22);
+  }
+
+  .wr-menu-button {
+    display: inline-flex;
+    height: 2.5rem;
+    width: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(9, 9, 11, 0.18);
+    border-radius: 999px;
+  }
+
+  .wr-hero {
+    position: relative;
+    overflow: hidden;
+    background: #09090b;
+    color: #fafafa;
+  }
+
+  .wr-hero-image {
+    object-fit: contain;
+    object-position: center;
+    filter: saturate(0.95) contrast(1.02);
+  }
+
+  .wr-hero-shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(9, 9, 11, 0.78) 0%, rgba(9, 9, 11, 0.38) 55%, rgba(9, 9, 11, 0.18) 100%), linear-gradient(0deg, rgba(9, 9, 11, 0.64), transparent 55%);
+  }
+
+  .wr-claims {
+    overflow: hidden;
+    background: #a855f7;
+    border-block: 2px solid #09090b;
+  }
+
+  .wr-section { position: relative; padding: 7rem 0; }
+  .wr-page-hero { position: relative; overflow: hidden; padding: 8rem 0 7rem; }
+  .wr-page-hero > .container { position: relative; z-index: 2; }
+  .wr-page-hero::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: -10rem;
+    right: 10%;
+    width: 7rem;
+    height: 42rem;
+    background: rgba(59, 7, 100, .92);
+    transform: rotate(28deg);
+  }
+  .wr-page-hero::after {
+    content: "WALLRIDE";
+    position: absolute;
+    right: -1rem;
+    bottom: -2rem;
+    color: rgba(9, 9, 11, .055);
+    font-family: var(--font-wr-display), Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-size: clamp(6rem, 16vw, 15rem);
+    line-height: .8;
+    letter-spacing: -.04em;
+    pointer-events: none;
+  }
+  .wr-page-hero.wr-ink::after { color: rgba(255,255,255,.045); }
+  .wr-ink { background: #09090b; }
+  .wr-paper {
+    background-color: #f7f4ef;
+    background-image:
+      linear-gradient(rgba(9, 9, 11, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(9, 9, 11, 0.035) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .wr-purple { background: #a855f7; }
+
+  .wr-feature {
+    position: relative;
+    border: 1px solid rgba(9, 9, 11, 0.2);
+    background: #fafafa;
+    padding: 1rem;
+    box-shadow: 8px 8px 0 rgba(9, 9, 11, 0.1);
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+
+  .wr-feature:hover {
+    transform: translateY(-6px) rotate(-0.35deg);
+    box-shadow: 12px 14px 0 rgba(168, 85, 247, 0.28);
+  }
+
+  .wr-story { position: relative; overflow: hidden; background: #09090b; padding: 7rem 0; }
+  .wr-story::after {
+    content: "WALLRIDE / HYDERABAD / SINCE 2017";
+    position: absolute;
+    right: -1rem;
+    bottom: -1.2rem;
+    color: rgba(255, 255, 255, 0.045);
+    font-family: var(--font-wr-display), Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-size: clamp(4rem, 10vw, 10rem);
+    line-height: 0.8;
+    white-space: nowrap;
+  }
+  .wr-footer { background: #09090b; color: #fafafa; }
+
+  .wr-photo-frame {
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #09090b;
+    background: #3b0764;
+    box-shadow: 12px 12px 0 #a855f7;
+  }
+
+  .wr-photo-frame::before,
+  .wr-photo-frame::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    width: 5rem;
+    height: 1.1rem;
+    background: #a855f7;
+    opacity: 0.92;
+  }
+
+  .wr-photo-frame::before { left: -1.2rem; top: 1rem; transform: rotate(-35deg); }
+  .wr-photo-frame::after { right: -1.2rem; bottom: 1rem; transform: rotate(-35deg); }
+
+  .wr-photo-contain {
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+
+  .wr-hero-grid {
+    display: grid;
+    min-height: 730px;
+    align-items: center;
+    gap: 3.5rem;
+    padding-block: 4.5rem;
+  }
+
+  .wr-hero-media {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: #3b0764;
+    border: 2px solid rgba(255,255,255,0.9);
+    box-shadow: 16px 16px 0 #a855f7;
+    transform: rotate(1.5deg);
+  }
+
+  .wr-hero-media::before {
+    content: "FULL SEND / FIRST TRY";
+    position: absolute;
+    z-index: 3;
+    left: -1.4rem;
+    top: 1.6rem;
+    padding: .55rem .8rem;
+    background: #a855f7;
+    color: #09090b;
+    font-size: .68rem;
+    font-weight: 900;
+    letter-spacing: .13em;
+    transform: rotate(-7deg);
+  }
+
+  .wr-hero-orbit {
+    position: absolute;
+    inset: auto -8rem -10rem auto;
+    width: 28rem;
+    height: 28rem;
+    border: 1px solid rgba(168, 85, 247, 0.35);
+    border-radius: 50%;
+  }
+
+  .wr-hero-orbit::before,
+  .wr-hero-orbit::after {
+    content: "";
+    position: absolute;
+    inset: 3rem;
+    border: 1px solid rgba(168, 85, 247, 0.22);
+    border-radius: 50%;
+  }
+
+  .wr-hero-orbit::after { inset: 7rem; }
+
+  .wr-section-index {
+    display: inline-flex;
+    align-items: center;
+    gap: .7rem;
+    font-size: .72rem;
+    font-weight: 900;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+
+  .wr-section-index::before {
+    content: "";
+    width: 2.5rem;
+    height: 3px;
+    background: currentColor;
+  }
+
+  .wr-stat-rail {
+    border-block: 2px solid #09090b;
+    background: #f5f3ff;
+  }
+
+  .wr-stat {
+    padding: 1.7rem 1rem;
+    border-left: 1px solid rgba(9,9,11,.25);
+  }
+
+  .wr-stat:last-child { border-right: 1px solid rgba(9,9,11,.25); }
+
+  .wr-stat-value {
+    font-family: var(--font-wr-display), Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.6rem);
+    line-height: .9;
+    text-transform: uppercase;
+  }
+
+  .wr-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: wr-marquee 22s linear infinite;
+  }
+
+  .wr-marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.1rem 2rem;
+    font-family: var(--font-wr-display), Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-size: clamp(1.3rem, 2.5vw, 2.2rem);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  @keyframes wr-marquee { to { transform: translateX(-50%); } }
+
+  @keyframes wr-reveal {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .wr-reveal { animation: wr-reveal 700ms cubic-bezier(.2,.75,.25,1) both; }
+  .wr-reveal-delay { animation-delay: 140ms; }
+
+  @media (max-width: 767px) {
+    .wr-section, .wr-story { padding: 4.5rem 0; }
+    .wr-page-hero { padding: 5.5rem 0 4.5rem; }
+    .wr-hero-grid { min-height: auto; padding-block: 3rem 4.5rem; }
+    .wr-hero-media { box-shadow: 9px 9px 0 #a855f7; transform: none; }
+    .wr-photo-frame { box-shadow: 8px 8px 0 #a855f7; }
+    .wr-stat { border-top: 1px solid rgba(9,9,11,.25); }
+  }
+
+  @media (min-width: 768px) {
+    .wr-hero-grid { grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wr-marquee-track, .wr-reveal, .wr-reveal-delay { animation: none; }
+    .wr-feature, .wr-button-primary, .wr-button-light, .wr-button-dark, .wr-button-outline, .wr-nav-cta { transition: none; }
   }
 }

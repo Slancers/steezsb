@@ -50,7 +50,7 @@ export function WhatsAppCTA({ intent, children, ...buttonProps }: Props) {
       window.open(data.whatsappUrl, "_blank", "noopener,noreferrer");
     } catch {
       // Fall back to a plain wa.me URL with no ref code so the user can
-      // still reach Hari. The lead just won't be attributed.
+      // still reach WallRide. The lead just won't be attributed.
       const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "";
       window.open(
         `https://wa.me/${number}`,

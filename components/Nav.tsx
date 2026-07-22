@@ -1,82 +1,61 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
-import { Menu } from "lucide-react";
 
 const NAV_LINKS = [
-  { href: "/classes", label: "Classes" },
-  { href: "/practice", label: "Practice" },
-  { href: "/shop", label: "Shop" },
   { href: "/about", label: "About" },
-  { href: "/faq", label: "FAQ" },
+  { href: "/classes", label: "Classes" },
+  { href: "/events", label: "Events" },
+  { href: "/blog", label: "Journal" },
+  { href: "/media-buzz", label: "Media" },
+  { href: "/practice", label: "Visit" },
   { href: "/contact", label: "Contact" },
 ];
 
 export function Nav() {
   return (
-    <header className="sticky top-0 z-30 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-      <div className="container flex h-16 items-center justify-between gap-4">
-        <Link
-          href="/"
-          aria-label="STEEZE Skateboarding home"
-          className="flex shrink-0 items-center"
-        >
+    <header className="wr-nav">
+      <div className="container flex h-[76px] items-center justify-between gap-5">
+        <Link href="/" aria-label="WallRide Park home" className="flex shrink-0 items-center">
           <Image
-            src="/brand/logo.png"
-            alt="STEEZE Skateboarding"
-            width={1089}
-            height={490}
+            src="/wallride/logo.png"
+            alt="WallRide Park"
+            width={720}
+            height={480}
             priority
-            className="h-10 w-auto md:h-12"
+            className="h-12 w-20 object-contain object-center mix-blend-multiply md:h-14 md:w-24"
           />
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-6 lg:flex xl:gap-8">
           {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
-            >
+            <Link key={link.href} href={link.href} className="wr-nav-link">
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
-          <WhatsAppCTA
-            intent="general"
-            size="sm"
-            className="hidden md:inline-flex"
-          >
+        <div className="flex items-center gap-3">
+          <WhatsAppCTA intent="general" size="sm" className="wr-nav-cta hidden sm:inline-flex">
             WhatsApp
           </WhatsAppCTA>
-
           <Sheet>
-            <SheetTrigger
-              aria-label="Open menu"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-md border md:hidden"
-            >
+            <SheetTrigger aria-label="Open menu" className="wr-menu-button lg:hidden">
               <Menu className="h-5 w-5" />
             </SheetTrigger>
-            <SheetContent side="right" className="w-72">
-              <nav className="mt-8 flex flex-col gap-4">
+            <SheetContent side="right" className="w-80 bg-zinc-950 text-white">
+              <nav className="mt-10 flex flex-col gap-5">
                 {NAV_LINKS.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="text-lg font-medium"
-                  >
+                  <Link key={link.href} href={link.href} className="wr-display text-3xl" >
                     {link.label}
                   </Link>
                 ))}
-                <div className="mt-4">
-                  <WhatsAppCTA intent="general" className="w-full">
-                    WhatsApp Hari
-                  </WhatsAppCTA>
-                </div>
+                <WhatsAppCTA intent="general" className="wr-button-primary mt-5 w-full">
+                  WhatsApp WallRide
+                </WhatsAppCTA>
               </nav>
             </SheetContent>
           </Sheet>

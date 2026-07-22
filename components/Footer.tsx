@@ -1,152 +1,39 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { getSiteSettings } from "@/sanity/queries";
-
-function formatAddress(
-  address?: NonNullable<
-    Awaited<ReturnType<typeof getSiteSettings>>
-  >["address"]
-) {
-  if (!address) return null;
-  const parts = [
-    address.line1,
-    address.line2,
-    [address.city, address.state, address.pincode].filter(Boolean).join(" "),
-  ].filter(Boolean);
-  return parts.length > 0 ? parts : null;
-}
-
-export async function Footer() {
-  const settings = await getSiteSettings();
-  const addressLines = formatAddress(settings?.address);
-  const year = new Date().getFullYear();
-
+export function Footer() {
   return (
-    <footer className="mt-16 border-t bg-muted/30">
-      <div className="container grid gap-8 py-12 md:grid-cols-4">
-        <div className="space-y-3">
-          <Image
-            src="/brand/logo.png"
-            alt="STEEZE Skateboarding"
-            width={1089}
-            height={490}
-            className="h-10 w-auto"
-          />
-          {settings?.tagline ? (
-            <p className="text-sm text-muted-foreground">{settings.tagline}</p>
-          ) : null}
-        </div>
-
+    <footer className="wr-footer">
+      <div className="container grid gap-12 py-14 md:grid-cols-[1.5fr_1fr_1fr_1fr] md:py-20">
         <div>
-          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide">
-            Contact
-          </h3>
-          <ul className="space-y-2 text-sm text-muted-foreground">
-            {settings?.phoneNumber ? (
-              <li>
-                <a
-                  href={`tel:${settings.phoneNumber}`}
-                  className="hover:text-foreground"
-                >
-                  {settings.phoneNumber}
-                </a>
-              </li>
-            ) : null}
-            {settings?.email ? (
-              <li>
-                <a
-                  href={`mailto:${settings.email}`}
-                  className="hover:text-foreground"
-                >
-                  {settings.email}
-                </a>
-              </li>
-            ) : null}
-            {settings?.whatsappNumber ? (
-              <li>
-                <a
-                  href={`https://wa.me/${settings.whatsappNumber}`}
-                  className="hover:text-foreground"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  WhatsApp
-                </a>
-              </li>
-            ) : null}
-          </ul>
+          <Image src="/wallride/logo.png" alt="WallRide Park" width={720} height={480} className="h-24 w-36 object-contain object-center invert" />
+          <p className="mt-5 max-w-xs text-sm leading-6 text-white/60">A safe and engaging environment supporting alternative culture in Hyderabad.</p>
         </div>
-
         <div>
-          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide">
-            Visit
-          </h3>
-          {addressLines ? (
-            <address className="not-italic text-sm text-muted-foreground">
-              {addressLines.map((line, i) => (
-                <div key={i}>{line}</div>
-              ))}
-            </address>
-          ) : (
-            <p className="text-sm text-muted-foreground">Hyderabad, Telangana</p>
-          )}
-          {settings?.openingHours && settings.openingHours.length > 0 ? (
-            <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
-              {settings.openingHours.map((h) => (
-                <li key={h}>{h}</li>
-              ))}
-            </ul>
-          ) : null}
+          <p className="wr-eyebrow mb-4 text-white/40">Explore</p>
+          <div className="flex flex-col gap-3 text-sm text-white/75">
+            <Link href="/about" className="hover:text-white">About WallRide</Link>
+            <Link href="/classes" className="hover:text-white">Classes</Link>
+            <Link href="/practice" className="hover:text-white">Plan your visit</Link>
+          </div>
         </div>
-
         <div>
-          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide">
-            Follow
-          </h3>
-          <ul className="space-y-2 text-sm text-muted-foreground">
-            {settings?.social?.instagram ? (
-              <li>
-                <a
-                  href={settings.social.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-foreground"
-                >
-                  Instagram
-                </a>
-              </li>
-            ) : null}
-            {settings?.social?.youtube ? (
-              <li>
-                <a
-                  href={settings.social.youtube}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-foreground"
-                >
-                  YouTube
-                </a>
-              </li>
-            ) : null}
-          </ul>
+          <p className="wr-eyebrow mb-4 text-white/40">Find us</p>
+          <p className="text-sm leading-6 text-white/75">Peeran Cheruvu<br />Hyderabad, Telangana<br />Off Chevella Road</p>
+          <p className="mt-3 text-sm text-white/50">Open 3:00 pm—9:00 pm<br />Closed Wednesdays</p>
+        </div>
+        <div>
+          <p className="wr-eyebrow mb-4 text-white/40">Follow</p>
+          <div className="flex flex-col gap-3 text-sm text-white/75">
+            <a href="https://instagram.com/wallrideparkhyd" target="_blank" rel="noopener noreferrer" className="hover:text-white">Instagram ↗</a>
+            <Link href="/contact" className="hover:text-white">Contact WallRide</Link>
+          </div>
         </div>
       </div>
-
-      <div className="border-t">
-        <div className="container flex flex-col items-start justify-between gap-2 py-6 text-sm text-muted-foreground md:flex-row md:items-center">
-          <p>© {year} STEEZE Skateboarding</p>
-          <p>
-            Designed by{" "}
-            <Link
-              href="https://moretraffic.in"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-foreground hover:underline"
-            >
-              Joe
-            </Link>
-          </p>
+      <div className="border-t border-white/10">
+        <div className="container flex flex-col gap-2 py-5 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} WallRide Park</p>
+          <p>Designed by Joe</p>
         </div>
       </div>
     </footer>

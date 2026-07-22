@@ -1,122 +1,17 @@
-import { FaqEngagementTracker } from "@/components/analytics/FaqEngagementTracker";
-import { JsonLd } from "@/components/JsonLd";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
-import { breadcrumbJsonLd, buildMetadata, faqPageJsonLd } from "@/lib/seo";
-import { getFaqs } from "@/sanity/queries";
-import type { Faq } from "@/types/sanity";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata = buildMetadata({
-  title: "FAQ",
-  description:
-    "Common questions about skateboarding classes, practice, gear, and getting started at STEEZE in Hyderabad.",
-  path: "/faq",
-});
+export const metadata = buildMetadata({ title: "WallRide Park FAQ", description: "Answers about visiting, classes, equipment and starting at WallRide Park.", path: "/faq" });
 
-const CATEGORY_LABELS: Record<
-  NonNullable<Faq["category"]>,
-  string
-> = {
-  classes: "Classes",
-  practice: "Practice",
-  gear: "Gear",
-  general: "General",
-};
-
-const CATEGORY_ORDER: NonNullable<Faq["category"]>[] = [
-  "classes",
-  "practice",
-  "gear",
-  "general",
+const FAQS = [
+  ["What are WallRide’s opening hours?", "The park is open from 3:00 pm to 9:00 pm and is closed on Wednesdays. Classes run in the mornings."],
+  ["Do I need experience to start?", "No. WallRide welcomes first-timers and progressing riders. Message us with the rider’s age, discipline and experience so we can point you to the right session."],
+  ["What can I ride at WallRide?", "WallRide has skateboarding, BMX and pump track spaces. Rentals include boards, bikes and scooters, subject to availability."],
+  ["How much is entry?", "The current listed entry price is ₹250 per hour. Rates and rental availability can change, so confirm before visiting."],
+  ["What should I bring?", "Wear comfortable clothes and closed shoes. Bring your own BMX bike or skateboard and safety gear where possible."],
+  ["Where is the park?", "WallRide Park is in Peeran Cheruvu, Hyderabad, off Chevella Road."],
 ];
 
-function groupByCategory(faqs: Faq[]) {
-  const groups = new Map<NonNullable<Faq["category"]>, Faq[]>();
-  for (const faq of faqs) {
-    const cat = (faq.category ?? "general") as NonNullable<Faq["category"]>;
-    const bucket = groups.get(cat) ?? [];
-    bucket.push(faq);
-    groups.set(cat, bucket);
-  }
-  return groups;
-}
-
-export default async function FaqPage() {
-  const faqs = await getFaqs();
-  const grouped = groupByCategory(faqs);
-
-  return (
-    <>
-      <FaqEngagementTracker />
-      <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "FAQ", path: "/faq" },
-        ])}
-      />
-      {faqs.length > 0 ? <JsonLd data={faqPageJsonLd(faqs)} /> : null}
-
-      <section className="container py-12 md:py-16">
-        <div className="max-w-3xl space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
-            Frequently asked questions
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            The questions parents and skaters ask most. Can&apos;t find your
-            answer? WhatsApp Hari directly.
-          </p>
-        </div>
-      </section>
-
-      <section className="container pb-12">
-        {faqs.length === 0 ? (
-          <div className="rounded-lg border border-dashed p-12 text-center text-muted-foreground">
-            FAQs will appear here once added in Sanity Studio.
-          </div>
-        ) : (
-          <div className="mx-auto max-w-3xl space-y-12">
-            {CATEGORY_ORDER.map((category) => {
-              const items = grouped.get(category);
-              if (!items || items.length === 0) return null;
-              return (
-                <div key={category}>
-                  <h2 className="mb-6 text-2xl font-bold tracking-tight">
-                    {CATEGORY_LABELS[category]}
-                  </h2>
-                  <dl className="space-y-6">
-                    {items.map((faq) => (
-                      <div key={faq._id} className="border-b pb-6">
-                        <dt className="text-lg font-semibold">
-                          {faq.question}
-                        </dt>
-                        <dd className="mt-2 whitespace-pre-line text-muted-foreground">
-                          {faq.answer}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </section>
-
-      <section className="container py-12 md:py-16">
-        <div className="rounded-xl bg-muted p-8 text-center md:p-12">
-          <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-            Still have a question?
-          </h2>
-          <p className="mx-auto mt-3 max-w-prose text-muted-foreground">
-            WhatsApp Hari directly — he&apos;s the fastest way to a real
-            answer.
-          </p>
-          <div className="mt-6">
-            <WhatsAppCTA intent="general" size="lg">
-              WhatsApp Hari
-            </WhatsAppCTA>
-          </div>
-        </div>
-      </section>
-    </>
-  );
+export default function FaqPage() {
+  return <><section className="wr-page-hero wr-purple"><div className="container"><p className="wr-eyebrow mb-5 text-black/60">Good to know</p><h1 className="wr-display max-w-4xl text-7xl leading-[0.88] tracking-[-0.07em] text-black md:text-[9rem]">Before you roll in.</h1></div></section><section className="wr-section wr-paper"><div className="container grid gap-12 md:grid-cols-[0.6fr_1.4fr]"><div><p className="wr-eyebrow text-purple-700">Questions / answers</p><h2 className="wr-display mt-5 text-4xl leading-[0.95] tracking-[-0.04em] text-zinc-950">Still unsure? That’s what we’re here for.</h2><WhatsAppCTA intent="general" className="wr-button-dark mt-8">Ask WallRide</WhatsAppCTA></div><div className="divide-y divide-zinc-900/15">{FAQS.map(([question, answer]) => <details key={question} className="group py-6"><summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-xl font-bold text-zinc-950"><span>{question}</span><span className="text-2xl font-normal text-purple-700 transition group-open:rotate-45">＋</span></summary><p className="max-w-2xl pt-4 text-base leading-7 text-zinc-600">{answer}</p></details>)}</div></div></section></>;
 }

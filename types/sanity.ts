@@ -105,3 +105,28 @@ export type MediaItem = {
   tags?: string[];
   order?: number;
 };
+
+export type BlogPost = {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  excerpt?: string;
+  coverImage?: SanityImage;
+  body?: import("@portabletext/types").PortableTextBlock[];
+  publishedAt?: string;
+  tags?: string[];
+  metaTitle?: string;
+  metaDescription?: string;
+};
+
+export type MediaBuzz = {
+  _id: string;
+  headline: string;
+  slug: { current: string };
+  publication: string;
+  publishedAt?: string;
+  excerpt?: string;
+  coverImage?: SanityImage;
+  sourceUrl: string;
+  featured?: boolean;
+};

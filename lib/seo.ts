@@ -9,11 +9,11 @@ import type {
 
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "https://steezsb.com";
+  "http://127.0.0.1:3000";
 
-export const SITE_NAME = "STEEZE Skateboarding";
+export const SITE_NAME = "WallRide Park";
 
-const DEFAULT_OG_IMAGE = `${SITE_URL}/brand/logo.png`;
+const DEFAULT_OG_IMAGE = `${SITE_URL}/wallride/logo.png`;
 
 export function absoluteUrl(path: string): string {
   if (path.startsWith("http")) return path;
@@ -193,8 +193,8 @@ export function personJsonLd(settings: SiteSettings | null) {
   return cleanObject({
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Hari",
-    jobTitle: "Skateboarding Coach",
+    name: "WallRide Park team",
+    jobTitle: "Action-sports park team",
     description: settings?.about?.bio,
     worksFor: {
       "@type": "Organization",

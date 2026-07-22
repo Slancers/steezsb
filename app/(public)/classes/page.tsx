@@ -1,146 +1,60 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import Image from "next/image";
+import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/JsonLd";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
-import { formatINR, pluralize } from "@/lib/format";
-import { breadcrumbJsonLd, buildMetadata, courseJsonLd } from "@/lib/seo";
-import { getAllLocations, getCoachingPrograms } from "@/sanity/queries";
+import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Skateboarding Classes in Hyderabad",
-  description:
-    "1-on-1 and group skateboarding coaching for kids and adults in Hyderabad. Structured programs, transparent pricing.",
+  title: "Classes at WallRide Park",
+  description: "BMX, skateboarding and pump track classes in Hyderabad for beginners and progressing riders.",
   path: "/classes",
 });
 
-export default async function ClassesPage() {
-  const [programs, locations] = await Promise.all([
-    getCoachingPrograms(),
-    getAllLocations(),
-  ]);
+const CLASSES = [
+  { title: "BMX classes", label: "Find your flow", text: "Learn balance, bike control, pumping, cornering and the foundations needed to ride the track with flow.", details: "₹6,000 for 8 classes · Schedule to be confirmed", image: "/wallride/pump-track.jpeg" },
+  { title: "Skateboarding classes", label: "Start with balance", text: "Start with stance, balance, pushing and stopping before progressing to lines, transitions and tricks.", details: "Price and schedule to be confirmed", image: "/wallride/classes.jpeg" },
+];
 
+export default function ClassesPage() {
   return (
     <>
-      <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "Classes", path: "/classes" },
-        ])}
-      />
-      {programs.map((program) => (
-        <JsonLd key={program._id} data={courseJsonLd(program)} />
-      ))}
-
-      <section className="container py-12 md:py-16">
-        <div className="max-w-3xl space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
-            Skateboarding classes in Hyderabad
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Structured coaching with Hari. 1-on-1 if you want focused
-            attention, group classes if you want a regular squad. Beginners
-            welcome — gear can be discussed on WhatsApp.
-          </p>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Classes", path: "/classes" }])} />
+      <section className="wr-page-hero wr-ink text-white">
+        <div className="container grid gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-end">
+          <div>
+            <p className="wr-eyebrow mb-5 text-fuchsia-200">Classes at WallRide</p>
+            <h1 className="wr-display max-w-4xl text-6xl leading-[0.9] tracking-[-0.06em] md:text-8xl">Start from zero. Progress from there.</h1>
+          </div>
+          <p className="max-w-sm text-lg leading-8 text-white/65">You don’t need experience to begin. Tell us the rider’s age, discipline and level—we’ll help choose the right session.</p>
         </div>
       </section>
 
-      <section className="container pb-12">
-        {programs.length === 0 ? (
-          <div className="rounded-lg border border-dashed p-12 text-center text-muted-foreground">
-            Program pricing will appear here once added in Sanity Studio.
-            <div className="mt-4">
-              <WhatsAppCTA intent="class">WhatsApp for class info</WhatsAppCTA>
-            </div>
-          </div>
-        ) : (
-          <div className="grid gap-6 md:grid-cols-2">
-            {programs.map((program) => (
-              <Card key={program._id} className="flex flex-col">
-                <CardHeader>
-                  <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                    {program.type === "1on1" ? "1-on-1" : "Group"}
-                  </div>
-                  <CardTitle className="text-2xl">{program.title}</CardTitle>
-                  <CardDescription className="text-base">
-                    {program.sessionCount}{" "}
-                    {pluralize(program.sessionCount, "session")} ·{" "}
-                    {program.sessionDurationMinutes} min each · up to{" "}
-                    {program.maxStudents}{" "}
-                    {pluralize(program.maxStudents, "student")}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="flex-1 space-y-4">
-                  <div className="text-3xl font-bold">
-                    {formatINR(program.priceINR)}
-                  </div>
-                  {program.description ? (
-                    <p className="text-sm text-muted-foreground">
-                      {program.description}
-                    </p>
-                  ) : null}
-                  {program.learnings && program.learnings.length > 0 ? (
-                    <div>
-                      <h3 className="mb-2 text-sm font-semibold">
-                        What students learn
-                      </h3>
-                      <ul className="space-y-1 text-sm text-muted-foreground">
-                        {program.learnings.map((line, i) => (
-                          <li key={i}>• {line}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : null}
-                </CardContent>
-                <CardFooter>
-                  <WhatsAppCTA intent="class" className="w-full">
-                    WhatsApp about this program
-                  </WhatsAppCTA>
-                </CardFooter>
-              </Card>
+      <section className="wr-section wr-paper">
+        <div className="container">
+          <div className="grid gap-8 md:grid-cols-2">
+            {CLASSES.map((item, index) => (
+              <article key={item.title} className="wr-feature group">
+                <div className="flex items-baseline justify-between"><span className="wr-eyebrow text-purple-700">0{index + 1}</span><span className="text-xs font-bold uppercase tracking-[0.14em] text-zinc-400">All levels</span></div>
+                <div className="relative mt-6 aspect-square overflow-hidden bg-zinc-950"><Image src={item.image} alt={item.title} fill sizes="(min-width: 768px) 50vw, 100vw" className="wr-photo-contain transition duration-700 group-hover:scale-[1.02]" /></div>
+                <p className="mt-8 text-sm font-bold uppercase tracking-[0.12em] text-zinc-500">{item.label}</p>
+                <h2 className="wr-display mt-2 text-4xl tracking-[-0.04em] text-zinc-950">{item.title}</h2>
+                <p className="mt-4 text-base leading-7 text-zinc-600">{item.text}</p>
+                <p className="mt-4 text-sm font-semibold leading-6 text-zinc-500">Suitable for beginners and progressing riders<br />{item.details}</p>
+                <WhatsAppCTA intent="class" className="wr-button-dark mt-7">Ask about {item.title}</WhatsAppCTA>
+              </article>
             ))}
-          </div>
-        )}
-      </section>
-
-      {locations.length > 0 ? (
-        <section className="container py-8">
-          <h2 className="mb-4 text-2xl font-bold tracking-tight">
-            Where classes happen
-          </h2>
-          <ul className="space-y-2 text-muted-foreground">
-            {locations.map((loc) => (
-              <li key={loc._id}>
-                <strong className="text-foreground">{loc.name}</strong>
-                {loc.address ? ` — ${loc.address}` : ""}
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
-
-      <section className="container py-12 md:py-16">
-        <div className="rounded-xl bg-muted p-8 text-center md:p-12">
-          <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-            Not sure which program fits?
-          </h2>
-          <p className="mx-auto mt-3 max-w-prose text-muted-foreground">
-            WhatsApp Hari — he&apos;ll help match the program to age, level, and
-            schedule.
-          </p>
-          <div className="mt-6">
-            <WhatsAppCTA intent="class" size="lg">
-              WhatsApp Hari about classes
-            </WhatsAppCTA>
           </div>
         </div>
       </section>
 
+      <section className="wr-section wr-purple">
+        <div className="container grid gap-10 md:grid-cols-[1fr_1fr] md:items-center">
+          <div><p className="wr-eyebrow mb-5 text-black/60">Class details</p><h2 className="wr-display max-w-xl text-5xl leading-[0.95] tracking-[-0.05em] text-black md:text-7xl">A better first session starts with the right questions.</h2></div>
+          <div className="space-y-6 text-lg leading-8 text-black/70"><p>Tell us the rider’s age, discipline and experience level. We will help you choose the right session and explain what equipment and safety gear to bring.</p><p>Equipment availability and current rental options should be confirmed before visiting.</p><div className="flex flex-wrap gap-3"><WhatsAppCTA intent="class" size="lg" className="wr-button-dark">Message WallRide on WhatsApp</WhatsAppCTA><Button asChild size="lg" variant="outline" className="border-black/30 text-black"><Link href="/contact">Visit the park</Link></Button></div></div>
+        </div>
+      </section>
     </>
   );
 }

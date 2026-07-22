@@ -23,6 +23,7 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem("faq").title("FAQs"),
       S.documentTypeListItem("mediaItem").title("Media"),
       S.documentTypeListItem("blogPost").title("Blog Posts"),
+      S.documentTypeListItem("mediaBuzz").title("Media Buzz"),
       S.divider(),
       S.listItem()
         .title("Private")

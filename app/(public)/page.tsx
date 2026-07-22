@@ -2,196 +2,177 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { buildMetadata } from "@/lib/seo";
-import { urlFor } from "@/sanity/lib/image";
-import {
-  getFeaturedTestimonials,
-  getMediaItems,
-  getSiteSettings,
-} from "@/sanity/queries";
+import { getSiteSettings } from "@/sanity/queries";
 
 export const metadata = buildMetadata({
-  title: "STEEZE Skateboarding — Skateboarding Classes in Hyderabad",
+  title: "WallRide Park — Hyderabad rides here",
   description:
-    "Skateboarding classes, hourly bowl practice, and gear for kids and adults in Hyderabad. Coached by Hari.",
+    "BMX, skateboarding and a rider-built park in Hyderabad for first tries, bigger lines and the community in between.",
   path: "/",
 });
 
-const OFFERS = [
+const FEATURES = [
   {
-    title: "Classes",
-    desc: "1-on-1 and group coaching, beginner to skilled.",
-    href: "/classes",
+    number: "01",
+    title: "Ride the pump track",
+    text: "Build speed through rollers, banked turns and flowing lines on India’s first asphalt pump track.",
+    image: "/wallride/pump-track.jpeg",
   },
   {
-    title: "Practice",
-    desc: "Hourly bowl access for independent skaters.",
-    href: "/practice",
+    number: "02",
+    title: "Skate the park",
+    text: "Practice balance, transitions, lines and tricks in a space made for progression.",
+    image: "/wallride/park-hero.jpeg",
   },
   {
-    title: "Kit",
-    desc: "Everything a new skater needs to start.",
-    href: "/shop",
+    number: "03",
+    title: "Learn with a coach",
+    text: "New to BMX or skateboarding? Start with structured guidance and build confidence at your pace.",
+    image: "/wallride/classes.jpeg",
   },
 ];
 
 export default async function HomePage() {
-  const [settings, testimonials, mediaItems] = await Promise.all([
-    getSiteSettings(),
-    getFeaturedTestimonials(),
-    getMediaItems(),
-  ]);
-
-  const heroTitle =
-    settings?.hero?.title ?? "Skateboarding coaching in Hyderabad";
-  const heroSubtitle =
-    settings?.hero?.subtitle ??
-    "Classes, practice time, and gear — all in one place. Coached by Hari.";
+  const settings = await getSiteSettings();
+  const openingHours = settings?.openingHours?.[0] ?? "Open daily · 3:00 pm—9:00 pm";
 
   return (
     <>
-      <section className="container py-16 md:py-24 lg:py-28">
-        <div className="grid gap-10 md:grid-cols-2 md:items-center">
-          <div className="space-y-6">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-              {heroTitle}
+      <section className="wr-hero">
+        <div className="wr-hero-orbit" aria-hidden="true" />
+        <div className="container wr-hero-grid relative z-10">
+          <div className="wr-reveal">
+            <div className="mb-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-white/65">
+              <span className="wr-section-index text-fuchsia-200">Hyderabad · Telangana</span>
+              <span className="text-xs font-bold uppercase tracking-[0.14em]">{openingHours}</span>
+            </div>
+            <p className="wr-eyebrow mb-5 text-fuchsia-200">India’s action-sports home</p>
+            <h1 className="wr-display max-w-4xl text-7xl leading-[0.82] tracking-[-0.055em] text-white sm:text-8xl lg:text-[9.5rem]">
+              Hyderabad<br /><span className="text-purple-400">rides here.</span>
             </h1>
-            <p className="text-lg text-muted-foreground md:text-xl">
-              {heroSubtitle}
+            <p className="mt-7 max-w-xl text-lg leading-8 text-white/68">
+              BMX, skateboarding and a rider-built park for first tries, bigger lines and the community in between.
             </p>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <WhatsAppCTA intent="class" size="lg">
-                WhatsApp for class info
-              </WhatsAppCTA>
-              <Button asChild variant="outline" size="lg">
-                <Link href="/classes">See classes</Link>
-              </Button>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <WhatsAppCTA intent="general" size="lg" className="wr-button-primary">Plan your visit</WhatsAppCTA>
+              <Button asChild size="lg" className="wr-button-light"><Link href="/events">See events</Link></Button>
             </div>
           </div>
-          {settings?.hero?.image ? (
-            <Image
-              src={urlFor(settings.hero.image).width(800).height(600).url()}
-              alt={settings.hero.image.alt ?? "Skateboarding at STEEZE"}
-              width={800}
-              height={600}
-              priority
-              className="aspect-[4/3] w-full rounded-lg object-cover"
-            />
-          ) : (
-            <div className="aspect-[4/3] w-full rounded-lg border bg-muted" />
-          )}
+          <div className="wr-hero-media wr-reveal wr-reveal-delay">
+            <Image src="/wallride/park-hero.jpeg" alt="Riders at WallRide Park in Hyderabad" fill priority sizes="(min-width: 768px) 45vw, 100vw" className="wr-hero-image" />
+          </div>
         </div>
       </section>
 
-      <section className="container py-12">
-        <h2 className="mb-8 text-center text-3xl font-bold tracking-tight md:text-4xl">
-          What we offer
-        </h2>
-        <div className="grid gap-6 md:grid-cols-3">
-          {OFFERS.map((offer) => (
-            <Card key={offer.href}>
-              <CardHeader>
-                <CardTitle>{offer.title}</CardTitle>
-                <CardDescription>{offer.desc}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button asChild variant="outline" className="w-full">
-                  <Link href={offer.href}>Learn more</Link>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+      <section className="wr-claims" aria-label="WallRide claims">
+        <div className="wr-marquee-track">
+          {[0, 1].map((copy) => <div key={copy} className="wr-marquee-item" aria-hidden={copy === 1}><span>India’s first asphalt pump track</span><span>✦</span><span>Telangana’s first skate park</span><span>✦</span><span>Built for progression</span><span>✦</span></div>)}
         </div>
       </section>
 
-      {settings?.about?.bio ? (
-        <section className="container py-12">
-          <div className="grid items-center gap-10 md:grid-cols-3">
-            {settings.about.photo ? (
-              <Image
-                src={urlFor(settings.about.photo).width(400).height(400).url()}
-                alt="Hari, coach at STEEZE"
-                width={400}
-                height={400}
-                className="aspect-square rounded-full object-cover md:col-span-1"
-              />
-            ) : null}
-            <div className="space-y-4 md:col-span-2">
-              <h2 className="text-3xl font-bold tracking-tight">About Hari</h2>
-              <p className="whitespace-pre-line text-muted-foreground">
-                {settings.about.bio}
-              </p>
-              <Button asChild variant="link" className="px-0">
-                <Link href="/about">Read more →</Link>
-              </Button>
-            </div>
+      <section className="wr-section wr-paper">
+        <div className="container">
+          <div className="mb-14 max-w-3xl">
+            <p className="wr-section-index mb-4 text-purple-700">01 / Find your line</p>
+            <h2 className="wr-display text-5xl leading-[0.95] tracking-[-0.045em] text-zinc-950 md:text-7xl">
+              Come for the ride.
+              <br />
+              Stay for the people.
+            </h2>
+            <p className="mt-6 max-w-xl text-lg leading-8 text-zinc-600">
+              WallRide is a place to learn, ride and progress. Take your first lesson, build flow around the pump track, work on new tricks or meet the people shaping Hyderabad’s action-sports scene.
+            </p>
           </div>
-        </section>
-      ) : null}
 
-      {mediaItems.length > 0 ? (
-        <section className="container py-12">
-          <h2 className="mb-8 text-3xl font-bold tracking-tight">Gallery</h2>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            {mediaItems.slice(0, 8).map((item) =>
-              item.image ? (
-                <Image
-                  key={item._id}
-                  src={urlFor(item.image).width(400).height(400).url()}
-                  alt={item.caption || item.image.alt || "STEEZE Skateboarding"}
-                  width={400}
-                  height={400}
-                  className="aspect-square rounded-lg object-cover"
-                />
-              ) : null
-            )}
-          </div>
-        </section>
-      ) : null}
-
-      {testimonials.length > 0 ? (
-        <section className="container py-12">
-          <h2 className="mb-8 text-3xl font-bold tracking-tight">
-            What parents say
-          </h2>
-          <div className="grid gap-6 md:grid-cols-3">
-            {testimonials.map((t) => (
-              <Card key={t._id}>
-                <CardContent className="pt-6">
-                  <p className="italic">&ldquo;{t.quote}&rdquo;</p>
-                  <p className="mt-4 text-sm text-muted-foreground">
-                    {t.parentName ?? t.studentName ?? "Parent"}
-                  </p>
-                </CardContent>
-              </Card>
+          <div className="grid gap-5 md:grid-cols-3">
+            {FEATURES.map((feature) => (
+              <article key={feature.number} className="wr-feature group">
+                <div className="relative aspect-square overflow-hidden bg-zinc-950">
+                  <Image
+                    src={feature.image}
+                    alt={feature.title}
+                    fill
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    className="wr-photo-contain transition duration-700 group-hover:scale-[1.025]"
+                  />
+                  <span className="absolute left-5 top-5 bg-purple-500 px-3 py-1 text-xs font-bold tracking-[0.15em] text-black">
+                    {feature.number}
+                  </span>
+                </div>
+                <h3 className="wr-display mt-5 text-3xl tracking-[-0.03em] text-zinc-950">{feature.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-zinc-600">{feature.text}</p>
+              </article>
             ))}
           </div>
-        </section>
-      ) : null}
+          <div className="mt-14 flex justify-center"><Button asChild size="lg" className="wr-button-dark"><Link href="/classes">Explore classes <span aria-hidden>↗</span></Link></Button></div>
+        </div>
+      </section>
 
-      <section className="container py-12 md:py-20">
-        <div className="rounded-xl bg-muted p-8 text-center md:p-12">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-            Ready to start?
+      <section className="wr-stat-rail">
+        <div className="container grid sm:grid-cols-3">
+          <div className="wr-stat"><p className="wr-stat-value">2017</p><p className="mt-2 text-xs font-bold uppercase tracking-[0.14em]">WallRide founded</p></div>
+          <div className="wr-stat"><p className="wr-stat-value">BMX + Skate</p><p className="mt-2 text-xs font-bold uppercase tracking-[0.14em]">One rider-built home</p></div>
+          <div className="wr-stat"><p className="wr-stat-value">First tries</p><p className="mt-2 text-xs font-bold uppercase tracking-[0.14em]">Through bigger lines</p></div>
+        </div>
+      </section>
+
+      <section className="wr-story">
+        <div className="container grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center md:gap-20">
+          <div className="wr-photo-frame relative aspect-square">
+            <Image
+              src="/wallride/community.jpeg"
+              alt="The WallRide community together at the park"
+              fill
+              sizes="(min-width: 768px) 40vw, 100vw"
+              className="wr-photo-contain"
+            />
+          </div>
+          <div className="max-w-xl text-white">
+            <p className="wr-section-index mb-5 text-fuchsia-200">02 / Built by a rider, for riders</p>
+            <h2 className="wr-display text-5xl leading-[0.95] tracking-[-0.045em] md:text-7xl">
+              Hyderabad needed a place to ride.
+            </h2>
+            <p className="mt-7 text-lg leading-8 text-white/70">
+              WallRide began because Hyderabad needed a real place for people to ride, learn and meet. In 2017, BMX rider Hamza Khan turned that need into a park—and a community.
+            </p>
+            <Button asChild className="wr-button-primary mt-8" size="lg">
+              <Link href="/about">Our story <span aria-hidden>↗</span></Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="wr-section wr-purple">
+        <div className="container grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
+          <div>
+            <p className="wr-section-index mb-4 text-black/60">03 / Next up at WallRide</p>
+            <h2 className="wr-display max-w-3xl text-5xl leading-[0.95] tracking-[-0.045em] text-black md:text-7xl">
+              Contests, jams, workshops and community sessions.
+            </h2>
+          </div>
+          <Button asChild size="lg" className="wr-button-dark">
+            <Link href="/events">View events <span aria-hidden>↗</span></Link>
+          </Button>
+        </div>
+      </section>
+
+      <section className="wr-section wr-paper">
+        <div className="container text-center">
+          <p className="wr-eyebrow mb-4 text-purple-700">Ready to ride?</p>
+          <h2 className="wr-display mx-auto max-w-4xl text-6xl leading-[0.9] tracking-[-0.06em] text-zinc-950 md:text-8xl">
+            Make your way to WallRide.
           </h2>
-          <p className="mx-auto mt-4 max-w-prose text-muted-foreground">
-            WhatsApp Hari directly to book a class, ask about pricing, or arrange
-            a visit.
+          <p className="mx-auto mt-6 max-w-lg text-lg leading-8 text-zinc-600">
+            Check today’s timings, plan your session or message us before you come.
           </p>
-          <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <WhatsAppCTA intent="general" size="lg">
-              WhatsApp Hari
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <WhatsAppCTA intent="general" size="lg" className="wr-button-dark">
+              WhatsApp WallRide
             </WhatsAppCTA>
-            <Button asChild variant="outline" size="lg">
-              <Link href="/contact">Contact details</Link>
+            <Button asChild variant="outline" size="lg" className="wr-button-outline">
+              <Link href="/contact">Get directions</Link>
             </Button>
           </div>
         </div>
