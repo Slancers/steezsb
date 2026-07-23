@@ -16,13 +16,15 @@ type Props = Omit<ButtonProps, "onClick"> & {
 // click → POST /api/lead → open wa.me URL with ref code prefilled.
 // On API failure, falls back to opening a plain wa.me link so the
 // visitor is never blocked (PRD Section 7, edge cases).
-export function WhatsAppCTA({ intent, children, ...buttonProps }: Props) {
+export function WhatsAppCTA({ intent, children, disabled, ...buttonProps }: Props) {
   const pathname = usePathname();
   const [pending, setPending] = React.useState(false);
 
   async function handleClick() {
     if (pending) return;
     setPending(true);
+    const popup = window.open("about:blank", "_blank");
+    if (popup) popup.opener = null;
     pushEvent("whatsapp_click", { intent, sourcePage: pathname });
     try {
       const res = await fetch("/api/lead", {
@@ -47,23 +49,27 @@ export function WhatsAppCTA({ intent, children, ...buttonProps }: Props) {
         sourcePage: pathname,
         refCode: data.refCode,
       });
-      window.open(data.whatsappUrl, "_blank", "noopener,noreferrer");
+      if (popup) popup.location.replace(data.whatsappUrl);
+      else window.location.assign(data.whatsappUrl);
     } catch {
       // Fall back to a plain wa.me URL with no ref code so the user can
       // still reach WallRide. The lead just won't be attributed.
       const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "";
-      window.open(
-        `https://wa.me/${number}`,
-        "_blank",
-        "noopener,noreferrer"
-      );
+      const fallbackUrl = `https://wa.me/${number}`;
+      if (popup) popup.location.replace(fallbackUrl);
+      else window.location.assign(fallbackUrl);
     } finally {
       setPending(false);
     }
   }
 
   return (
-    <Button {...buttonProps} onClick={handleClick} disabled={pending}>
+    <Button
+      {...buttonProps}
+      onClick={handleClick}
+      disabled={disabled || pending}
+      aria-busy={pending}
+    >
       {children}
     </Button>
   );

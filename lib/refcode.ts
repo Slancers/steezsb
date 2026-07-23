@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 
 // Generate a Sanity document _id and a 6-char refCode derived from it.
-// refCode = last 6 alphanumeric chars of _id, lowercased — matches PRD spec.
+// refCode = last 6 alphanumeric chars of _id, lowercased. Matches PRD spec.
 // We mint the _id ourselves (instead of letting Sanity auto-generate) so
 // the doc write is atomic: refCode is known up front, no second update needed.
 export function newLeadIds(): { id: string; refCode: string } {

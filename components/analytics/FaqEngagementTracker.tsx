@@ -4,24 +4,33 @@ import { useEffect } from "react";
 
 import { pushEvent } from "@/lib/analytics";
 
-// Fires faq_engagement once when the visitor scrolls past 50% of the
-// FAQ page. Since the FAQ is rendered open (not collapsed) per PRD,
-// scroll depth is the right engagement signal here.
+// Fires faq_engagement once when the document midpoint enters view.
 export function FaqEngagementTracker() {
   useEffect(() => {
-    let fired = false;
-    function onScroll() {
-      if (fired) return;
-      const viewportBottom = window.scrollY + window.innerHeight;
-      const halfPage = document.body.scrollHeight * 0.5;
-      if (viewportBottom >= halfPage) {
-        fired = true;
-        pushEvent("faq_engagement");
-        window.removeEventListener("scroll", onScroll);
-      }
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const sentinel = document.createElement("span");
+    sentinel.setAttribute("aria-hidden", "true");
+    sentinel.style.cssText = "position:absolute;left:0;width:1px;height:1px;pointer-events:none;opacity:0";
+    document.body.appendChild(sentinel);
+
+    const positionSentinel = () => {
+      sentinel.style.top = `${document.documentElement.scrollHeight * 0.5}px`;
+    };
+    positionSentinel();
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry?.isIntersecting) return;
+      pushEvent("faq_engagement");
+      observer.disconnect();
+    });
+    const resizeObserver = new ResizeObserver(positionSentinel);
+    observer.observe(sentinel);
+    resizeObserver.observe(document.body);
+
+    return () => {
+      observer.disconnect();
+      resizeObserver.disconnect();
+      sentinel.remove();
+    };
   }, []);
 
   return null;

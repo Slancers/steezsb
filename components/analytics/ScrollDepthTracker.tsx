@@ -5,25 +5,36 @@ import { useEffect } from "react";
 
 import { pushEvent } from "@/lib/analytics";
 
-// Fires scroll_depth_50 once per route when the user has scrolled past
-// the midpoint of the document. Cheap passive listener; resets per path.
+// Fires scroll_depth_50 once per route when the midpoint of the document
+// enters the viewport. IntersectionObserver avoids per-frame scroll work.
 export function ScrollDepthTracker() {
   const pathname = usePathname();
 
   useEffect(() => {
-    let fired = false;
-    function onScroll() {
-      if (fired) return;
-      const viewportBottom = window.scrollY + window.innerHeight;
-      const halfPage = document.body.scrollHeight * 0.5;
-      if (viewportBottom >= halfPage) {
-        fired = true;
-        pushEvent("scroll_depth_50", { path: pathname });
-        window.removeEventListener("scroll", onScroll);
-      }
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const sentinel = document.createElement("span");
+    sentinel.setAttribute("aria-hidden", "true");
+    sentinel.style.cssText = "position:absolute;left:0;width:1px;height:1px;pointer-events:none;opacity:0";
+    document.body.appendChild(sentinel);
+
+    const positionSentinel = () => {
+      sentinel.style.top = `${document.documentElement.scrollHeight * 0.5}px`;
+    };
+    positionSentinel();
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry?.isIntersecting) return;
+      pushEvent("scroll_depth_50", { path: pathname });
+      observer.disconnect();
+    });
+    const resizeObserver = new ResizeObserver(positionSentinel);
+    observer.observe(sentinel);
+    resizeObserver.observe(document.body);
+
+    return () => {
+      observer.disconnect();
+      resizeObserver.disconnect();
+      sentinel.remove();
+    };
   }, [pathname]);
 
   return null;

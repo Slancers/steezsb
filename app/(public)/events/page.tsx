@@ -1,10 +1,69 @@
+import { PageHero } from "@/components/public/PageHero";
 import { Button } from "@/components/ui/button";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { buildMetadata } from "@/lib/seo";
 
-export const metadata = buildMetadata({ title: "Events at WallRide Park", description: "Jams, contests, workshops and community sessions at WallRide Park in Hyderabad.", path: "/events" });
+export const metadata = buildMetadata({
+  title: "Events at WallRide Park",
+  description: "Jams, contests, workshops and community sessions at WallRide Park in Hyderabad.",
+  path: "/events",
+});
+
+const EVENT_INFO = [
+  ["Core details", "Event name and one-sentence description", "Date, start time and venue"],
+  ["Rider categories", "Disciplines, age groups and skill categories", "Schedule, rules and required safety gear"],
+  ["Registration", "Entry fee, registration link and deadline", "Prizes, partners and contact person"],
+  ["Event media", "Poster, photos and results after the event", "Everything needed to share the event clearly"],
+];
 
 export default function EventsPage() {
-  const eventInfo = ["Event name and one-sentence description", "Date, start time and venue", "Disciplines, age groups and skill categories", "Entry fee, registration link and deadline", "Schedule, rules and required safety gear", "Prizes, partners and contact person", "Poster, photos and results after the event"];
-  return <><section className="wr-page-hero wr-ink text-white"><div className="container grid gap-10 md:grid-cols-[1fr_0.7fr] md:items-end"><div><p className="wr-eyebrow mb-5 text-fuchsia-200">Events / culture</p><h1 className="wr-display max-w-4xl text-7xl leading-[0.88] tracking-[-0.07em] md:text-[9rem]">What’s dropping next.</h1></div><p className="max-w-sm pb-2 text-lg leading-8 text-white/65">Contests, jams, workshops and community sessions for riders—and the people who back them.</p></div></section><section className="wr-section wr-purple"><div className="container grid gap-10 md:grid-cols-[1fr_0.8fr] md:items-center"><div><p className="wr-eyebrow mb-5 text-black/60">Next event</p><h2 className="wr-display text-5xl leading-[0.95] tracking-[-0.05em] text-black md:text-7xl">Details are being confirmed.</h2></div><div className="space-y-4 text-lg leading-8 text-black/70"><p><strong>Event:</strong> Hamza to confirm</p><p><strong>Date and time:</strong> Hamza to confirm</p><p><strong>Registration:</strong> Hamza to confirm</p><WhatsAppCTA intent="general" size="lg" className="wr-button-dark">Register / ask on WhatsApp</WhatsAppCTA></div></div></section><section className="wr-section wr-paper"><div className="container grid gap-6 md:grid-cols-2"><div><p className="wr-eyebrow text-purple-700">At WallRide</p><h2 className="wr-display mt-5 text-5xl leading-[0.95] tracking-[-0.05em] text-zinc-950 md:text-7xl">The park comes alive when the community gets together.</h2><p className="mt-6 text-lg leading-8 text-zinc-600">WallRide has hosted pump-track racing, BMX and skateboarding competitions, beginner workshops and community jams. Past highlights include Red Bull Pump Track events, Red Bull Feel the Wheel, RevJam and community-led workshops.</p></div><div className="border-t border-zinc-900/15 pt-5"><p className="wr-eyebrow text-zinc-500">Information needed for every new event</p><ul className="mt-5 space-y-3 text-lg leading-7 text-zinc-600">{eventInfo.map((item) => <li key={item}>↗ {item}</li>)}</ul></div></div></section><section className="wr-section wr-purple text-center"><div className="container"><h2 className="wr-display mx-auto max-w-3xl text-5xl leading-[0.95] tracking-[-0.05em] text-black md:text-7xl">No upcoming event has been announced yet.</h2><p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-black/70">Follow WallRide or message us to hear what is coming next.</p><div className="mt-8 flex justify-center gap-3"><Button asChild size="lg" className="wr-button-dark"><a href="https://instagram.com/wallrideparkhyd" target="_blank" rel="noopener noreferrer">Follow @wallrideparkhyd ↗</a></Button><WhatsAppCTA intent="general" size="lg" className="border-black/30 text-black">WhatsApp WallRide</WhatsAppCTA></div></div></section></>;
+  return (
+    <>
+      <PageHero
+        eyebrow="Events and culture"
+        title="What’s dropping next."
+        description="Contests, jams, workshops and community sessions for riders and the people who back them."
+      />
+
+      <section className="wr-section wr-section-accent">
+        <div className="container grid gap-10 md:grid-cols-[1.15fr_0.85fr] md:items-end">
+          <h2 className="wr-section-heading">Details are being confirmed.</h2>
+          <div className="space-y-3 text-lg leading-8 text-black/75">
+            <p><strong>Event:</strong> Hamza to confirm</p>
+            <p><strong>Date and time:</strong> Hamza to confirm</p>
+            <p><strong>Registration:</strong> Hamza to confirm</p>
+            <WhatsAppCTA intent="general" size="lg" className="wr-button-light mt-5">Register or ask on WhatsApp</WhatsAppCTA>
+          </div>
+        </div>
+      </section>
+
+      <section className="wr-section wr-section-muted">
+        <div className="container">
+          <h2 className="wr-section-heading">The park comes alive when the community gets together.</h2>
+          <p className="wr-section-copy mt-7">
+            WallRide has hosted pump-track racing, BMX and skateboarding competitions, beginner workshops and community jams. Past highlights include Red Bull Pump Track events, Red Bull Feel the Wheel, RevJam and community-led workshops.
+          </p>
+          <div className="wr-info-grid mt-12">
+            {EVENT_INFO.map(([title, first, second]) => (
+              <article key={title} className="wr-info-card">
+                <strong>{title}</strong>
+                <p>{first}<br />{second}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="wr-section wr-section-deep">
+        <div className="container">
+          <h2 className="wr-section-heading">No upcoming event has been announced yet.</h2>
+          <p className="wr-section-copy mt-6">Follow WallRide or message us to hear what is coming next.</p>
+          <div className="wr-cta-group">
+            <Button asChild size="lg" className="wr-button-light"><a href="https://instagram.com/wallrideparkhyd" target="_blank" rel="noopener noreferrer">Follow @wallrideparkhyd ↗</a></Button>
+            <WhatsAppCTA intent="general" size="lg" className="wr-button-primary">WhatsApp WallRide</WhatsAppCTA>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }

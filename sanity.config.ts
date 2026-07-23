@@ -9,7 +9,7 @@ import { structure } from "./sanity/structure";
 
 export default defineConfig({
   name: "default",
-  title: "STEEZE",
+  title: "WallRide Park",
   basePath: "/studio",
   projectId,
   dataset,

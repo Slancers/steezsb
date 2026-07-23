@@ -48,10 +48,10 @@ export async function GET() {
 ${name} is a rider-built action-sports park in Hyderabad, India, with BMX, skateboarding, pump track sessions, classes, events and a growing community.
 
 ## Services
-- [Classes](${SITE_URL}/classes) — BMX, skateboarding and pump track classes for beginners and progressing riders.
-- [Practice](${SITE_URL}/practice) — Park hours, entry, rentals and visit information.
-- [Events](${SITE_URL}/events) — Jams, contests, workshops and community sessions.
-- [Shop](${SITE_URL}/shop) — WallRide drops and partner brands, coming soon.
+- [Classes](${SITE_URL}/classes) - BMX, skateboarding and pump track classes for beginners and progressing riders.
+- [Practice](${SITE_URL}/practice) - Park hours, entry, rentals and visit information.
+- [Events](${SITE_URL}/events) - Jams, contests, workshops and community sessions.
+- [Shop](${SITE_URL}/shop) - WallRide drops and partner brands, coming soon.
 
 ## Location
 ${addressLine}

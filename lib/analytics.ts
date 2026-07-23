@@ -5,7 +5,7 @@ declare global {
 }
 
 // Push an event onto the GTM dataLayer. No-ops on the server.
-// Safe to call even when GTM hasn't loaded — events queue on dataLayer
+// Safe to call even when GTM has not loaded. Events queue on dataLayer.
 // and fire once the GTM script initialises.
 export function pushEvent(
   event: string,

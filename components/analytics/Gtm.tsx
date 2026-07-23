@@ -2,7 +2,7 @@ import Script from "next/script";
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
-// Google Tag Manager container. GA4 is configured as a tag inside GTM —
+// Google Tag Manager container. GA4 is configured as a tag inside GTM.
 // the GA4 ID is NOT hardcoded here (PRD requirement).
 // Renders nothing if NEXT_PUBLIC_GTM_ID is unset, so local dev without
 // analytics stays clean.

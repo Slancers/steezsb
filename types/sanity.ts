@@ -112,7 +112,10 @@ export type BlogPost = {
   slug: { current: string };
   excerpt?: string;
   coverImage?: SanityImage;
-  body?: import("@portabletext/types").PortableTextBlock[];
+  body?: Array<
+    | import("@portabletext/types").PortableTextBlock
+    | (SanityImage & { _key: string })
+  >;
   publishedAt?: string;
   tags?: string[];
   metaTitle?: string;

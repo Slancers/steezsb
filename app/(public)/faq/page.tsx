@@ -1,7 +1,12 @@
+import { PageHero } from "@/components/public/PageHero";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { buildMetadata } from "@/lib/seo";
 
-export const metadata = buildMetadata({ title: "WallRide Park FAQ", description: "Answers about visiting, classes, equipment and starting at WallRide Park.", path: "/faq" });
+export const metadata = buildMetadata({
+  title: "WallRide Park FAQ",
+  description: "Answers about visiting, classes, equipment and starting at WallRide Park.",
+  path: "/faq",
+});
 
 const FAQS = [
   ["What are WallRide’s opening hours?", "The park is open from 3:00 pm to 9:00 pm and is closed on Wednesdays. Classes run in the mornings."],
@@ -13,5 +18,32 @@ const FAQS = [
 ];
 
 export default function FaqPage() {
-  return <><section className="wr-page-hero wr-purple"><div className="container"><p className="wr-eyebrow mb-5 text-black/60">Good to know</p><h1 className="wr-display max-w-4xl text-7xl leading-[0.88] tracking-[-0.07em] text-black md:text-[9rem]">Before you roll in.</h1></div></section><section className="wr-section wr-paper"><div className="container grid gap-12 md:grid-cols-[0.6fr_1.4fr]"><div><p className="wr-eyebrow text-purple-700">Questions / answers</p><h2 className="wr-display mt-5 text-4xl leading-[0.95] tracking-[-0.04em] text-zinc-950">Still unsure? That’s what we’re here for.</h2><WhatsAppCTA intent="general" className="wr-button-dark mt-8">Ask WallRide</WhatsAppCTA></div><div className="divide-y divide-zinc-900/15">{FAQS.map(([question, answer]) => <details key={question} className="group py-6"><summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-xl font-bold text-zinc-950"><span>{question}</span><span className="text-2xl font-normal text-purple-700 transition group-open:rotate-45">＋</span></summary><p className="max-w-2xl pt-4 text-base leading-7 text-zinc-600">{answer}</p></details>)}</div></div></section></>;
+  return (
+    <>
+      <PageHero eyebrow="Good to know" title="Before you roll in." />
+      <section className="wr-section wr-section-muted">
+        <div className="container grid gap-12 md:grid-cols-[0.55fr_1.45fr] md:gap-20">
+          <div className="md:sticky md:top-28 md:self-start">
+            <h2 className="wr-section-heading text-[clamp(2.5rem,4.5vw,4.5rem)]">Still unsure? That’s what we’re here for.</h2>
+          </div>
+          <div>
+            <div className="wr-faq-list">
+              {FAQS.map(([question, answer]) => (
+                <details key={question} className="wr-faq-item group">
+                  <summary className="wr-faq-summary">
+                    <span>{question}</span>
+                    <span aria-hidden="true" className="text-2xl font-normal text-[#7138d3] transition-transform group-open:rotate-45">＋</span>
+                  </summary>
+                  <p className="wr-faq-answer">{answer}</p>
+                </details>
+              ))}
+            </div>
+            <div className="wr-cta-group">
+              <WhatsAppCTA intent="general" className="wr-button-primary">Ask WallRide</WhatsAppCTA>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }

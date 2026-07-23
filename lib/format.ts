@@ -1,5 +1,5 @@
 export function formatINR(amount: number | undefined): string {
-  if (typeof amount !== "number") return "—";
+  if (typeof amount !== "number") return "-";
   return `₹${amount.toLocaleString("en-IN")}`;
 }
 

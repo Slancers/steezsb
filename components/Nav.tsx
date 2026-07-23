@@ -1,8 +1,17 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-
+import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 
 const NAV_LINKS = [
@@ -16,26 +25,41 @@ const NAV_LINKS = [
 ];
 
 export function Nav() {
+  const pathname = usePathname();
+
   return (
     <header className="wr-nav">
-      <div className="container flex h-[76px] items-center justify-between gap-5">
-        <Link href="/" aria-label="WallRide Park home" className="flex shrink-0 items-center">
+      <div className="container flex h-[72px] items-center justify-between gap-5">
+        <Link
+          href="/"
+          aria-label="WallRide Park home"
+          aria-current={pathname === "/" ? "page" : undefined}
+          className="wr-logo-link"
+        >
           <Image
-            src="/wallride/logo.png"
+            src="/wallride/logo-mark.png"
             alt="WallRide Park"
-            width={720}
-            height={480}
+            width={1200}
+            height={802}
             priority
-            className="h-12 w-20 object-contain object-center mix-blend-multiply md:h-14 md:w-24"
+            className="wr-nav-logo"
           />
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex xl:gap-8">
-          {NAV_LINKS.map((link) => (
-            <Link key={link.href} href={link.href} className="wr-nav-link">
-              {link.label}
-            </Link>
-          ))}
+        <nav aria-label="Primary" className="hidden items-center gap-5 lg:flex xl:gap-7">
+          {NAV_LINKS.map((link) => {
+            const active = pathname === link.href || pathname.startsWith(`${link.href}/`);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={active ? "page" : undefined}
+                className="wr-nav-link"
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-3">
@@ -46,14 +70,31 @@ export function Nav() {
             <SheetTrigger aria-label="Open menu" className="wr-menu-button lg:hidden">
               <Menu className="h-5 w-5" />
             </SheetTrigger>
-            <SheetContent side="right" className="w-80 bg-zinc-950 text-white">
-              <nav className="mt-10 flex flex-col gap-5">
-                {NAV_LINKS.map((link) => (
-                  <Link key={link.href} href={link.href} className="wr-display text-3xl" >
-                    {link.label}
-                  </Link>
-                ))}
-                <WhatsAppCTA intent="general" className="wr-button-primary mt-5 w-full">
+            <SheetContent side="right" className="w-[min(88vw,24rem)] border-black/10 bg-[#f7f7f4] px-7 text-[#17171b]">
+              <SheetTitle className="sr-only">WallRide navigation</SheetTitle>
+              <Image
+                src="/wallride/logo-mark.png"
+                alt="WallRide Park"
+                width={1200}
+                height={802}
+                className="mt-2 h-20 w-28 object-contain"
+              />
+              <nav aria-label="Mobile" className="mt-10 flex flex-col">
+                {NAV_LINKS.map((link) => {
+                  const active = pathname === link.href || pathname.startsWith(`${link.href}/`);
+                  return (
+                    <SheetClose asChild key={link.href}>
+                      <Link
+                        href={link.href}
+                        aria-current={active ? "page" : undefined}
+                        className="wr-mobile-nav-link"
+                      >
+                        {link.label}
+                      </Link>
+                    </SheetClose>
+                  );
+                })}
+                <WhatsAppCTA intent="general" className="wr-button-primary mt-8 w-full">
                   WhatsApp WallRide
                 </WhatsAppCTA>
               </nav>
